@@ -37,19 +37,31 @@ app.layout = html.Div([
                      n_intervals = 0),
     ]),
     html.Div([
+        html.Div([
+            html.Div([
+            ], className = 'adjust_card'),
+            html.Div([
+            ], className = 'adjust_card'),
+            html.Div([
+            ], className = 'adjust_card'),
+            html.Div([
+            ], className = 'adjust_card'),
+            html.Div([
+            ], className = 'adjust_last_card'),
+        ], className = 'background1')
+    ], className = 'adjust_margin1'),
+    html.Div([
+        html.Div([
+        ], className = 'background2'),
+        html.Div([
             html.Div([
                 html.Div([
-                ], className = 'adjust_card'),
+                ], className = 'weather1'),
                 html.Div([
-                ], className = 'adjust_card'),
-                html.Div([
-                ], className = 'adjust_card'),
-                html.Div([
-                ], className = 'adjust_card'),
-                html.Div([
-                ], className = 'adjust_last_card'),
-            ], className = 'background')
-    ], className = 'adjust_margin'),
+                ], className = 'weather2')
+            ], className = 'weather_column')
+        ], className = 'weather_background')
+    ], className = 'adjust_margin2'),
 ])
 
 
