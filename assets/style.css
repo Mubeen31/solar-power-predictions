@@ -48,7 +48,7 @@ body {
   border-radius: 0px;
   background-color: rgba(255, 255, 255, 0);
   height: 115px;
-  border-right: 1px solid #cccccc;;
+  border-right: 1px solid #cccccc;
   /*box-shadow:  1px 1px 4px 4px lightgrey;*/
 }
 
@@ -83,6 +83,14 @@ body {
   border-radius: 0px;
   background-color: rgb(255, 255, 255);
   height: 415px;
+  /*box-shadow:  4px 4px 4px 1px lightgrey;*/
+  border-top: 1px solid #cccccc;
+}
+
+.tabs {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(255, 255, 255);
   box-shadow:  1px 1px 4px 4px lightgrey;
 }
 
@@ -90,7 +98,7 @@ body {
   width: 295px;
   border-radius: 0px;
   background-color: rgba(255, 255, 255, 0);
-  height: 207px;
+  height: 225px;
   border-bottom: 1px solid #cccccc;;
   /*box-shadow:  1px 1px 4px 4px lightgrey;*/
 }
@@ -98,7 +106,7 @@ body {
   width: 295px;
   border-radius: 0px;
   background-color: rgba(255, 255, 255, 0);
-  height: 207px;
+  height: 225px;
   /*box-shadow:  1px 1px 4px 4px lightgrey;*/
 }
 
@@ -113,13 +121,13 @@ body {
   width: 295px;
   border-radius: 0px;
   background-color: rgb(255, 255, 255);
-  height: 414px;
+  height: 450px;
   box-shadow:  1px 1px 4px 4px lightgrey;
 }
 
 .adjust_margin2 {
   display: flex;
-  margin-top: 50px;
+  margin-top: 20px;
   justify-content: center;
-  column-gap: 10px;
+  column-gap: 7px;
 }

@@ -14,6 +14,29 @@ external_stylesheets = [meta_tags, font_awesome]
 
 app = dash.Dash(__name__, external_stylesheets = external_stylesheets)
 
+tabs_styles = {
+    "flex-direction": "row",
+}
+tab_style = {
+    "padding": "0vh",
+    "color": '#1a1a1a',
+    "backgroundColor": 'rgb(255, 255, 255)',
+    'width': '120px',
+
+}
+
+tab_selected_style = {
+    "color": '#FF0000',
+    "padding": "0vh",
+    "backgroundColor": 'rgb(255, 255, 255)',
+    'border-bottom': '2px #FF0000 solid',
+    'width': '120px',
+}
+
+current_power = html.P('Current Power', className = 'background2')
+today_power = html.P('Today Power', className = 'background2')
+yesterday_power = html.P('Yesterday Power', className = 'background2')
+
 app.layout = html.Div([
     html.Div([
         html.Div([
@@ -52,7 +75,30 @@ app.layout = html.Div([
     ], className = 'adjust_margin1'),
     html.Div([
         html.Div([
-        ], className = 'background2'),
+            dcc.Tabs(value = 'today_power', children = [
+                dcc.Tab(current_power,
+                        label = 'Current Power',
+                        value = 'current_power',
+                        style = tab_style,
+                        selected_style = tab_selected_style,
+                        ),
+                dcc.Tab(today_power,
+                        label = 'Today Power',
+                        value = 'today_power',
+                        style = tab_style,
+                        selected_style = tab_selected_style,
+                        ),
+                dcc.Tab(yesterday_power,
+                        label = 'Yesterday Power',
+                        value = 'yesterday_power',
+                        style = tab_style,
+                        selected_style = tab_selected_style,
+                        ),
+            ], style = tabs_styles,
+                     colors = {"border": None,
+                               "primary": None,
+                               "background": None}),
+        ], className = 'tabs'),
         html.Div([
             html.Div([
                 html.Div([
