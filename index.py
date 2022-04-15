@@ -22,7 +22,6 @@ tab_style = {
     "color": '#1a1a1a',
     "backgroundColor": 'rgb(255, 255, 255)',
     'width': '120px',
-
 }
 
 tab_selected_style = {
