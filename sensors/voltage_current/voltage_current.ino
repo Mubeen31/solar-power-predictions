@@ -6,6 +6,7 @@ float R1 = 30000.0;
 float R2 = 7500.0;
 int value = 0;
 ///////voltage//////
+
 ///////current//////
 // Variables for Measured Voltage and Calculated Current
 double Vout = 0;
@@ -33,13 +34,15 @@ void setup() {
   Serial.begin(9600);
 }
 
-void loop()
-{
+void loop(){
+///////voltage//////
   value = analogRead(voltageSensor);
   vOUT = (value * 5.0) / 1024.0;
-  vIN = vOUT / (R2/(R1+R2)) - 0.70;
-//  Serial.print("Input = ");
-  Serial.print(vIN);
+  vIN = vOUT / (R2/(R1+R2));
+  Serial.print(vIN, 5);
+///////voltage//////
+  
+///////current//////
   // Vout is read 1000 Times for precision
   for(int i = 0; i < 1000; i++) {
     Vout = (Vout + (resADC * analogRead(A1)));   
@@ -50,16 +53,9 @@ void loop()
   Vout = Vout /1000;
   
   // Convert Vout into Current using Scale Factor
-  Current = (Vout - zeroPoint)/ scale_factor + 0.12;                   
- 
-  // Print Vout and Current to two Current = ");                  
- 
-//  Serial.print("Vout = ");           
-//  Serial.print(Vout,2); 
-//  Serial.print(" Volts");                            
-//  Serial.print("\t Current = ");
-  Serial.print(" ");                  
-  Serial.println(Current,2);
-//  Serial.println(" Amps");
+  Current = (Vout - zeroPoint)/ scale_factor + 0.12;                                   
+  Serial.print(" , ");                  
+  Serial.println(Current,5);
+///////current//////
   delay(1000);
 }
