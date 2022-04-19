@@ -8,6 +8,7 @@ import pandas as pd
 from datetime import datetime
 from components.header import header_value
 from components.solar_first_card import solar_first_card_value
+from components.solar_second_card import solar_second_card_value
 
 font_awesome = "https://use.fontawesome.com/releases/v5.10.2/css/all.css"
 meta_tags = [{"name": "viewport", "content": "width=device-width"}]
@@ -69,6 +70,7 @@ app.layout = html.Div([
                 html.Div(id = 'solar_first_card')
             ], className = 'adjust_card'),
             html.Div([
+                html.Div(id = 'solar_second_card')
             ], className = 'adjust_card'),
             html.Div([
             ], className = 'adjust_card'),
@@ -130,6 +132,14 @@ def solar_first_card_value_callback(n_intervals):
     solar_first_card_value_data = solar_first_card_value(n_intervals)
 
     return solar_first_card_value_data
+
+
+@app.callback(Output('solar_second_card', 'children'),
+              [Input('update_date_time_value', 'n_intervals')])
+def solar_second_card_value_callback(n_intervals):
+    solar_second_card_value_data = solar_second_card_value(n_intervals)
+
+    return solar_second_card_value_data
 
 
 if __name__ == "__main__":
