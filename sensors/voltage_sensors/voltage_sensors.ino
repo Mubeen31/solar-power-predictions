@@ -1,24 +1,25 @@
-//const int voltageSensor = A0;
-//
-//float vOUT = 0.0;
-//float vIN = 0.0;
-//float R1 = 30000.0;
-//float R2 = 7500.0;
-//int value = 0;
-//
-//void setup() {
-//  Serial.begin(9600);
-//}
-//
-//void loop()
-//{
-//  value = analogRead(voltageSensor);
-//  vOUT = (value * 5.0) / 1024.0;
-//  vIN = vOUT / (R2/(R1+R2));
-//  Serial.print("Input = ");
-//  Serial.println(vIN);
-//  delay(1000);
-//}
+const int voltageSensor = A0;
+
+float vOUT = 0.0;
+float vIN = 0.0;
+float R1 = 30000.0;
+float R2 = 7500.0;
+int value = 0;
+
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  value = analogRead(voltageSensor);
+  vOUT = (value * 5.0) / 1024.0;
+  vIN = vOUT / (R2/(R1+R2)) - 0.50;
+  Serial.print("Input = ");
+  Serial.println(vIN);
+  delay(1000);
+}
+
 //int offset = 0;// set the correction offset value
 //void setup() {
 //  // Robojax.com voltage sensor
@@ -31,11 +32,13 @@
 //  double voltage = map(volt,0,1023, 0, 2500) + offset;// map 0-1023 to 0-2500 and add correction offset
 //  
 //  voltage /=100;// divide by 100 to get the decimal values
+//  double voltage1 = voltage - 0.50;
 //  Serial.print("Voltage: ");
-//  Serial.print(voltage);//print the voltge
+//  Serial.print(voltage1);//print the voltge
 //  Serial.println("V");
-//delay(1000); 
+//  delay(1000); 
 //}
+
 //const int voltageinputPIN = A0; //select analog input pin for voltage sensor
 //const int baudRate = 9600; //sets baud rate in bits per second for serial monitor
 //const int sensorreadDelay = 1000; //sensor read delay in milliseconds

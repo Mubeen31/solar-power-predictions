@@ -84,7 +84,5 @@ void loop(){
   Serial.print("\t Current = ");                  
   Serial.print(Current,2);
   Serial.println(" Amps");                             
- 
   delay(1000); 
- 
 }
