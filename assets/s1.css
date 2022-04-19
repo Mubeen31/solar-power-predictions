@@ -556,63 +556,6 @@ there.
 
 /* Larger than tablet, for screens smaller than 768px */
 @media (max-width: 550px) {
-
-.right_price_value {
-  margin-top: 11px !important;
-}
-
-.adjust_first_card {
-  width: 220px !important;
-}
-
-.adjust_second_card {
-  width: 220px !important;
-}
-
-.adjust_third_card {
-  width: 220px !important;
-}
-
-.adjust_fourth_card {
-  width: 220px !important;
-}
-
-.flexbox_container {
-  display: grid !important;
-  grid-template-columns: 1fr 1fr !important;
-  margin-left: 9px;
-}
-
-.chart_width {
-  width: 470px !important;
-}
-
-.table_width {
-  width: 470px !important;
-}
-
-.crypto_column {
-  width: 310px !important;
-}
-
-.adjust_text_numeric_and_time {
-   margin-left: -390px !important;
-}
-
-.footer_text{
-   width: 470px !important;
-}
-
-.footer_content {
-   height: 60px !important;
-   align-items: center !important;
-}
-
-.rank {
-  margin-right: 10px !important;
-}
-
-
   h3 {
     font-size: 2.5rem;
   }

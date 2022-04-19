@@ -7,6 +7,7 @@ from dash.exceptions import PreventUpdate
 import pandas as pd
 from datetime import datetime
 from components.header import header_value
+from components.solar_first_card import solar_first_card_value
 
 font_awesome = "https://use.fontawesome.com/releases/v5.10.2/css/all.css"
 meta_tags = [{"name": "viewport", "content": "width=device-width"}]
@@ -20,12 +21,16 @@ tabs_styles = {
 tab_style = {
     "padding": "0vh",
     "color": '#1a1a1a',
+    "font-family": "Calibri",
+    "font-size": "16px",
     "backgroundColor": 'rgb(255, 255, 255)',
     'width': '120px',
 }
 
 tab_selected_style = {
     "color": '#FF0000',
+    "font-family": "Calibri",
+    "font-size": "16px",
     "padding": "0vh",
     "backgroundColor": 'rgb(255, 255, 255)',
     'border-bottom': '2px #FF0000 solid',
@@ -54,13 +59,14 @@ app.layout = html.Div([
                 )
     ], className = 'title_date_time_container'),
     html.Div([
-        dcc.Interval(id = 'update_date_time',
+        dcc.Interval(id = 'update_date_time_value',
                      interval = 1000,
                      n_intervals = 0),
     ]),
     html.Div([
         html.Div([
             html.Div([
+                html.Div(id = 'solar_first_card')
             ], className = 'adjust_card'),
             html.Div([
             ], className = 'adjust_card'),
@@ -111,11 +117,19 @@ app.layout = html.Div([
 
 
 @app.callback(Output('get_date_time', 'children'),
-              [Input('update_date_time', 'n_intervals')])
+              [Input('update_date_time_value', 'n_intervals')])
 def header_value_callback(n_intervals):
     header_value_data = header_value(n_intervals)
 
     return header_value_data
+
+
+@app.callback(Output('solar_first_card', 'children'),
+              [Input('update_date_time_value', 'n_intervals')])
+def solar_first_card_value_callback(n_intervals):
+    solar_first_card_value_data = solar_first_card_value(n_intervals)
+
+    return solar_first_card_value_data
 
 
 if __name__ == "__main__":

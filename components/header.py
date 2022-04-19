@@ -5,7 +5,6 @@ from dash.dependencies import Input, Output
 import plotly.graph_objs as go
 from dash.exceptions import PreventUpdate
 import pandas as pd
-from datetime import datetime, date, time
 import numpy as np
 from datetime import datetime, date, time
 from sklearn import linear_model

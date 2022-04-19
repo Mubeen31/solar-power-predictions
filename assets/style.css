@@ -131,3 +131,38 @@ body {
   justify-content: center;
   column-gap: 7px;
 }
+
+.card_text {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  color: #1a1a1a;
+  font-family: Calibri;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.card_value1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  color: #00cc00;
+  font-family: Calibri;
+  font-size: 20px;
+}
+
+.card_value2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  color: #a6a6a6;
+  font-family: Calibri;
+  font-size: 16px;
+  margin-top: -17px;
+}
+
+.card_values_gap {
+  display: flex;
+  flex-direction: column;
+  margin-top: -5px;
+}
