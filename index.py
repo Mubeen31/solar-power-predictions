@@ -9,6 +9,8 @@ from datetime import datetime
 from components.header import header_value
 from components.solar_first_card import solar_first_card_value
 from components.solar_second_card import solar_second_card_value
+from components.solar_third_card import solar_third_card_value
+from components.solar_fourth_card import solar_fourth_card_value
 
 font_awesome = "https://use.fontawesome.com/releases/v5.10.2/css/all.css"
 meta_tags = [{"name": "viewport", "content": "width=device-width"}]
@@ -73,8 +75,10 @@ app.layout = html.Div([
                 html.Div(id = 'solar_second_card')
             ], className = 'adjust_card'),
             html.Div([
+                html.Div(id = 'solar_third_card')
             ], className = 'adjust_card'),
             html.Div([
+                html.Div(id = 'solar_fourth_card')
             ], className = 'adjust_card'),
             html.Div([
             ], className = 'adjust_last_card'),
@@ -140,6 +144,22 @@ def solar_second_card_value_callback(n_intervals):
     solar_second_card_value_data = solar_second_card_value(n_intervals)
 
     return solar_second_card_value_data
+
+
+@app.callback(Output('solar_third_card', 'children'),
+              [Input('update_date_time_value', 'n_intervals')])
+def solar_third_card_value_callback(n_intervals):
+    solar_third_card_value_data = solar_third_card_value(n_intervals)
+
+    return solar_third_card_value_data
+
+
+@app.callback(Output('solar_fourth_card', 'children'),
+              [Input('update_date_time_value', 'n_intervals')])
+def solar_fourth_card_value_callback(n_intervals):
+    solar_fourth_card_value_data = solar_fourth_card_value(n_intervals)
+
+    return solar_fourth_card_value_data
 
 
 if __name__ == "__main__":
