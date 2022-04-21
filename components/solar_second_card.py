@@ -40,9 +40,9 @@ def solar_second_card_value(n_intervals):
     return [
         html.P('Today Power', className = 'card_text'),
         html.Div([
-            html.P('{0:,.5f}'.format(power_kilo_watt) + ' ' + 'KW',
+            html.P('{0:,.5f}'.format(abs(power_kilo_watt)) + ' ' + 'KW',
                    className = 'card_value1'),
-            html.P('{0:,.5f}'.format(power_watt) + ' ' + 'W',
+            html.P('{0:,.5f}'.format(abs(power_watt)) + ' ' + 'W',
                    className = 'card_value2')
         ], className = 'card_values_gap')
     ]

@@ -11,6 +11,8 @@ from components.solar_first_card import solar_first_card_value
 from components.solar_second_card import solar_second_card_value
 from components.solar_third_card import solar_third_card_value
 from components.solar_fourth_card import solar_fourth_card_value
+from components.solar_fifth_card import solar_fifth_card_value
+from components.solar_current_power_chart import solar_current_power_chart_value
 
 font_awesome = "https://use.fontawesome.com/releases/v5.10.2/css/all.css"
 meta_tags = [{"name": "viewport", "content": "width=device-width"}]
@@ -40,7 +42,10 @@ tab_selected_style = {
     'width': '120px',
 }
 
-current_power = html.P('Current Power', className = 'background2')
+solar_current_power_chart = dcc.Graph(id = 'solar_current_power_chart',
+                                      animate = True,
+                                      config = {'displayModeBar': False},
+                                      className = 'background2')
 today_power = html.P('Today Power', className = 'background2')
 yesterday_power = html.P('Yesterday Power', className = 'background2')
 
@@ -81,15 +86,16 @@ app.layout = html.Div([
                 html.Div(id = 'solar_fourth_card')
             ], className = 'adjust_card'),
             html.Div([
+                html.Div(id = 'solar_fifth_card')
             ], className = 'adjust_last_card'),
         ], className = 'background1')
     ], className = 'adjust_margin1'),
     html.Div([
         html.Div([
             dcc.Tabs(value = 'today_power', children = [
-                dcc.Tab(current_power,
+                dcc.Tab(solar_current_power_chart,
                         label = 'Current Power',
-                        value = 'current_power',
+                        value = 'solar_current_power_chart',
                         style = tab_style,
                         selected_style = tab_selected_style,
                         ),
@@ -160,6 +166,22 @@ def solar_fourth_card_value_callback(n_intervals):
     solar_fourth_card_value_data = solar_fourth_card_value(n_intervals)
 
     return solar_fourth_card_value_data
+
+
+@app.callback(Output('solar_fifth_card', 'children'),
+              [Input('update_date_time_value', 'n_intervals')])
+def solar_fifth_card_value_callback(n_intervals):
+    solar_fifth_card_value_data = solar_fifth_card_value(n_intervals)
+
+    return solar_fifth_card_value_data
+
+
+@app.callback(Output('solar_current_power_chart', 'figure'),
+              [Input('update_date_time_value', 'n_intervals')])
+def solar_current_power_chart_value_callback(n_intervals):
+    solar_current_power_chart_value_data = solar_current_power_chart_value(n_intervals)
+
+    return solar_current_power_chart_value_data
 
 
 if __name__ == "__main__":

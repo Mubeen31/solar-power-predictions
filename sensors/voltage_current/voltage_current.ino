@@ -53,7 +53,8 @@ void loop(){
   Vout = Vout /1000;
   
   // Convert Vout into Current using Scale Factor
-  Current = (Vout - zeroPoint)/ scale_factor + 0.12;                                   
+//  Current = (Vout - zeroPoint)/ scale_factor + 0.12;
+  Current = (zeroPoint - Vout)/ scale_factor + 0.12;                                   
   Serial.print(" , ");                  
   Serial.println(Current,5);
 ///////current//////
