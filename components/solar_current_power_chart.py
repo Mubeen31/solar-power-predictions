@@ -38,29 +38,18 @@ def solar_current_power_chart_value(n_intervals):
         'data': [go.Bar(
             x = date_time,
             y = power_watt,
-            # fill = 'tonexty',
-            # fillcolor = 'rgba(255, 0, 255, 0.1)',
-            # mode = 'lines',
-            # line = dict(width = 2, color = '#ff00ff'),
-            # marker = dict(size = 7, symbol = 'circle', color = '#D35400',
-            #               line = dict(color = '#D35400', width = 2)
-            #               ),
-
+            marker = dict(color = '#00cc00'),
             hoverinfo = 'text',
             hovertext =
             '<b>Time</b>: ' + date_time.astype(str) + '<br>' +
-            '<b></b>: ' + [f'{x:,.5f} W' for x in power_watt] + '<br>'
-
+            '<b>Current Power</b>: ' + [f'{x:,.5f} W' for x in power_watt] + '<br>'
         )],
 
         'layout': go.Layout(
-            # paper_bgcolor = 'rgba(0,0,0,0)',
-            # plot_bgcolor = 'rgba(0,0,0,0)',
-            plot_bgcolor = 'black',
-            paper_bgcolor = 'black',
+            plot_bgcolor = 'rgba(255, 255, 255, 0)',
+            paper_bgcolor = 'rgba(255, 255, 255, 0)',
             title = {
                 'text': '',
-
                 'y': 0.97,
                 'x': 0.5,
                 'xanchor': 'center',
@@ -68,39 +57,35 @@ def solar_current_power_chart_value(n_intervals):
             titlefont = {
                 'color': 'white',
                 'size': 17},
-
-            hovermode = 'x unified',
-            margin = dict(t = 25, r = 10, l = 70),
-
+            hovermode = 'closest',
+            margin = dict(t = 50, r = 40),
             xaxis = dict(range = [min(date_time), max(date_time)],
                          title = '<b>Time</b>',
-                         color = 'white',
-                         showspikes = True,
+                         color = '#1a1a1a',
                          showline = True,
                          showgrid = False,
-                         linecolor = 'white',
+                         linecolor = '#1a1a1a',
                          linewidth = 1,
                          ticks = 'outside',
                          tickfont = dict(
                              family = 'Arial',
                              size = 12,
-                             color = 'white')
+                             color = '#1a1a1a')
 
                          ),
 
             yaxis = dict(range = [min(power_watt), max(power_watt)],
-                         title = '<b></b>',
-                         color = 'white',
-                         showspikes = False,
+                         title = '<b>Current Power (W)</b>',
+                         color = '#1a1a1a',
                          showline = True,
                          showgrid = False,
-                         linecolor = 'white',
+                         linecolor = '#1a1a1a',
                          linewidth = 1,
                          ticks = 'outside',
                          tickfont = dict(
                              family = 'Arial',
                              size = 12,
-                             color = 'white')
+                             color = '#1a1a1a')
 
                          ),
 
