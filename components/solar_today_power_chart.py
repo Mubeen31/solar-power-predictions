@@ -25,23 +25,28 @@ html.Div([
 ]),
 
 
-def solar_current_power_chart_value(n_intervals):
+def solar_today_power_chart_value(n_intervals):
     header_list = ['Date Time', 'Voltage', 'Current']
     df = pd.read_csv('sensors_data.csv', names = header_list)
-    date_time = df['Date Time'].tail(35)
-    get_voltage = df['Voltage'].tail(35)
-    get_current = df['Current'].tail(35)
-    power_watt = get_voltage * get_current
+    df['Date Time'] = pd.to_datetime(df['Date Time'])
+    df['Date'] = df['Date Time'].dt.date
+    df['Date'] = pd.to_datetime(df['Date'])
+    today_date = df['Date'].unique()
+    date_time = df[df['Date'] == today_date[-1]]['Date Time'].tail(100)
+    today_voltage = df[df['Date'] == today_date[-1]]['Voltage'].tail(100)
+    today_current = df[df['Date'] == today_date[-1]]['Current'].tail(100)
+    power_watt = today_voltage * today_current
 
     return {
-        'data': [go.Bar(
+        'data': [go.Scatter(
             x = date_time,
             y = power_watt,
-            marker = dict(color = '#00cc00'),
+            mode = 'lines',
+            line = dict(width = 2, color = '#F1AB4D'),
             hoverinfo = 'text',
             hovertext =
             '<b>Time</b>: ' + date_time.astype(str) + '<br>' +
-            '<b>Current Power</b>: ' + [f'{x:,.5f} W' for x in power_watt] + '<br>'
+            '<b>Today Power</b>: ' + [f'{x:,.5f} W' for x in power_watt] + '<br>'
         )],
 
         'layout': go.Layout(
@@ -74,7 +79,7 @@ def solar_current_power_chart_value(n_intervals):
                          ),
 
             yaxis = dict(range = [min(power_watt), max(power_watt)],
-                         title = '<b>Current Power (W)</b>',
+                         title = '<b>Today Power (W)</b>',
                          color = '#1a1a1a',
                          showline = True,
                          showgrid = False,

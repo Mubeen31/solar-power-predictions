@@ -13,6 +13,8 @@ from components.solar_third_card import solar_third_card_value
 from components.solar_fourth_card import solar_fourth_card_value
 from components.solar_fifth_card import solar_fifth_card_value
 from components.solar_current_power_chart import solar_current_power_chart_value
+from components.solar_today_power_chart import solar_today_power_chart_value
+from components.solar_yesterday_power_chart import solar_yesterday_power_chart_value
 
 font_awesome = "https://use.fontawesome.com/releases/v5.10.2/css/all.css"
 meta_tags = [{"name": "viewport", "content": "width=device-width"}]
@@ -46,8 +48,14 @@ solar_current_power_chart = dcc.Graph(id = 'solar_current_power_chart',
                                       animate = True,
                                       config = {'displayModeBar': False},
                                       className = 'background2')
-today_power = html.P('Today Power', className = 'background2')
-yesterday_power = html.P('Yesterday Power', className = 'background2')
+solar_today_power_chart = dcc.Graph(id = 'solar_today_power_chart',
+                                    animate = True,
+                                    config = {'displayModeBar': False},
+                                    className = 'background2')
+solar_yesterday_power_chart = dcc.Graph(id = 'solar_yesterday_power_chart',
+                                        animate = True,
+                                        config = {'displayModeBar': False},
+                                        className = 'background2')
 
 app.layout = html.Div([
     html.Div([
@@ -92,22 +100,22 @@ app.layout = html.Div([
     ], className = 'adjust_margin1'),
     html.Div([
         html.Div([
-            dcc.Tabs(value = 'today_power', children = [
+            dcc.Tabs(value = 'solar_today_power_chart', children = [
                 dcc.Tab(solar_current_power_chart,
                         label = 'Current Power',
                         value = 'solar_current_power_chart',
                         style = tab_style,
                         selected_style = tab_selected_style,
                         ),
-                dcc.Tab(today_power,
+                dcc.Tab(solar_today_power_chart,
                         label = 'Today Power',
-                        value = 'today_power',
+                        value = 'solar_today_power_chart',
                         style = tab_style,
                         selected_style = tab_selected_style,
                         ),
-                dcc.Tab(yesterday_power,
+                dcc.Tab(solar_yesterday_power_chart,
                         label = 'Yesterday Power',
-                        value = 'yesterday_power',
+                        value = 'solar_yesterday_power_chart',
                         style = tab_style,
                         selected_style = tab_selected_style,
                         ),
@@ -182,6 +190,22 @@ def solar_current_power_chart_value_callback(n_intervals):
     solar_current_power_chart_value_data = solar_current_power_chart_value(n_intervals)
 
     return solar_current_power_chart_value_data
+
+
+@app.callback(Output('solar_today_power_chart', 'figure'),
+              [Input('update_date_time_value', 'n_intervals')])
+def solar_today_power_chart_value_callback(n_intervals):
+    solar_today_power_chart_value_data = solar_today_power_chart_value(n_intervals)
+
+    return solar_today_power_chart_value_data
+
+
+@app.callback(Output('solar_yesterday_power_chart', 'figure'),
+              [Input('update_date_time_value', 'n_intervals')])
+def solar_yesterday_power_chart_value_callback(n_intervals):
+    solar_yesterday_power_chart_value_data = solar_yesterday_power_chart_value(n_intervals)
+
+    return solar_yesterday_power_chart_value_data
 
 
 if __name__ == "__main__":
