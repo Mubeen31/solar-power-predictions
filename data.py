@@ -15,8 +15,7 @@ while True:
     current = split_string[1]  # convert second part of string into float
     now = datetime.now()
     dt_string = now.strftime("%Y-%m-%d %H:%M:%S")
-    time.sleep(1)
-    with open("sensors_data.csv", "a") as f:
+    with open("sensors_data.csv", "a", newline = '\n') as f:
         writer = csv.writer(f, delimiter = ",")
         writer.writerow([dt_string, voltage, current])
         print(dt_string, voltage, current)
