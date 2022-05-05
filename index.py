@@ -75,8 +75,13 @@ app.layout = html.Div([
                 )
     ], className = 'title_date_time_container'),
     html.Div([
-        dcc.Interval(id = 'update_date_time_value',
+        dcc.Interval(id = 'update_time',
                      interval = 1000,
+                     n_intervals = 0),
+    ]),
+    html.Div([
+        dcc.Interval(id = 'update_date_time_value',
+                     interval = 60000,
                      n_intervals = 0),
     ]),
     html.Div([

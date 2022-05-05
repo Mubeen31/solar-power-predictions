@@ -25,20 +25,7 @@ html.Div([
 ]),
 
 
-def solar_first_card_value(n_intervals):
-    header_list = ['Date Time', 'Voltage', 'Current']
+def current_weather_value(n_intervals):
+    header_list = ['Date Time', 'Weather Status', 'Temperature', 'Real Feel Temperature', 'Humidity', 'Dew Point',
+                   'Wind Direction', 'Wind Speed', 'Visibility', 'Pressure']
     df = pd.read_csv('sensors_data.csv', names = header_list)
-    get_voltage = df['Voltage'].tail(1).iloc[0]
-    get_current = df['Current'].tail(1).iloc[0]
-    power_watt = get_voltage * get_current
-    power_kilo_watt = power_watt / 1000
-
-    return [
-        html.P('Current Power', className = 'card_text'),
-        html.Div([
-            html.P('{0:,.5f}'.format(abs(power_kilo_watt)) + ' ' + 'KW',
-                   className = 'card_value1'),
-            html.P('{0:,.5f}'.format(abs(power_watt)) + ' ' + 'W',
-                   className = 'card_value2')
-        ], className = 'card_values_gap')
-    ]
