@@ -15,6 +15,7 @@ from components.solar_fifth_card import solar_fifth_card_value
 from components.solar_current_power_chart import solar_current_power_chart_value
 from components.solar_today_power_chart import solar_today_power_chart_value
 from components.solar_yesterday_power_chart import solar_yesterday_power_chart_value
+from components.current_weather import current_weather_value
 
 font_awesome = "https://use.fontawesome.com/releases/v5.10.2/css/all.css"
 meta_tags = [{"name": "viewport", "content": "width=device-width"}]
@@ -69,10 +70,10 @@ app.layout = html.Div([
                     className = 'title'
                     ),
         ], className = 'logo_title'),
-        html.H6(id = 'get_date_time',
-                style = {'color': '#1a1a1a'},
-                className = 'adjust_date_time'
-                )
+        html.P(id = 'get_date_time',
+               style = {'color': '#eb6e4b'},
+               className = 'adjust_date_time'
+               )
     ], className = 'title_date_time_container'),
     html.Div([
         dcc.Interval(id = 'update_time',
@@ -132,6 +133,8 @@ app.layout = html.Div([
         html.Div([
             html.Div([
                 html.Div([
+                    html.H6('Worcester, GB', className = 'title_city'),
+                    html.Div(id = 'current_weather')
                 ], className = 'weather1'),
                 html.Div([
                 ], className = 'weather2')
@@ -142,7 +145,7 @@ app.layout = html.Div([
 
 
 @app.callback(Output('get_date_time', 'children'),
-              [Input('update_date_time_value', 'n_intervals')])
+              [Input('update_time', 'n_intervals')])
 def header_value_callback(n_intervals):
     header_value_data = header_value(n_intervals)
 
@@ -211,6 +214,14 @@ def solar_yesterday_power_chart_value_callback(n_intervals):
     solar_yesterday_power_chart_value_data = solar_yesterday_power_chart_value(n_intervals)
 
     return solar_yesterday_power_chart_value_data
+
+
+@app.callback(Output('current_weather', 'children'),
+              [Input('update_date_time_value', 'n_intervals')])
+def current_weather_value_callback(n_intervals):
+    current_weather_value_data = current_weather_value(n_intervals)
+
+    return current_weather_value_data
 
 
 if __name__ == "__main__":

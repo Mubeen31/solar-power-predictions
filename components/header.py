@@ -27,7 +27,7 @@ html.Div([
 
 def header_value(n_intervals):
     now = datetime.now()
-    dt_string = now.strftime("%Y-%m-%d %H:%M:%S")
+    dt_string = now.strftime("%b %d, %H:%M%p")
 
     return [
         html.Div(dt_string),

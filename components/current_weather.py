@@ -28,4 +28,21 @@ html.Div([
 def current_weather_value(n_intervals):
     header_list = ['Date Time', 'Weather Status', 'Temperature', 'Real Feel Temperature', 'Humidity', 'Dew Point',
                    'Wind Direction', 'Wind Speed', 'Visibility', 'Pressure']
-    df = pd.read_csv('sensors_data.csv', names = header_list)
+    df = pd.read_csv('accu_weather_data.csv', names = header_list)
+    weather_status = df['Weather Status'].tail(1).iloc[0]
+    temp = df['Temperature'].tail(1).iloc[0]
+    feels_like_temp = df['Real Feel Temperature'].tail(1).iloc[0]
+
+    if weather_status == 'Mostly sunny':
+        return [
+            html.Div([
+                html.Img(src = app.get_asset_url('mostly sunny.png'),
+                         className = 'weather_image'),
+                html.P('{0:,.0f}°C'.format(temp),
+                       className = 'temperature_value'
+                       ),
+            ], className = 'image_value'),
+            html.P(weather_status + '. ' + 'Feels like ' + '{0:,.0f}°C'.format(feels_like_temp) + '.',
+                   className = 'feels_like_temp_value'
+                   ),
+        ]
