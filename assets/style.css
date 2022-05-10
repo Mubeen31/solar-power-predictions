@@ -189,7 +189,7 @@ body {
   font-family: Space Grotesk,Arial,sans-serif;
   font-size: 36px;
   color: #48484a;
-  margin-left: -15px;
+  margin-left: -10px;
   margin-top: 3px;
 }
 .image_value {
@@ -207,4 +207,89 @@ body {
   color: #48484a;
   margin-left: 7px;
   margin-top: -10px;
+}
+
+.speed {
+  display: flex;
+  flex-direction: row;
+  font-family: Space Grotesk,Arial,sans-serif;
+  font-size: 14px;
+  color: #48484a;
+}
+
+.direction {
+  display: flex;
+  flex-direction: row;
+  font-family: Space Grotesk,Arial,sans-serif;
+  font-size: 14px;
+  color: #48484a;
+}
+
+.s_d_p1 {
+  display: flex;
+  flex-direction: row;
+  column-gap: 10px;
+  margin-left: 10px;
+}
+
+.s_d_p2 {
+  display: flex;
+  flex-direction: row;
+  column-gap: 10px;
+  margin-left: 10px;
+  margin-top: -7px;
+}
+
+.s_d_p3 {
+  display: flex;
+  flex-direction: row;
+  column-gap: 10px;
+  margin-left: 10px;
+  margin-top: -7px;
+}
+
+.humidity {
+  display: flex;
+  flex-direction: row;
+  font-family: Space Grotesk,Arial,sans-serif;
+  font-size: 14px;
+  color: #48484a;
+}
+
+.pressure {
+  display: flex;
+  flex-direction: row;
+  font-family: Space Grotesk,Arial,sans-serif;
+  font-size: 14px;
+  color: #48484a;
+}
+
+.dew_point {
+  display: flex;
+  flex-direction: row;
+  font-family: Space Grotesk,Arial,sans-serif;
+  font-size: 14px;
+  color: #48484a;
+}
+
+.visibility {
+  display: flex;
+  flex-direction: row;
+  font-family: Space Grotesk,Arial,sans-serif;
+  font-size: 14px;
+  color: #48484a;
+}
+
+.bg_color1 {
+  width: 250px;
+  border-radius: 0px;
+  background-color: rgba(255, 255, 255, 0);
+  height: 73px;
+  border-left: 1px solid #eb6e4b;
+}
+
+.bg_color2 {
+  display: flex;
+  flex-direction: row;
+  margin-left: 8px;
 }
