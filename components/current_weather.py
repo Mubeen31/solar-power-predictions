@@ -39,7 +39,89 @@ def current_weather_value(n_intervals):
     dew_point = df['Dew Point'].tail(1).iloc[0]
     vs = df['Visibility'].tail(1).iloc[0]
 
-    if weather_status == 'Mostly cloudy':
+    if weather_status == 'Partly sunny':
+        return [
+            html.Div([
+                html.Img(src = app.get_asset_url('partly sunny.png'),
+                         className = 'weather_image'),
+                html.P('{0:,.0f}°C'.format(temp),
+                       className = 'temperature_value'
+                       ),
+            ], className = 'image_value'),
+            html.P(weather_status + '. ' + 'Feels like ' + '{0:,.0f}°C'.format(feels_like_temp) + '.',
+                   className = 'feels_like_temp_value'
+                   ),
+            html.Div([
+                html.Div([
+                    html.Div([
+                        html.P('Wind speed: ' + '{0:,.0f}km/h'.format(wind_speed),
+                               className = 'speed'
+                               ),
+                        html.P('Direction: ' + wind_direction,
+                               className = 'direction'
+                               ),
+                    ], className = 's_d_p1'),
+                    html.Div([
+                        html.P('Humidity: ' + '{0:.0f}%'.format(hum),
+                               className = 'humidity'
+                               ),
+                        html.P('Pressure: ' + '{0:.0f}mb'.format(pr),
+                               className = 'pressure'
+                               ),
+                    ], className = 's_d_p2'),
+                    html.Div([
+                        html.P('Dew point: ' + '{0:.0f}°C'.format(dew_point),
+                               className = 'dew_point'
+                               ),
+                        html.P('Visibility: ' + '{0:.1f}km'.format(vs),
+                               className = 'visibility'
+                               ),
+                    ], className = 's_d_p3'),
+                ], className = 'bg_color1')
+            ], className = 'bg_color2')
+        ]
+    elif weather_status == 'Mostly sunny':
+        return [
+            html.Div([
+                html.Img(src = app.get_asset_url('mostly sunny.png'),
+                         className = 'weather_image'),
+                html.P('{0:,.0f}°C'.format(temp),
+                       className = 'temperature_value'
+                       ),
+            ], className = 'image_value'),
+            html.P(weather_status + '. ' + 'Feels like ' + '{0:,.0f}°C'.format(feels_like_temp) + '.',
+                   className = 'feels_like_temp_value'
+                   ),
+            html.Div([
+                html.Div([
+                    html.Div([
+                        html.P('Wind speed: ' + '{0:,.0f}km/h'.format(wind_speed),
+                               className = 'speed'
+                               ),
+                        html.P('Direction: ' + wind_direction,
+                               className = 'direction'
+                               ),
+                    ], className = 's_d_p1'),
+                    html.Div([
+                        html.P('Humidity: ' + '{0:.0f}%'.format(hum),
+                               className = 'humidity'
+                               ),
+                        html.P('Pressure: ' + '{0:.0f}mb'.format(pr),
+                               className = 'pressure'
+                               ),
+                    ], className = 's_d_p2'),
+                    html.Div([
+                        html.P('Dew point: ' + '{0:.0f}°C'.format(dew_point),
+                               className = 'dew_point'
+                               ),
+                        html.P('Visibility: ' + '{0:.1f}km'.format(vs),
+                               className = 'visibility'
+                               ),
+                    ], className = 's_d_p3'),
+                ], className = 'bg_color1')
+            ], className = 'bg_color2')
+        ]
+    elif weather_status == 'Mostly cloudy':
         return [
             html.Div([
                 html.Img(src = app.get_asset_url('mostly cloudy.png'),
