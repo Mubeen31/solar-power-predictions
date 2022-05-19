@@ -16,6 +16,7 @@ from components.solar_current_power_chart import solar_current_power_chart_value
 from components.solar_today_power_chart import solar_today_power_chart_value
 from components.solar_yesterday_power_chart import solar_yesterday_power_chart_value
 from components.current_weather import current_weather_value
+from components.forecast_weather import forecast_weather_value
 
 font_awesome = "https://use.fontawesome.com/releases/v5.10.2/css/all.css"
 meta_tags = [{"name": "viewport", "content": "width=device-width"}]
@@ -137,6 +138,7 @@ app.layout = html.Div([
                     html.Div(id = 'current_weather')
                 ], className = 'weather1'),
                 html.Div([
+                    html.Div(id = 'forecast_weather')
                 ], className = 'weather2')
             ], className = 'weather_column')
         ], className = 'weather_background')
@@ -222,6 +224,14 @@ def current_weather_value_callback(n_intervals):
     current_weather_value_data = current_weather_value(n_intervals)
 
     return current_weather_value_data
+
+
+@app.callback(Output('forecast_weather', 'children'),
+              [Input('update_date_time_value', 'n_intervals')])
+def forecast_weather_value_callback(n_intervals):
+    forecast_weather_value_data = forecast_weather_value(n_intervals)
+
+    return forecast_weather_value_data
 
 
 if __name__ == "__main__":
