@@ -40,13 +40,66 @@ def forecast_weather_value(n_intervals):
     vs = df['Visibility'].tail(1).iloc[0]
 
     return [
-        html.P('14:00', className = 'time'),
-        html.Img(src = app.get_asset_url('partly sunny.png'),
-                 className = 'weather_image'),
-        html.P('{0:,.0f}°C'.format(temp),
-               className = 'forecast_temperature_value'
-               ),
-        html.P('RealFeel ' + '{0:,.0f}°C'.format(feels_like_temp),
-               className = 'forecast_real_feel'
-               ),
+        html.Div([
+            html.Div([
+                html.Div([
+                    html.P('14:00', className = 'time'),
+                    html.Img(src = app.get_asset_url('partly sunny.png'),
+                             className = 'weather_image'),
+                    html.P(weather_status,
+                           className = 'forecast_weather_status'
+                           ),
+                    html.P('{0:,.0f}°C'.format(temp),
+                           className = 'forecast_temperature_value'
+                           ),
+                    html.Div([
+                        html.Img(src = app.get_asset_url('pre.png'),
+                                 className = 'forecast_pre_image'),
+                        html.P('52%',
+                               className = 'forecast_pre_value'
+                               ),
+                    ], className = 'forecast_pre_row')
+                ], className = 'forecast_bg')
+            ], className = 'forecast_card'),
+            html.Div([
+                html.Div([
+                    html.P('15:00', className = 'time'),
+                    html.Img(src = app.get_asset_url('partly sunny.png'),
+                             className = 'weather_image'),
+                    html.P(weather_status,
+                           className = 'forecast_weather_status'
+                           ),
+                    html.P('{0:,.0f}°C'.format(temp),
+                           className = 'forecast_temperature_value'
+                           ),
+                    html.Div([
+                        html.Img(src = app.get_asset_url('pre.png'),
+                                 className = 'forecast_pre_image'),
+                        html.P('52%',
+                               className = 'forecast_pre_value'
+                               ),
+                    ], className = 'forecast_pre_row')
+                ], className = 'forecast_bg')
+            ], className = 'forecast_card'),
+            html.Div([
+                html.Div([
+                    html.P('16:00', className = 'time'),
+                    html.Img(src = app.get_asset_url('partly sunny.png'),
+                             className = 'weather_image'),
+                    html.P(weather_status,
+                           className = 'forecast_weather_status'
+                           ),
+                    html.P('{0:,.0f}°C'.format(temp),
+                           className = 'forecast_temperature_value'
+                           ),
+                    html.Div([
+                        html.Img(src = app.get_asset_url('pre.png'),
+                                 className = 'forecast_pre_image'),
+                        html.P('52%',
+                               className = 'forecast_pre_value'
+                               ),
+                    ], className = 'forecast_pre_row')
+                ], className = 'forecast_bg')
+            ], className = 'forecast_card')
+        ], className = 'forecast_cards_row')
     ]

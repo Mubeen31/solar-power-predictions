@@ -189,7 +189,7 @@ body {
   font-family: Space Grotesk,Arial,sans-serif;
   font-size: 36px;
   color: #48484a;
-  margin-left: -10px;
+  margin-left: -5px;
   margin-top: 3px;
 }
 .image_value {
@@ -306,15 +306,59 @@ body {
   display: flex;
   flex-direction: row;
   font-family: Space Grotesk,Arial,sans-serif;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: bold;
   color: #48484a;
 }
 
-.forecast_real_feel {
+.forecast_weather_status {
   display: flex;
   flex-direction: row;
   font-family: Space Grotesk,Arial,sans-serif;
   font-size: 12px;
   color: #48484a;
+}
+
+.forecast_pre_image {
+  display: flex;
+  flex-direction: row;
+  height: 15px;
+  width: 15px;
+}
+
+.forecast_pre_value {
+  display: flex;
+  flex-direction: row;
+  font-family: Space Grotesk,Arial,sans-serif;
+  font-size: 12px;
+  color: #48484a;
+}
+
+.forecast_pre_row {
+  display: flex;
+  flex-direction: row;
+  margin-top: -8px;
+}
+
+.forecast_bg {
+  display: flex;
+  flex-direction: column;
+  width: 90px;
+  background-color: #d9d9d9;
+  height: 160px;
+  align-items: center;
+}
+
+.forecast_card {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.forecast_cards_row {
+  display: flex;
+  flex-direction: row;
+  column-gap: 5px;
+  justify-content: center;
 }
