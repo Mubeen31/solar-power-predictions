@@ -25,7 +25,7 @@ html.Div([
 ]),
 
 
-def solar_first_card_value(n_intervals):
+def wind_first_card_value(n_intervals):
     header_list = ['Date Time', 'Voltage', 'Current']
     df = pd.read_csv('sensors_data.csv', names = header_list)
     get_voltage = df['Voltage'].tail(1).iloc[0]
@@ -34,7 +34,7 @@ def solar_first_card_value(n_intervals):
     power_kilo_watt = power_watt / 1000
 
     return [
-        html.P('Current Solar Power', className = 'card_text'),
+        html.P('Current Wind Power', className = 'card_text'),
         html.Div([
             html.P('{0:,.5f}'.format(abs(power_kilo_watt)) + ' ' + 'KW',
                    className = 'card_value1'),

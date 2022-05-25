@@ -8,6 +8,7 @@ import pandas as pd
 from datetime import datetime
 from components.header import header_value
 from components.solar_first_card import solar_first_card_value
+from components.wind_first_card import wind_first_card_value
 from components.solar_second_card import solar_second_card_value
 from components.solar_third_card import solar_third_card_value
 from components.solar_fourth_card import solar_fourth_card_value
@@ -89,14 +90,14 @@ app.layout = html.Div([
                      n_intervals = 0),
     ]),
     html.Div([
-        dcc.Interval(id = 'update_forecast_value',
-                     interval = 5000,
+        dcc.Interval(id = 'solar_wind_card',
+                     interval = 30000,
                      n_intervals = 0),
     ]),
     html.Div([
         html.Div([
             html.Div([
-                html.Div(id = 'solar_first_card')
+                html.Div(id = 'solar_wind_first_card')
             ], className = 'adjust_card'),
             html.Div([
                 html.Div(id = 'solar_second_card')
@@ -165,12 +166,17 @@ def header_value_callback(n_intervals):
     return header_value_data
 
 
-@app.callback(Output('solar_first_card', 'children'),
-              [Input('update_date_time_value', 'n_intervals')])
-def solar_first_card_value_callback(n_intervals):
-    solar_first_card_value_data = solar_first_card_value(n_intervals)
+@app.callback(Output('solar_wind_first_card', 'children'),
+              [Input('solar_wind_card', 'n_intervals')])
+def solar_wind_first_card_value_callback(n_intervals):
+    if n_intervals == None or n_intervals % 2 == 1:
+        solar_wind_first_card_value_data = solar_first_card_value(n_intervals)
+    elif n_intervals % 2 == 0:
+        solar_wind_first_card_value_data = wind_first_card_value(n_intervals)
+    else:
+        solar_wind_first_card_value_data = "None"
 
-    return solar_first_card_value_data
+    return solar_wind_first_card_value_data
 
 
 @app.callback(Output('solar_second_card', 'children'),
