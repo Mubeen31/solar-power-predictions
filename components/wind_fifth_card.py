@@ -25,20 +25,16 @@ html.Div([
 ]),
 
 
-def solar_third_card_value(n_intervals):
+def wind_fifth_card_value(n_intervals):
     header_list = ['Date Time', 'Voltage', 'Current']
     df = pd.read_csv('sensors_data.csv', names = header_list)
-    df['Date Time'] = pd.to_datetime(df['Date Time'])
-    df['Date'] = df['Date Time'].dt.date
-    df['Date'] = pd.to_datetime(df['Date'])
-    today_date = df['Date'].unique()
-    today_voltage = df[df['Date'] == today_date[-2]]['Voltage'].mean()
-    today_current = df[df['Date'] == today_date[-2]]['Current'].mean()
-    power_watt = today_voltage * today_current
+    voltage = df['Voltage'].mean()
+    current = df['Current'].mean()
+    power_watt = voltage * current
     power_kilo_watt = power_watt / 1000
 
     return [
-        html.P('Yesterday Solar Energy', className = 'card_text'),
+        html.P('Lifetime Wind Energy', className = 'card_text'),
         html.Div([
             html.P('{0:,.5f}'.format(abs(power_kilo_watt)) + ' ' + 'KW',
                    className = 'card_value1'),

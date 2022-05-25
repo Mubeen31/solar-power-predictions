@@ -36,6 +36,289 @@ def third_hour_forecast_weather_value(n_intervals):
     temp = df['Temperature'].tail(1).iloc[0]
     real_feel_temp = df['Real Feel Temperature'].tail(1).iloc[0]
     pr = df['Precipitation'].tail(1).iloc[0]
+    now = datetime.now()
+    time_name = now.strftime('%H:%M:%S')
+    sun_time1 = '21:00:00'
+    sun_time2 = '23:59:59'
+    sun_time3 = '00:00:00'
+    sun_time4 = '05:11:00'
+
+    if time_name >= sun_time1 and time_name <= sun_time2 and weather_status == 'Clear':
+        return [
+            html.Div([
+                html.Div([
+                    html.P(tme, className = 'time'),
+                    html.Img(src = app.get_asset_url('night-clear.png'),
+                             className = 'weather_image'),
+                    html.P('RealFeel ' + '{0:,.0f}°C'.format(real_feel_temp),
+                           className = 'real_feel_temp'
+                           ),
+                    html.P('{0:,.0f}°C'.format(temp),
+                           className = 'forecast_temperature_value'
+                           ),
+                    html.Div([
+                        html.Img(src = app.get_asset_url('pre.png'),
+                                 className = 'forecast_pre_image'),
+                        html.P('{0:,.0f}%'.format(pr),
+                               className = 'forecast_pre_value'
+                               ),
+                    ], className = 'forecast_pre_row')
+                ], className = 'forecast_bg')
+            ], className = 'forecast_card'),
+        ]
+    if time_name >= sun_time1 and time_name <= sun_time2 and weather_status == 'Mostly clear':
+        return [
+            html.Div([
+                html.Div([
+                    html.P(tme, className = 'time'),
+                    html.Img(src = app.get_asset_url('night-mostly-clear.png'),
+                             className = 'weather_image'),
+                    html.P('RealFeel ' + '{0:,.0f}°C'.format(real_feel_temp),
+                           className = 'real_feel_temp'
+                           ),
+                    html.P('{0:,.0f}°C'.format(temp),
+                           className = 'forecast_temperature_value'
+                           ),
+                    html.Div([
+                        html.Img(src = app.get_asset_url('pre.png'),
+                                 className = 'forecast_pre_image'),
+                        html.P('{0:,.0f}%'.format(pr),
+                               className = 'forecast_pre_value'
+                               ),
+                    ], className = 'forecast_pre_row')
+                ], className = 'forecast_bg')
+            ], className = 'forecast_card'),
+        ]
+    if time_name >= sun_time1 and time_name <= sun_time2 and weather_status == 'Partly cloudy':
+        return [
+            html.Div([
+                html.Div([
+                    html.P(tme, className = 'time'),
+                    html.Img(src = app.get_asset_url('night-partly-cloudy.png'),
+                             className = 'weather_image'),
+                    html.P('RealFeel ' + '{0:,.0f}°C'.format(real_feel_temp),
+                           className = 'real_feel_temp'
+                           ),
+                    html.P('{0:,.0f}°C'.format(temp),
+                           className = 'forecast_temperature_value'
+                           ),
+                    html.Div([
+                        html.Img(src = app.get_asset_url('pre.png'),
+                                 className = 'forecast_pre_image'),
+                        html.P('{0:,.0f}%'.format(pr),
+                               className = 'forecast_pre_value'
+                               ),
+                    ], className = 'forecast_pre_row')
+                ], className = 'forecast_bg')
+            ], className = 'forecast_card'),
+        ]
+    if time_name >= sun_time1 and time_name <= sun_time2 and weather_status == 'Intermittent clouds':
+        return [
+            html.Div([
+                html.Div([
+                    html.P(tme, className = 'time'),
+                    html.Img(src = app.get_asset_url('night-intermittent-clouds.png'),
+                             className = 'weather_image'),
+                    html.P('RealFeel ' + '{0:,.0f}°C'.format(real_feel_temp),
+                           className = 'real_feel_temp'
+                           ),
+                    html.P('{0:,.0f}°C'.format(temp),
+                           className = 'forecast_temperature_value'
+                           ),
+                    html.Div([
+                        html.Img(src = app.get_asset_url('pre.png'),
+                                 className = 'forecast_pre_image'),
+                        html.P('{0:,.0f}%'.format(pr),
+                               className = 'forecast_pre_value'
+                               ),
+                    ], className = 'forecast_pre_row')
+                ], className = 'forecast_bg')
+            ], className = 'forecast_card'),
+        ]
+    if time_name >= sun_time1 and time_name <= sun_time2 and weather_status == 'Hazy moonlight':
+        return [
+            html.Div([
+                html.Div([
+                    html.P(tme, className = 'time'),
+                    html.Img(src = app.get_asset_url('hazy-moonlight.png'),
+                             className = 'weather_image'),
+                    html.P('RealFeel ' + '{0:,.0f}°C'.format(real_feel_temp),
+                           className = 'real_feel_temp'
+                           ),
+                    html.P('{0:,.0f}°C'.format(temp),
+                           className = 'forecast_temperature_value'
+                           ),
+                    html.Div([
+                        html.Img(src = app.get_asset_url('pre.png'),
+                                 className = 'forecast_pre_image'),
+                        html.P('{0:,.0f}%'.format(pr),
+                               className = 'forecast_pre_value'
+                               ),
+                    ], className = 'forecast_pre_row')
+                ], className = 'forecast_bg')
+            ], className = 'forecast_card'),
+        ]
+    if time_name >= sun_time1 and time_name <= sun_time2 and weather_status == 'Mostly cloudy':
+        return [
+            html.Div([
+                html.Div([
+                    html.P(tme, className = 'time'),
+                    html.Img(src = app.get_asset_url('night-mostly-cloudy.png'),
+                             className = 'weather_image'),
+                    html.P('RealFeel ' + '{0:,.0f}°C'.format(real_feel_temp),
+                           className = 'real_feel_temp'
+                           ),
+                    html.P('{0:,.0f}°C'.format(temp),
+                           className = 'forecast_temperature_value'
+                           ),
+                    html.Div([
+                        html.Img(src = app.get_asset_url('pre.png'),
+                                 className = 'forecast_pre_image'),
+                        html.P('{0:,.0f}%'.format(pr),
+                               className = 'forecast_pre_value'
+                               ),
+                    ], className = 'forecast_pre_row')
+                ], className = 'forecast_bg')
+            ], className = 'forecast_card'),
+        ]
+    if time_name >= sun_time3 and time_name <= sun_time4 and weather_status == 'Clear':
+        return [
+            html.Div([
+                html.Div([
+                    html.P(tme, className = 'time'),
+                    html.Img(src = app.get_asset_url('night-clear.png'),
+                             className = 'weather_image'),
+                    html.P('RealFeel ' + '{0:,.0f}°C'.format(real_feel_temp),
+                           className = 'real_feel_temp'
+                           ),
+                    html.P('{0:,.0f}°C'.format(temp),
+                           className = 'forecast_temperature_value'
+                           ),
+                    html.Div([
+                        html.Img(src = app.get_asset_url('pre.png'),
+                                 className = 'forecast_pre_image'),
+                        html.P('{0:,.0f}%'.format(pr),
+                               className = 'forecast_pre_value'
+                               ),
+                    ], className = 'forecast_pre_row')
+                ], className = 'forecast_bg')
+            ], className = 'forecast_card'),
+        ]
+    if time_name >= sun_time3 and time_name <= sun_time4 and weather_status == 'Mostly clear':
+        return [
+            html.Div([
+                html.Div([
+                    html.P(tme, className = 'time'),
+                    html.Img(src = app.get_asset_url('night-mostly-clear.png'),
+                             className = 'weather_image'),
+                    html.P('RealFeel ' + '{0:,.0f}°C'.format(real_feel_temp),
+                           className = 'real_feel_temp'
+                           ),
+                    html.P('{0:,.0f}°C'.format(temp),
+                           className = 'forecast_temperature_value'
+                           ),
+                    html.Div([
+                        html.Img(src = app.get_asset_url('pre.png'),
+                                 className = 'forecast_pre_image'),
+                        html.P('{0:,.0f}%'.format(pr),
+                               className = 'forecast_pre_value'
+                               ),
+                    ], className = 'forecast_pre_row')
+                ], className = 'forecast_bg')
+            ], className = 'forecast_card'),
+        ]
+    if time_name >= sun_time3 and time_name <= sun_time4 and weather_status == 'Partly cloudy':
+        return [
+            html.Div([
+                html.Div([
+                    html.P(tme, className = 'time'),
+                    html.Img(src = app.get_asset_url('night-partly-cloudy.png'),
+                             className = 'weather_image'),
+                    html.P('RealFeel ' + '{0:,.0f}°C'.format(real_feel_temp),
+                           className = 'real_feel_temp'
+                           ),
+                    html.P('{0:,.0f}°C'.format(temp),
+                           className = 'forecast_temperature_value'
+                           ),
+                    html.Div([
+                        html.Img(src = app.get_asset_url('pre.png'),
+                                 className = 'forecast_pre_image'),
+                        html.P('{0:,.0f}%'.format(pr),
+                               className = 'forecast_pre_value'
+                               ),
+                    ], className = 'forecast_pre_row')
+                ], className = 'forecast_bg')
+            ], className = 'forecast_card'),
+        ]
+    if time_name >= sun_time3 and time_name <= sun_time4 and weather_status == 'Intermittent clouds':
+        return [
+            html.Div([
+                html.Div([
+                    html.P(tme, className = 'time'),
+                    html.Img(src = app.get_asset_url('night-intermittent-clouds.png'),
+                             className = 'weather_image'),
+                    html.P('RealFeel ' + '{0:,.0f}°C'.format(real_feel_temp),
+                           className = 'real_feel_temp'
+                           ),
+                    html.P('{0:,.0f}°C'.format(temp),
+                           className = 'forecast_temperature_value'
+                           ),
+                    html.Div([
+                        html.Img(src = app.get_asset_url('pre.png'),
+                                 className = 'forecast_pre_image'),
+                        html.P('{0:,.0f}%'.format(pr),
+                               className = 'forecast_pre_value'
+                               ),
+                    ], className = 'forecast_pre_row')
+                ], className = 'forecast_bg')
+            ], className = 'forecast_card'),
+        ]
+    if time_name >= sun_time3 and time_name <= sun_time4 and weather_status == 'Hazy moonlight':
+        return [
+            html.Div([
+                html.Div([
+                    html.P(tme, className = 'time'),
+                    html.Img(src = app.get_asset_url('hazy-moonlight.png'),
+                             className = 'weather_image'),
+                    html.P('RealFeel ' + '{0:,.0f}°C'.format(real_feel_temp),
+                           className = 'real_feel_temp'
+                           ),
+                    html.P('{0:,.0f}°C'.format(temp),
+                           className = 'forecast_temperature_value'
+                           ),
+                    html.Div([
+                        html.Img(src = app.get_asset_url('pre.png'),
+                                 className = 'forecast_pre_image'),
+                        html.P('{0:,.0f}%'.format(pr),
+                               className = 'forecast_pre_value'
+                               ),
+                    ], className = 'forecast_pre_row')
+                ], className = 'forecast_bg')
+            ], className = 'forecast_card'),
+        ]
+    if time_name >= sun_time3 and time_name <= sun_time4 and weather_status == 'Mostly cloudy':
+        return [
+            html.Div([
+                html.Div([
+                    html.P(tme, className = 'time'),
+                    html.Img(src = app.get_asset_url('night-mostly-cloudy.png'),
+                             className = 'weather_image'),
+                    html.P('RealFeel ' + '{0:,.0f}°C'.format(real_feel_temp),
+                           className = 'real_feel_temp'
+                           ),
+                    html.P('{0:,.0f}°C'.format(temp),
+                           className = 'forecast_temperature_value'
+                           ),
+                    html.Div([
+                        html.Img(src = app.get_asset_url('pre.png'),
+                                 className = 'forecast_pre_image'),
+                        html.P('{0:,.0f}%'.format(pr),
+                               className = 'forecast_pre_value'
+                               ),
+                    ], className = 'forecast_pre_row')
+                ], className = 'forecast_bg')
+            ], className = 'forecast_card'),
+        ]
 
     if weather_status == 'Partly sunny':
         return [

@@ -10,9 +10,13 @@ from components.header import header_value
 from components.solar_first_card import solar_first_card_value
 from components.wind_first_card import wind_first_card_value
 from components.solar_second_card import solar_second_card_value
+from components.wind_second_card import wind_second_card_value
 from components.solar_third_card import solar_third_card_value
+from components.wind_third_card import wind_third_card_value
 from components.solar_fourth_card import solar_fourth_card_value
+from components.wind_fourth_card import wind_fourth_card_value
 from components.solar_fifth_card import solar_fifth_card_value
+from components.wind_fifth_card import wind_fifth_card_value
 from components.solar_current_power_chart import solar_current_power_chart_value
 from components.solar_today_power_chart import solar_today_power_chart_value
 from components.solar_yesterday_power_chart import solar_yesterday_power_chart_value
@@ -100,16 +104,16 @@ app.layout = html.Div([
                 html.Div(id = 'solar_wind_first_card')
             ], className = 'adjust_card'),
             html.Div([
-                html.Div(id = 'solar_second_card')
+                html.Div(id = 'solar_wind_second_card')
             ], className = 'adjust_card'),
             html.Div([
-                html.Div(id = 'solar_third_card')
+                html.Div(id = 'solar_wind_third_card')
             ], className = 'adjust_card'),
             html.Div([
-                html.Div(id = 'solar_fourth_card')
+                html.Div(id = 'solar_wind_fourth_card')
             ], className = 'adjust_card'),
             html.Div([
-                html.Div(id = 'solar_fifth_card')
+                html.Div(id = 'solar_wind_fifth_card')
             ], className = 'adjust_last_card'),
         ], className = 'background1')
     ], className = 'adjust_margin1'),
@@ -179,36 +183,56 @@ def solar_wind_first_card_value_callback(n_intervals):
     return solar_wind_first_card_value_data
 
 
-@app.callback(Output('solar_second_card', 'children'),
-              [Input('update_date_time_value', 'n_intervals')])
-def solar_second_card_value_callback(n_intervals):
-    solar_second_card_value_data = solar_second_card_value(n_intervals)
+@app.callback(Output('solar_wind_second_card', 'children'),
+              [Input('solar_wind_card', 'n_intervals')])
+def solar_wind_second_card_value_callback(n_intervals):
+    if n_intervals == None or n_intervals % 2 == 1:
+        solar_wind_second_card_value_data = solar_second_card_value(n_intervals)
+    elif n_intervals % 2 == 0:
+        solar_wind_second_card_value_data = wind_second_card_value(n_intervals)
+    else:
+        solar_wind_second_card_value_data = "None"
 
-    return solar_second_card_value_data
-
-
-@app.callback(Output('solar_third_card', 'children'),
-              [Input('update_date_time_value', 'n_intervals')])
-def solar_third_card_value_callback(n_intervals):
-    solar_third_card_value_data = solar_third_card_value(n_intervals)
-
-    return solar_third_card_value_data
+    return solar_wind_second_card_value_data
 
 
-@app.callback(Output('solar_fourth_card', 'children'),
-              [Input('update_date_time_value', 'n_intervals')])
-def solar_fourth_card_value_callback(n_intervals):
-    solar_fourth_card_value_data = solar_fourth_card_value(n_intervals)
+@app.callback(Output('solar_wind_third_card', 'children'),
+              [Input('solar_wind_card', 'n_intervals')])
+def solar_wind_third_card_value_callback(n_intervals):
+    if n_intervals == None or n_intervals % 2 == 1:
+        solar_wind_third_card_value_data = solar_third_card_value(n_intervals)
+    elif n_intervals % 2 == 0:
+        solar_wind_third_card_value_data = wind_third_card_value(n_intervals)
+    else:
+        solar_wind_third_card_value_data = "None"
 
-    return solar_fourth_card_value_data
+    return solar_wind_third_card_value_data
 
 
-@app.callback(Output('solar_fifth_card', 'children'),
-              [Input('update_date_time_value', 'n_intervals')])
-def solar_fifth_card_value_callback(n_intervals):
-    solar_fifth_card_value_data = solar_fifth_card_value(n_intervals)
+@app.callback(Output('solar_wind_fourth_card', 'children'),
+              [Input('solar_wind_card', 'n_intervals')])
+def solar_wind_fourth_card_value_callback(n_intervals):
+    if n_intervals == None or n_intervals % 2 == 1:
+        solar_wind_fourth_card_value_data = solar_fourth_card_value(n_intervals)
+    elif n_intervals % 2 == 0:
+        solar_wind_fourth_card_value_data = wind_fourth_card_value(n_intervals)
+    else:
+        solar_wind_fourth_card_value_data = "None"
 
-    return solar_fifth_card_value_data
+    return solar_wind_fourth_card_value_data
+
+
+@app.callback(Output('solar_wind_fifth_card', 'children'),
+              [Input('solar_wind_card', 'n_intervals')])
+def solar_wind_fifth_card_value_callback(n_intervals):
+    if n_intervals == None or n_intervals % 2 == 1:
+        solar_wind_fifth_card_value_data = solar_fifth_card_value(n_intervals)
+    elif n_intervals % 2 == 0:
+        solar_wind_fifth_card_value_data = wind_fifth_card_value(n_intervals)
+    else:
+        solar_wind_fifth_card_value_data = "None"
+
+    return solar_wind_fifth_card_value_data
 
 
 @app.callback(Output('solar_current_power_chart', 'figure'),

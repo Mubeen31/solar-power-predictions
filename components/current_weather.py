@@ -38,7 +38,505 @@ def current_weather_value(n_intervals):
     pr = df['Pressure'].tail(1).iloc[0]
     dew_point = df['Dew Point'].tail(1).iloc[0]
     vs = df['Visibility'].tail(1).iloc[0]
+    now = datetime.now()
+    time_name = now.strftime('%H:%M:%S')
+    sun_time1 = '21:00:00'
+    sun_time2 = '23:59:59'
+    sun_time3 = '00:00:00'
+    sun_time4 = '05:11:00'
 
+    if time_name >= sun_time1 and time_name <= sun_time2 and weather_status == 'Clear':
+        return [
+            html.Div([
+                html.Img(src = app.get_asset_url('night-clear.png'),
+                         className = 'weather_image'),
+                html.P('{0:,.0f}°C'.format(temp),
+                       className = 'temperature_value'
+                       ),
+            ], className = 'image_value'),
+            html.P(weather_status + '. ' + 'Feels like ' + '{0:,.0f}°C'.format(feels_like_temp) + '.',
+                   className = 'feels_like_temp_value'
+                   ),
+            html.Div([
+                html.Div([
+                    html.Div([
+                        html.P('Wind speed: ' + '{0:,.0f}km/h'.format(wind_speed),
+                               className = 'speed'
+                               ),
+                        html.P('Direction: ' + wind_direction,
+                               className = 'direction'
+                               ),
+                    ], className = 's_d_p1'),
+                    html.Div([
+                        html.P('Humidity: ' + '{0:.0f}%'.format(hum),
+                               className = 'humidity'
+                               ),
+                        html.P('Pressure: ' + '{0:.0f}mb'.format(pr),
+                               className = 'pressure'
+                               ),
+                    ], className = 's_d_p2'),
+                    html.Div([
+                        html.P('Dew point: ' + '{0:.0f}°C'.format(dew_point),
+                               className = 'dew_point'
+                               ),
+                        html.P('Visibility: ' + '{0:.1f}km'.format(vs),
+                               className = 'visibility'
+                               ),
+                    ], className = 's_d_p3'),
+                ], className = 'bg_color1')
+            ], className = 'bg_color2')
+        ]
+    if time_name >= sun_time1 and time_name <= sun_time2 and weather_status == 'Mostly clear':
+        return [
+            html.Div([
+                html.Img(src = app.get_asset_url('night-mostly-clear.png'),
+                         className = 'weather_image'),
+                html.P('{0:,.0f}°C'.format(temp),
+                       className = 'temperature_value'
+                       ),
+            ], className = 'image_value'),
+            html.P(weather_status + '. ' + 'Feels like ' + '{0:,.0f}°C'.format(feels_like_temp) + '.',
+                   className = 'feels_like_temp_value'
+                   ),
+            html.Div([
+                html.Div([
+                    html.Div([
+                        html.P('Wind speed: ' + '{0:,.0f}km/h'.format(wind_speed),
+                               className = 'speed'
+                               ),
+                        html.P('Direction: ' + wind_direction,
+                               className = 'direction'
+                               ),
+                    ], className = 's_d_p1'),
+                    html.Div([
+                        html.P('Humidity: ' + '{0:.0f}%'.format(hum),
+                               className = 'humidity'
+                               ),
+                        html.P('Pressure: ' + '{0:.0f}mb'.format(pr),
+                               className = 'pressure'
+                               ),
+                    ], className = 's_d_p2'),
+                    html.Div([
+                        html.P('Dew point: ' + '{0:.0f}°C'.format(dew_point),
+                               className = 'dew_point'
+                               ),
+                        html.P('Visibility: ' + '{0:.1f}km'.format(vs),
+                               className = 'visibility'
+                               ),
+                    ], className = 's_d_p3'),
+                ], className = 'bg_color1')
+            ], className = 'bg_color2')
+        ]
+    if time_name >= sun_time1 and time_name <= sun_time2 and weather_status == 'Partly cloudy':
+        return [
+            html.Div([
+                html.Img(src = app.get_asset_url('night-partly-cloudy.png'),
+                         className = 'weather_image'),
+                html.P('{0:,.0f}°C'.format(temp),
+                       className = 'temperature_value'
+                       ),
+            ], className = 'image_value'),
+            html.P(weather_status + '. ' + 'Feels like ' + '{0:,.0f}°C'.format(feels_like_temp) + '.',
+                   className = 'feels_like_temp_value'
+                   ),
+            html.Div([
+                html.Div([
+                    html.Div([
+                        html.P('Wind speed: ' + '{0:,.0f}km/h'.format(wind_speed),
+                               className = 'speed'
+                               ),
+                        html.P('Direction: ' + wind_direction,
+                               className = 'direction'
+                               ),
+                    ], className = 's_d_p1'),
+                    html.Div([
+                        html.P('Humidity: ' + '{0:.0f}%'.format(hum),
+                               className = 'humidity'
+                               ),
+                        html.P('Pressure: ' + '{0:.0f}mb'.format(pr),
+                               className = 'pressure'
+                               ),
+                    ], className = 's_d_p2'),
+                    html.Div([
+                        html.P('Dew point: ' + '{0:.0f}°C'.format(dew_point),
+                               className = 'dew_point'
+                               ),
+                        html.P('Visibility: ' + '{0:.1f}km'.format(vs),
+                               className = 'visibility'
+                               ),
+                    ], className = 's_d_p3'),
+                ], className = 'bg_color1')
+            ], className = 'bg_color2')
+        ]
+    if time_name >= sun_time1 and time_name <= sun_time2 and weather_status == 'Intermittent clouds':
+        return [
+            html.Div([
+                html.Img(src = app.get_asset_url('night-intermittent-clouds.png'),
+                         className = 'weather_image'),
+                html.P('{0:,.0f}°C'.format(temp),
+                       className = 'temperature_value'
+                       ),
+            ], className = 'image_value'),
+            html.P(weather_status + '. ' + 'Feels like ' + '{0:,.0f}°C'.format(feels_like_temp) + '.',
+                   className = 'feels_like_temp_value'
+                   ),
+            html.Div([
+                html.Div([
+                    html.Div([
+                        html.P('Wind speed: ' + '{0:,.0f}km/h'.format(wind_speed),
+                               className = 'speed'
+                               ),
+                        html.P('Direction: ' + wind_direction,
+                               className = 'direction'
+                               ),
+                    ], className = 's_d_p1'),
+                    html.Div([
+                        html.P('Humidity: ' + '{0:.0f}%'.format(hum),
+                               className = 'humidity'
+                               ),
+                        html.P('Pressure: ' + '{0:.0f}mb'.format(pr),
+                               className = 'pressure'
+                               ),
+                    ], className = 's_d_p2'),
+                    html.Div([
+                        html.P('Dew point: ' + '{0:.0f}°C'.format(dew_point),
+                               className = 'dew_point'
+                               ),
+                        html.P('Visibility: ' + '{0:.1f}km'.format(vs),
+                               className = 'visibility'
+                               ),
+                    ], className = 's_d_p3'),
+                ], className = 'bg_color1')
+            ], className = 'bg_color2')
+        ]
+    if time_name >= sun_time1 and time_name <= sun_time2 and weather_status == 'Hazy moonlight':
+        return [
+            html.Div([
+                html.Img(src = app.get_asset_url('hazy-moonlight.png'),
+                         className = 'weather_image'),
+                html.P('{0:,.0f}°C'.format(temp),
+                       className = 'temperature_value'
+                       ),
+            ], className = 'image_value'),
+            html.P(weather_status + '. ' + 'Feels like ' + '{0:,.0f}°C'.format(feels_like_temp) + '.',
+                   className = 'feels_like_temp_value'
+                   ),
+            html.Div([
+                html.Div([
+                    html.Div([
+                        html.P('Wind speed: ' + '{0:,.0f}km/h'.format(wind_speed),
+                               className = 'speed'
+                               ),
+                        html.P('Direction: ' + wind_direction,
+                               className = 'direction'
+                               ),
+                    ], className = 's_d_p1'),
+                    html.Div([
+                        html.P('Humidity: ' + '{0:.0f}%'.format(hum),
+                               className = 'humidity'
+                               ),
+                        html.P('Pressure: ' + '{0:.0f}mb'.format(pr),
+                               className = 'pressure'
+                               ),
+                    ], className = 's_d_p2'),
+                    html.Div([
+                        html.P('Dew point: ' + '{0:.0f}°C'.format(dew_point),
+                               className = 'dew_point'
+                               ),
+                        html.P('Visibility: ' + '{0:.1f}km'.format(vs),
+                               className = 'visibility'
+                               ),
+                    ], className = 's_d_p3'),
+                ], className = 'bg_color1')
+            ], className = 'bg_color2')
+        ]
+    if time_name >= sun_time1 and time_name <= sun_time2 and weather_status == 'Mostly cloudy':
+        return [
+            html.Div([
+                html.Img(src = app.get_asset_url('night-mostly-cloudy.png'),
+                         className = 'weather_image'),
+                html.P('{0:,.0f}°C'.format(temp),
+                       className = 'temperature_value'
+                       ),
+            ], className = 'image_value'),
+            html.P(weather_status + '. ' + 'Feels like ' + '{0:,.0f}°C'.format(feels_like_temp) + '.',
+                   className = 'feels_like_temp_value'
+                   ),
+            html.Div([
+                html.Div([
+                    html.Div([
+                        html.P('Wind speed: ' + '{0:,.0f}km/h'.format(wind_speed),
+                               className = 'speed'
+                               ),
+                        html.P('Direction: ' + wind_direction,
+                               className = 'direction'
+                               ),
+                    ], className = 's_d_p1'),
+                    html.Div([
+                        html.P('Humidity: ' + '{0:.0f}%'.format(hum),
+                               className = 'humidity'
+                               ),
+                        html.P('Pressure: ' + '{0:.0f}mb'.format(pr),
+                               className = 'pressure'
+                               ),
+                    ], className = 's_d_p2'),
+                    html.Div([
+                        html.P('Dew point: ' + '{0:.0f}°C'.format(dew_point),
+                               className = 'dew_point'
+                               ),
+                        html.P('Visibility: ' + '{0:.1f}km'.format(vs),
+                               className = 'visibility'
+                               ),
+                    ], className = 's_d_p3'),
+                ], className = 'bg_color1')
+            ], className = 'bg_color2')
+        ]
+    if time_name >= sun_time3 and time_name <= sun_time4 and weather_status == 'Clear':
+        return [
+            html.Div([
+                html.Img(src = app.get_asset_url('night-clear.png'),
+                         className = 'weather_image'),
+                html.P('{0:,.0f}°C'.format(temp),
+                       className = 'temperature_value'
+                       ),
+            ], className = 'image_value'),
+            html.P(weather_status + '. ' + 'Feels like ' + '{0:,.0f}°C'.format(feels_like_temp) + '.',
+                   className = 'feels_like_temp_value'
+                   ),
+            html.Div([
+                html.Div([
+                    html.Div([
+                        html.P('Wind speed: ' + '{0:,.0f}km/h'.format(wind_speed),
+                               className = 'speed'
+                               ),
+                        html.P('Direction: ' + wind_direction,
+                               className = 'direction'
+                               ),
+                    ], className = 's_d_p1'),
+                    html.Div([
+                        html.P('Humidity: ' + '{0:.0f}%'.format(hum),
+                               className = 'humidity'
+                               ),
+                        html.P('Pressure: ' + '{0:.0f}mb'.format(pr),
+                               className = 'pressure'
+                               ),
+                    ], className = 's_d_p2'),
+                    html.Div([
+                        html.P('Dew point: ' + '{0:.0f}°C'.format(dew_point),
+                               className = 'dew_point'
+                               ),
+                        html.P('Visibility: ' + '{0:.1f}km'.format(vs),
+                               className = 'visibility'
+                               ),
+                    ], className = 's_d_p3'),
+                ], className = 'bg_color1')
+            ], className = 'bg_color2')
+        ]
+    if time_name >= sun_time3 and time_name <= sun_time4 and weather_status == 'Mostly clear':
+        return [
+            html.Div([
+                html.Img(src = app.get_asset_url('night-mostly-clear.png'),
+                         className = 'weather_image'),
+                html.P('{0:,.0f}°C'.format(temp),
+                       className = 'temperature_value'
+                       ),
+            ], className = 'image_value'),
+            html.P(weather_status + '. ' + 'Feels like ' + '{0:,.0f}°C'.format(feels_like_temp) + '.',
+                   className = 'feels_like_temp_value'
+                   ),
+            html.Div([
+                html.Div([
+                    html.Div([
+                        html.P('Wind speed: ' + '{0:,.0f}km/h'.format(wind_speed),
+                               className = 'speed'
+                               ),
+                        html.P('Direction: ' + wind_direction,
+                               className = 'direction'
+                               ),
+                    ], className = 's_d_p1'),
+                    html.Div([
+                        html.P('Humidity: ' + '{0:.0f}%'.format(hum),
+                               className = 'humidity'
+                               ),
+                        html.P('Pressure: ' + '{0:.0f}mb'.format(pr),
+                               className = 'pressure'
+                               ),
+                    ], className = 's_d_p2'),
+                    html.Div([
+                        html.P('Dew point: ' + '{0:.0f}°C'.format(dew_point),
+                               className = 'dew_point'
+                               ),
+                        html.P('Visibility: ' + '{0:.1f}km'.format(vs),
+                               className = 'visibility'
+                               ),
+                    ], className = 's_d_p3'),
+                ], className = 'bg_color1')
+            ], className = 'bg_color2')
+        ]
+    if time_name >= sun_time3 and time_name <= sun_time4 and weather_status == 'Partly cloudy':
+        return [
+            html.Div([
+                html.Img(src = app.get_asset_url('night-partly-cloudy.png'),
+                         className = 'weather_image'),
+                html.P('{0:,.0f}°C'.format(temp),
+                       className = 'temperature_value'
+                       ),
+            ], className = 'image_value'),
+            html.P(weather_status + '. ' + 'Feels like ' + '{0:,.0f}°C'.format(feels_like_temp) + '.',
+                   className = 'feels_like_temp_value'
+                   ),
+            html.Div([
+                html.Div([
+                    html.Div([
+                        html.P('Wind speed: ' + '{0:,.0f}km/h'.format(wind_speed),
+                               className = 'speed'
+                               ),
+                        html.P('Direction: ' + wind_direction,
+                               className = 'direction'
+                               ),
+                    ], className = 's_d_p1'),
+                    html.Div([
+                        html.P('Humidity: ' + '{0:.0f}%'.format(hum),
+                               className = 'humidity'
+                               ),
+                        html.P('Pressure: ' + '{0:.0f}mb'.format(pr),
+                               className = 'pressure'
+                               ),
+                    ], className = 's_d_p2'),
+                    html.Div([
+                        html.P('Dew point: ' + '{0:.0f}°C'.format(dew_point),
+                               className = 'dew_point'
+                               ),
+                        html.P('Visibility: ' + '{0:.1f}km'.format(vs),
+                               className = 'visibility'
+                               ),
+                    ], className = 's_d_p3'),
+                ], className = 'bg_color1')
+            ], className = 'bg_color2')
+        ]
+    if time_name >= sun_time3 and time_name <= sun_time4 and weather_status == 'Intermittent clouds':
+        return [
+            html.Div([
+                html.Img(src = app.get_asset_url('night-intermittent-clouds.png'),
+                         className = 'weather_image'),
+                html.P('{0:,.0f}°C'.format(temp),
+                       className = 'temperature_value'
+                       ),
+            ], className = 'image_value'),
+            html.P(weather_status + '. ' + 'Feels like ' + '{0:,.0f}°C'.format(feels_like_temp) + '.',
+                   className = 'feels_like_temp_value'
+                   ),
+            html.Div([
+                html.Div([
+                    html.Div([
+                        html.P('Wind speed: ' + '{0:,.0f}km/h'.format(wind_speed),
+                               className = 'speed'
+                               ),
+                        html.P('Direction: ' + wind_direction,
+                               className = 'direction'
+                               ),
+                    ], className = 's_d_p1'),
+                    html.Div([
+                        html.P('Humidity: ' + '{0:.0f}%'.format(hum),
+                               className = 'humidity'
+                               ),
+                        html.P('Pressure: ' + '{0:.0f}mb'.format(pr),
+                               className = 'pressure'
+                               ),
+                    ], className = 's_d_p2'),
+                    html.Div([
+                        html.P('Dew point: ' + '{0:.0f}°C'.format(dew_point),
+                               className = 'dew_point'
+                               ),
+                        html.P('Visibility: ' + '{0:.1f}km'.format(vs),
+                               className = 'visibility'
+                               ),
+                    ], className = 's_d_p3'),
+                ], className = 'bg_color1')
+            ], className = 'bg_color2')
+        ]
+    if time_name >= sun_time3 and time_name <= sun_time4 and weather_status == 'Hazy moonlight':
+        return [
+            html.Div([
+                html.Img(src = app.get_asset_url('hazy-moonlight.png'),
+                         className = 'weather_image'),
+                html.P('{0:,.0f}°C'.format(temp),
+                       className = 'temperature_value'
+                       ),
+            ], className = 'image_value'),
+            html.P(weather_status + '. ' + 'Feels like ' + '{0:,.0f}°C'.format(feels_like_temp) + '.',
+                   className = 'feels_like_temp_value'
+                   ),
+            html.Div([
+                html.Div([
+                    html.Div([
+                        html.P('Wind speed: ' + '{0:,.0f}km/h'.format(wind_speed),
+                               className = 'speed'
+                               ),
+                        html.P('Direction: ' + wind_direction,
+                               className = 'direction'
+                               ),
+                    ], className = 's_d_p1'),
+                    html.Div([
+                        html.P('Humidity: ' + '{0:.0f}%'.format(hum),
+                               className = 'humidity'
+                               ),
+                        html.P('Pressure: ' + '{0:.0f}mb'.format(pr),
+                               className = 'pressure'
+                               ),
+                    ], className = 's_d_p2'),
+                    html.Div([
+                        html.P('Dew point: ' + '{0:.0f}°C'.format(dew_point),
+                               className = 'dew_point'
+                               ),
+                        html.P('Visibility: ' + '{0:.1f}km'.format(vs),
+                               className = 'visibility'
+                               ),
+                    ], className = 's_d_p3'),
+                ], className = 'bg_color1')
+            ], className = 'bg_color2')
+        ]
+    if time_name >= sun_time3 and time_name <= sun_time4 and weather_status == 'Mostly cloudy':
+        return [
+            html.Div([
+                html.Img(src = app.get_asset_url('night-mostly-cloudy.png'),
+                         className = 'weather_image'),
+                html.P('{0:,.0f}°C'.format(temp),
+                       className = 'temperature_value'
+                       ),
+            ], className = 'image_value'),
+            html.P(weather_status + '. ' + 'Feels like ' + '{0:,.0f}°C'.format(feels_like_temp) + '.',
+                   className = 'feels_like_temp_value'
+                   ),
+            html.Div([
+                html.Div([
+                    html.Div([
+                        html.P('Wind speed: ' + '{0:,.0f}km/h'.format(wind_speed),
+                               className = 'speed'
+                               ),
+                        html.P('Direction: ' + wind_direction,
+                               className = 'direction'
+                               ),
+                    ], className = 's_d_p1'),
+                    html.Div([
+                        html.P('Humidity: ' + '{0:.0f}%'.format(hum),
+                               className = 'humidity'
+                               ),
+                        html.P('Pressure: ' + '{0:.0f}mb'.format(pr),
+                               className = 'pressure'
+                               ),
+                    ], className = 's_d_p2'),
+                    html.Div([
+                        html.P('Dew point: ' + '{0:.0f}°C'.format(dew_point),
+                               className = 'dew_point'
+                               ),
+                        html.P('Visibility: ' + '{0:.1f}km'.format(vs),
+                               className = 'visibility'
+                               ),
+                    ], className = 's_d_p3'),
+                ], className = 'bg_color1')
+            ], className = 'bg_color2')
+        ]
     if weather_status == 'Partly sunny':
         return [
             html.Div([

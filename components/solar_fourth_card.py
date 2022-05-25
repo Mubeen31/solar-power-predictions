@@ -19,8 +19,8 @@ external_stylesheets = [meta_tags, font_awesome]
 app = dash.Dash(__name__, external_stylesheets = external_stylesheets)
 
 html.Div([
-    dcc.Interval(id = 'update_date_time_value',
-                 interval = 60000,
+    dcc.Interval(id = 'solar_wind_card',
+                 interval = 30000,
                  n_intervals = 0),
 ]),
 
