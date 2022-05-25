@@ -12,7 +12,7 @@ while i == 1:
     temp = api_data[1]['Temperature']['Value']
     real_feel_temp = api_data[1]['RealFeelTemperature']['Value']
     pre = api_data[1]['PrecipitationProbability']
-    time.sleep(60)
+    time.sleep(240)
     with open("second_hour_forecast_data.csv", "a", newline = '\n') as f:
         writer = csv.writer(f, delimiter = ",")
         writer.writerow([date_time, icon, temp, real_feel_temp, pre])

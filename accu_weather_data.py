@@ -19,7 +19,7 @@ while i == 1:
     press = api_data[0]['Pressure']['Metric']['Value']
     now = datetime.now()
     dt_string = now.strftime("%Y-%m-%d %H:%M:%S")
-    time.sleep(60)
+    time.sleep(240)
     with open("accu_weather_data.csv", "a", newline = '\n') as f:
         writer = csv.writer(f, delimiter = ",")
         writer.writerow([dt_string, weather_status, temp, real_feel_temp, hum, dew_point, wind_direction, wind_speed,
