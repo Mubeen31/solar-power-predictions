@@ -39,7 +39,7 @@ def solar_fourth_card_value(n_intervals):
     power_kilo_watt = power_watt / 1000
 
     return [
-        html.P('This Month Power', className = 'card_text'),
+        html.P('This Month Solar Energy', className = 'card_text'),
         html.Div([
             html.P('{0:,.5f}'.format(abs(power_kilo_watt)) + ' ' + 'KW',
                    className = 'card_value1'),

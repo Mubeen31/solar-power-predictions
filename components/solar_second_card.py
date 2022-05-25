@@ -38,7 +38,7 @@ def solar_second_card_value(n_intervals):
     power_kilo_watt = power_watt / 1000
 
     return [
-        html.P('Today Power', className = 'card_text'),
+        html.P('Today Solar Energy', className = 'card_text'),
         html.Div([
             html.P('{0:,.5f}'.format(abs(power_kilo_watt)) + ' ' + 'KW',
                    className = 'card_value1'),

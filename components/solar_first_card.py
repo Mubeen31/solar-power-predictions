@@ -34,11 +34,17 @@ def solar_first_card_value(n_intervals):
     power_kilo_watt = power_watt / 1000
 
     return [
-        html.P('Current Power', className = 'card_text'),
+        html.P('Current Solar Power', className = 'card_text'),
         html.Div([
             html.P('{0:,.5f}'.format(abs(power_kilo_watt)) + ' ' + 'KW',
                    className = 'card_value1'),
             html.P('{0:,.5f}'.format(abs(power_watt)) + ' ' + 'W',
                    className = 'card_value2')
-        ], className = 'card_values_gap')
+        ], className = 'card_values_gap'),
+        html.Div([
+            html.P('Voltage: ' + '{0:,.2f}'.format(get_voltage) + ' ' + 'V',
+                   className = 'card_value3'),
+            html.P('Current: ' + '{0:,.2f}'.format(abs(get_current)) + ' ' + 'A',
+                   className = 'card_value4')
+        ], className = 'card_value_3_4')
     ]
