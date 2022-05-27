@@ -79,7 +79,7 @@ def solar_yesterday_power_chart_value(n_intervals):
                          ),
 
             yaxis = dict(range = [min(power_watt), max(power_watt)],
-                         title = '<b>Yesterday Power (W)</b>',
+                         title = '<b>Yesterday Power (Wh)</b>',
                          color = '#1a1a1a',
                          showline = True,
                          showgrid = False,

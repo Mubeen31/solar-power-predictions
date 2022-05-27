@@ -11,6 +11,7 @@ int value = 0;
 // Variables for Measured Voltage and Calculated Current
 double Vout = 0;
 double Current = 0;
+double zeroValue = 0;
  
 // Constants for Scale Factor
 // Use one that matches your version of ACS712
@@ -54,9 +55,14 @@ void loop(){
   
   // Convert Vout into Current using Scale Factor
   Current = (Vout - zeroPoint)/ scale_factor;
-//  Current = (zeroPoint - Vout)/ scale_factor;                                   
+  if(Current < zeroValue){
+  Serial.print(" , ");                  
+  Serial.println(zeroValue,5);                                   
+  }
+  else {
   Serial.print(" , ");                  
   Serial.println(Current,5);
+  }
 ///////current//////
-  delay(1000);
+  delay(60000);
 }
