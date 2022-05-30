@@ -28,14 +28,14 @@ html.Div([
 
 def third_hour_forecast_weather_value(n_intervals):
     header_list = ['Time', 'Weather Status', 'Temperature', 'Real Feel Temperature', 'Precipitation']
-    df = pd.read_csv('third_hour_forecast_data.csv', names = header_list)
+    df = pd.read_csv('forecast_weather_data.csv', names = header_list)
     df['Time'] = pd.to_datetime(df['Time'])
     df['time'] = pd.to_datetime(df['Time']).dt.time
     tme = df['time'].iloc[-1].strftime('%H:%M')
-    weather_status = df['Weather Status'].tail(1).iloc[0]
-    temp = df['Temperature'].tail(1).iloc[0]
-    real_feel_temp = df['Real Feel Temperature'].tail(1).iloc[0]
-    pr = df['Precipitation'].tail(1).iloc[0]
+    weather_status = df['Weather Status'].tail(-1).iloc[0]
+    temp = df['Temperature'].tail(-1).iloc[0]
+    real_feel_temp = df['Real Feel Temperature'].tail(-1).iloc[0]
+    pr = df['Precipitation'].tail(-1).iloc[0]
     now = datetime.now()
     time_name = now.strftime('%H:%M:%S')
     sun_time1 = '21:00:00'
