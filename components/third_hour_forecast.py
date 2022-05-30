@@ -31,11 +31,11 @@ def third_hour_forecast_weather_value(n_intervals):
     df = pd.read_csv('forecast_weather_data.csv', names = header_list)
     df['Time'] = pd.to_datetime(df['Time'])
     df['time'] = pd.to_datetime(df['Time']).dt.time
-    tme = df['time'].iloc[-1].strftime('%H:%M')
-    weather_status = df['Weather Status'].tail(-1).iloc[0]
-    temp = df['Temperature'].tail(-1).iloc[0]
-    real_feel_temp = df['Real Feel Temperature'].tail(-1).iloc[0]
-    pr = df['Precipitation'].tail(-1).iloc[0]
+    tme = df['time'].tail(-1).iloc[-1].strftime('%H:%M')
+    weather_status = df['Weather Status'].tail(-1).iloc[-1]
+    temp = df['Temperature'].tail(-1).iloc[-1]
+    real_feel_temp = df['Real Feel Temperature'].tail(-1).iloc[-1]
+    pr = df['Precipitation'].tail(-1).iloc[-1]
     now = datetime.now()
     time_name = now.strftime('%H:%M:%S')
     sun_time1 = '21:00:00'

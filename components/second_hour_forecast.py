@@ -32,10 +32,10 @@ def second_hour_forecast_weather_value(n_intervals):
     df['Time'] = pd.to_datetime(df['Time'])
     df['time'] = pd.to_datetime(df['Time']).dt.time
     tme = df['time'].tail(-2).iloc[-2].strftime('%H:%M')
-    weather_status = df['Weather Status'].tail(-2).iloc[0]
-    temp = df['Temperature'].tail(-2).iloc[0]
-    real_feel_temp = df['Real Feel Temperature'].tail(-2).iloc[0]
-    pr = df['Precipitation'].tail(-2).iloc[0]
+    weather_status = df['Weather Status'].tail(-2).iloc[-2]
+    temp = df['Temperature'].tail(-2).iloc[-2]
+    real_feel_temp = df['Real Feel Temperature'].tail(-2).iloc[-2]
+    pr = df['Precipitation'].tail(-2).iloc[-2]
     now = datetime.now()
     time_name = now.strftime('%H:%M:%S')
     sun_time1 = '21:00:00'
