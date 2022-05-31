@@ -32,9 +32,9 @@ def solar_today_power_chart_value(n_intervals):
     df['Date'] = df['Date Time'].dt.date
     df['Date'] = pd.to_datetime(df['Date'])
     today_date = df['Date'].unique()
-    date_time = df[df['Date'] == today_date[-1]]['Date Time'].tail(100)
-    today_voltage = df[df['Date'] == today_date[-1]]['Voltage'].tail(100)
-    today_current = df[df['Date'] == today_date[-1]]['Current'].tail(100)
+    date_time = df[df['Date'] == today_date[-1]]['Date Time']
+    today_voltage = df[df['Date'] == today_date[-1]]['Voltage']
+    today_current = df[df['Date'] == today_date[-1]]['Current']
     power_watt = today_voltage * today_current
 
     return {
@@ -81,6 +81,7 @@ def solar_today_power_chart_value(n_intervals):
             yaxis = dict(range = [min(power_watt), max(power_watt)],
                          title = '<b>Today Power (Wh)</b>',
                          color = '#1a1a1a',
+                         zeroline = False,
                          showline = True,
                          showgrid = False,
                          linecolor = '#1a1a1a',
