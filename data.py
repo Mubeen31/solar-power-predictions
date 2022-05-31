@@ -4,7 +4,7 @@ from datetime import datetime
 import time
 
 # copy the port from your Arduino editor
-PORT = 'COM3'
+PORT = 'COM4'
 ser = serial.Serial(PORT, 9600)
 
 while True:

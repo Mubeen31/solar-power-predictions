@@ -28,9 +28,9 @@ html.Div([
 def solar_current_power_chart_value(n_intervals):
     header_list = ['Date Time', 'Voltage', 'Current']
     df = pd.read_csv('sensors_data.csv', names = header_list)
-    date_time = df['Date Time'].tail(35)
-    get_voltage = df['Voltage'].tail(35)
-    get_current = df['Current'].tail(35)
+    date_time = df['Date Time'].tail(60)
+    get_voltage = df['Voltage'].tail(60)
+    get_current = df['Current'].tail(60)
     power_watt = get_voltage * get_current
 
     return {
@@ -76,6 +76,7 @@ def solar_current_power_chart_value(n_intervals):
             yaxis = dict(range = [min(power_watt), max(power_watt)],
                          title = '<b>Current Power (W)</b>',
                          color = '#1a1a1a',
+                         zeroline = False,
                          showline = True,
                          showgrid = False,
                          linecolor = '#1a1a1a',
