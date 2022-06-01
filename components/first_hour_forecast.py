@@ -32,6 +32,7 @@ def first_hour_forecast_weather_value(n_intervals):
     df['Time'] = pd.to_datetime(df['Time'])
     df['time'] = pd.to_datetime(df['Time']).dt.time
     tme = df['time'].tail(-3).iloc[-3].strftime('%H:%M')
+    tme1 = df['time'].tail(-2).iloc[-2].strftime('%H:%M:%S')
     weather_status = df['Weather Status'].tail(-3).iloc[-3]
     temp = df['Temperature'].tail(-3).iloc[-3]
     real_feel_temp = df['Real Feel Temperature'].tail(-3).iloc[-3]
@@ -43,7 +44,7 @@ def first_hour_forecast_weather_value(n_intervals):
     sun_time3 = '00:00:00'
     sun_time4 = '05:11:00'
 
-    if time_name >= sun_time1 and time_name <= sun_time2 and weather_status == 'Clear':
+    if tme1 >= sun_time1 and tme1 <= sun_time2 and weather_status == 'Clear':
         return [
             html.Div([
                 html.Div([
@@ -66,7 +67,7 @@ def first_hour_forecast_weather_value(n_intervals):
                 ], className = 'forecast_bg')
             ], className = 'forecast_card'),
         ]
-    if time_name >= sun_time1 and time_name <= sun_time2 and weather_status == 'Mostly clear':
+    if tme1 >= sun_time1 and tme1 <= sun_time2 and weather_status == 'Mostly clear':
         return [
             html.Div([
                 html.Div([
@@ -89,7 +90,7 @@ def first_hour_forecast_weather_value(n_intervals):
                 ], className = 'forecast_bg')
             ], className = 'forecast_card'),
         ]
-    if time_name >= sun_time1 and time_name <= sun_time2 and weather_status == 'Partly cloudy':
+    if tme1 >= sun_time1 and tme1 <= sun_time2 and weather_status == 'Partly cloudy':
         return [
             html.Div([
                 html.Div([
@@ -112,7 +113,7 @@ def first_hour_forecast_weather_value(n_intervals):
                 ], className = 'forecast_bg')
             ], className = 'forecast_card'),
         ]
-    if time_name >= sun_time1 and time_name <= sun_time2 and weather_status == 'Intermittent clouds':
+    if tme1 >= sun_time1 and tme1 <= sun_time2 and weather_status == 'Intermittent clouds':
         return [
             html.Div([
                 html.Div([
@@ -135,7 +136,7 @@ def first_hour_forecast_weather_value(n_intervals):
                 ], className = 'forecast_bg')
             ], className = 'forecast_card'),
         ]
-    if time_name >= sun_time1 and time_name <= sun_time2 and weather_status == 'Hazy moonlight':
+    if tme1 >= sun_time1 and tme1 <= sun_time2 and weather_status == 'Hazy moonlight':
         return [
             html.Div([
                 html.Div([
@@ -158,7 +159,7 @@ def first_hour_forecast_weather_value(n_intervals):
                 ], className = 'forecast_bg')
             ], className = 'forecast_card'),
         ]
-    if time_name >= sun_time1 and time_name <= sun_time2 and weather_status == 'Mostly cloudy':
+    if tme1 >= sun_time1 and tme1 <= sun_time2 and weather_status == 'Mostly cloudy':
         return [
             html.Div([
                 html.Div([
@@ -181,7 +182,7 @@ def first_hour_forecast_weather_value(n_intervals):
                 ], className = 'forecast_bg')
             ], className = 'forecast_card'),
         ]
-    if time_name >= sun_time3 and time_name <= sun_time4 and weather_status == 'Clear':
+    if tme1 >= sun_time3 and tme1 <= sun_time4 and weather_status == 'Clear':
         return [
             html.Div([
                 html.Div([
@@ -204,7 +205,7 @@ def first_hour_forecast_weather_value(n_intervals):
                 ], className = 'forecast_bg')
             ], className = 'forecast_card'),
         ]
-    if time_name >= sun_time3 and time_name <= sun_time4 and weather_status == 'Mostly clear':
+    if tme1 >= sun_time3 and tme1 <= sun_time4 and weather_status == 'Mostly clear':
         return [
             html.Div([
                 html.Div([
@@ -227,7 +228,7 @@ def first_hour_forecast_weather_value(n_intervals):
                 ], className = 'forecast_bg')
             ], className = 'forecast_card'),
         ]
-    if time_name >= sun_time3 and time_name <= sun_time4 and weather_status == 'Partly cloudy':
+    if tme1 >= sun_time3 and tme1 <= sun_time4 and weather_status == 'Partly cloudy':
         return [
             html.Div([
                 html.Div([
@@ -250,7 +251,7 @@ def first_hour_forecast_weather_value(n_intervals):
                 ], className = 'forecast_bg')
             ], className = 'forecast_card'),
         ]
-    if time_name >= sun_time3 and time_name <= sun_time4 and weather_status == 'Intermittent clouds':
+    if tme1 >= sun_time3 and tme1 <= sun_time4 and weather_status == 'Intermittent clouds':
         return [
             html.Div([
                 html.Div([
@@ -273,7 +274,7 @@ def first_hour_forecast_weather_value(n_intervals):
                 ], className = 'forecast_bg')
             ], className = 'forecast_card'),
         ]
-    if time_name >= sun_time3 and time_name <= sun_time4 and weather_status == 'Hazy moonlight':
+    if tme1 >= sun_time3 and tme1 <= sun_time4 and weather_status == 'Hazy moonlight':
         return [
             html.Div([
                 html.Div([
@@ -296,7 +297,7 @@ def first_hour_forecast_weather_value(n_intervals):
                 ], className = 'forecast_bg')
             ], className = 'forecast_card'),
         ]
-    if time_name >= sun_time3 and time_name <= sun_time4 and weather_status == 'Mostly cloudy':
+    if tme1 >= sun_time3 and tme1 <= sun_time4 and weather_status == 'Mostly cloudy':
         return [
             html.Div([
                 html.Div([
