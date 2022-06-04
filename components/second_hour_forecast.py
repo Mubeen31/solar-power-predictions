@@ -556,7 +556,7 @@ def second_hour_forecast_weather_value(n_intervals):
             html.Div([
                 html.Div([
                     html.P(tme, className = 'time'),
-                    html.Img(src = app.get_asset_url('mostly-cloudy-w-showers.png'),
+                    html.Img(src = app.get_asset_url('mostly-cloudy-w-t-storm.png'),
                              className = 'weather_image'),
                     html.P('RealFeel ' + '{0:,.0f}°C'.format(real_feel_temp),
                            className = 'real_feel_temp'
