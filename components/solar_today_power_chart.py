@@ -1023,7 +1023,7 @@ def solar_today_power_chart_value(n_intervals):
         hours = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22]
         hourly_data_and_hours = {'Hours': hours, 'Hourly Data': hourly_data}
         hourly_data_and_hours_df = pd.DataFrame(hourly_data_and_hours)
-    elif time_name >= '22:00:00' and time_name <= '22:59:59':
+    elif time_name >= '23:00:00' and time_name <= '23:59:59':
         first_hour = df[(df['Date'] == today_date[-1]) & (df['time'] >= '00:00:00') & (df['time'] <= '00:59:59')]
         first_hour_energy = first_hour['Power (KW)'].sum()
 
