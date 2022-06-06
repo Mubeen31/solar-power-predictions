@@ -28,17 +28,17 @@ html.Div([
 def solar_fifth_card_value(n_intervals):
     header_list = ['Date Time', 'Voltage', 'Current']
     df = pd.read_csv('sensors_data.csv', names = header_list)
-    voltage = df['Voltage'].mean()
-    current = df['Current'].mean()
-    power_watt = voltage * current
-    power_kilo_watt = power_watt / 1000
+    df['Power (W)'] = df['Voltage'] * df['Current']
+    df['Power (KW)'] = df['Power (W)'] / 1000
+    energy_watts = (df['Power (W)'].sum()) / 24
+    energy_kilo_watts = (df['Power (KW)'].sum()) / 24
 
     return [
         html.P('Lifetime Solar Energy', className = 'card_text'),
         html.Div([
-            html.P('{0:,.5f}'.format(abs(power_kilo_watt)) + ' ' + 'KW',
+            html.P('{0:,.5f}'.format(energy_kilo_watts) + ' ' + 'KWh',
                    className = 'card_value1'),
-            html.P('{0:,.5f}'.format(abs(power_watt)) + ' ' + 'W',
+            html.P('{0:,.5f}'.format(energy_watts) + ' ' + 'Wh',
                    className = 'card_value2')
         ], className = 'card_values_gap')
     ]
