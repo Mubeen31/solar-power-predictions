@@ -34,8 +34,8 @@ def solar_third_card_value(n_intervals):
     df['Date'] = df['Date Time'].dt.date
     df['Date'] = pd.to_datetime(df['Date'])
     today_date = df['Date'].unique()
-    energy_watts = (df[df['Date'] == today_date[-2]]['Power (W)'].sum()) / 24
-    energy_kilo_watts = (df[df['Date'] == today_date[-2]]['Power (KW)'].sum()) / 24
+    energy_watts = (df[df['Date'] == today_date[-2]]['Power (W)'].sum())
+    energy_kilo_watts = (df[df['Date'] == today_date[-2]]['Power (KW)'].sum())
 
     return [
         html.P('Yesterday Solar Energy', className = 'card_text'),

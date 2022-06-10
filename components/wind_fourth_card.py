@@ -35,15 +35,15 @@ def wind_fourth_card_value(n_intervals):
     df['Date'] = pd.to_datetime(df['Date'])
     df['Month'] = pd.to_datetime(df['Date']).dt.month
     unique_month = df['Month'].unique()
-    energy_watts = (df[df['Month'] == unique_month[-1]]['Power (W)'].sum()) / 24
-    energy_kilo_watts = (df[df['Month'] == unique_month[-1]]['Power (KW)'].sum()) / 24
+    energy_watts = (df[df['Month'] == unique_month[-1]]['Power (W)'].sum())
+    energy_kilo_watts = (df[df['Month'] == unique_month[-1]]['Power (KW)'].sum())
 
     return [
         html.P('This Month Wind Energy', className = 'card_text'),
         html.Div([
-            html.P('{0:,.5f}'.format(energy_kilo_watts) + ' ' + 'KWh',
+            html.P('{0:,.2f}'.format(energy_kilo_watts) + ' ' + 'KWh',
                    className = 'card_value1'),
-            html.P('{0:,.5f}'.format(energy_watts) + ' ' + 'Wh',
+            html.P('{0:,.2f}'.format(energy_watts) + ' ' + 'Wh',
                    className = 'card_value2')
         ], className = 'card_values_gap')
     ]
