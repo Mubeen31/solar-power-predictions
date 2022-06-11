@@ -26,7 +26,7 @@ html.Div([
 
 
 def solar_fourth_card_value(n_intervals):
-    header_list = ['Date Time', 'Voltage', 'Current', 'Wind Current']
+    header_list = ['Date Time', 'Voltage', 'Current']
     df = pd.read_csv('sensors_data.csv', names = header_list)
     df['Power (W)'] = df['Voltage'] * df['Current']
     df['Power (KW)'] = df['Power (W)'] / 1000

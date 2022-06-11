@@ -26,7 +26,7 @@ html.Div([
 
 
 def solar_current_power_chart_value(n_intervals):
-    header_list = ['Date Time', 'Voltage', 'Current', 'Wind Current']
+    header_list = ['Date Time', 'Voltage', 'Current']
     df = pd.read_csv('sensors_data.csv', names = header_list)
     date_time = df['Date Time'].tail(60)
     get_voltage = df['Voltage'].tail(60)
