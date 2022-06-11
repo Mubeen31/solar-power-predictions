@@ -31,39 +31,6 @@ double resADC = vRef/resConvert;
 double zeroPoint = vRef/2;
 ///////solar current//////
 
-///////wind current//////
-// Variables for Measured Voltage and Calculated Current
-double Vout1 = 0;
-double Current1 = 0;
-double zeroValue1 = 0;
- 
-// Constants for Scale Factor
-// Use one that matches your version of ACS712
- 
-//const double scale_factor = 0.185; // 5A
-//const double scale_factor = 0.1; // 20A
-const double scale_factor1 = 0.066; // 30A
- 
-// Constants for A/D converter resolution
-// Arduino has 10-bit ADC, so 1024 possible values
-// Reference voltage is 5V if not using AREF external reference
-// Zero point is half of Reference Voltage
- 
-const double vRef1 = 5.00;
-const double resConvert1 = 1024;
-double resADC1 = vRef1/resConvert1;
-double zeroPoint1 = vRef1/2;
-///////wind current//////
-
-///////wind voltage//////
-const int voltageSensor1 = A3;
-float vOUT1 = 0.0;
-float vIN1 = 0.0;
-float R11 = 30000.0;
-float R21 = 7500.0;
-int value1 = 0;
-///////solar voltage//////
-
 void setup() {
   Serial.begin(9600);
 }
@@ -90,41 +57,12 @@ void loop(){
   Current = (Vout - zeroPoint)/ scale_factor;
   if(Current < zeroValue){
   Serial.print(" , ");                  
-  Serial.print(zeroValue,5);                                   
+  Serial.println(zeroValue,5);                                   
   }
   else {
   Serial.print(" , ");                  
-  Serial.print(Current,5);
+  Serial.println(Current,5);
   }
 ///////solar current//////
-
-///////wind current//////
-  // Vout is read 1000 Times for precision
-  for(int i = 0; i < 1000; i++) {
-    Vout1 = (Vout1 + (resADC1 * analogRead(A2)));   
-//    delay(1);
-  }
-  
-  // Get Vout in mv
-  Vout1 = Vout1 /1000;
-  
-  // Convert Vout into Current using Scale Factor
-  Current1 = (Vout1 - zeroPoint1)/ scale_factor1;
-  if(Current1 < zeroValue1){
-  Serial.print(" , ");                  
-  Serial.print(zeroValue1,5);                                   
-  }
-  else {
-  Serial.print(" , ");                  
-  Serial.print(Current1,5);
-  }
-///////wind current//////
-
-///////wind voltage//////
-  value1 = analogRead(voltageSensor1);
-  vOUT1 = (value1 * 5.0) / 1024.0;
-  vIN1 = vOUT1 / (R21/(R11+R21));
-  Serial.println(vIN1, 5);
-///////wind voltage//////
   delay(60000);
 }
