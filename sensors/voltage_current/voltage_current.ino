@@ -33,26 +33,26 @@ double zeroPoint = vRef/2;
 
 ///////wind current//////
 // Variables for Measured Voltage and Calculated Current
-double Vout = 0;
-double Current = 0;
-double zeroValue = 0;
+double Vout1 = 0;
+double Current1 = 0;
+double zeroValue1 = 0;
  
 // Constants for Scale Factor
 // Use one that matches your version of ACS712
  
 //const double scale_factor = 0.185; // 5A
 //const double scale_factor = 0.1; // 20A
-const double scale_factor = 0.066; // 30A
+const double scale_factor1 = 0.066; // 30A
  
 // Constants for A/D converter resolution
 // Arduino has 10-bit ADC, so 1024 possible values
 // Reference voltage is 5V if not using AREF external reference
 // Zero point is half of Reference Voltage
  
-const double vRef = 5.00;
-const double resConvert = 1024;
-double resADC = vRef/resConvert;
-double zeroPoint = vRef/2;
+const double vRef1 = 5.00;
+const double resConvert1 = 1024;
+double resADC1 = vRef1/resConvert1;
+double zeroPoint1 = vRef1/2;
 ///////wind current//////
 
 void setup() {
@@ -92,22 +92,22 @@ void loop(){
 ///////wind current//////
   // Vout is read 1000 Times for precision
   for(int i = 0; i < 1000; i++) {
-    Vout = (Vout + (resADC * analogRead(A2)));   
+    Vout1 = (Vout1 + (resADC1 * analogRead(A2)));   
 //    delay(1);
   }
   
   // Get Vout in mv
-  Vout = Vout /1000;
+  Vout1 = Vout1 /1000;
   
   // Convert Vout into Current using Scale Factor
-  Current = (Vout - zeroPoint)/ scale_factor;
-  if(Current < zeroValue){
+  Current1 = (Vout1 - zeroPoint1)/ scale_factor1;
+  if(Current1 < zeroValue1){
   Serial.print(" , ");                  
-  Serial.println(zeroValue,5);                                   
+  Serial.println(zeroValue1,5);                                   
   }
   else {
   Serial.print(" , ");                  
-  Serial.println(Current,5);
+  Serial.println(Current1,5);
   }
 ///////wind current//////
   delay(60000);
