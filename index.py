@@ -92,19 +92,19 @@ app.layout = html.Div([
     html.Div([
         html.Div([
             html.Div([
-                html.Div(id = 'solar_wind_first_card')
+                html.Div(id = 'solar_first_card')
             ], className = 'adjust_card'),
             html.Div([
-                html.Div(id = 'solar_wind_second_card')
+                html.Div(id = 'solar_second_card')
             ], className = 'adjust_card'),
             html.Div([
-                html.Div(id = 'solar_wind_third_card')
+                html.Div(id = 'solar_third_card')
             ], className = 'adjust_card'),
             html.Div([
-                html.Div(id = 'solar_wind_fourth_card')
+                html.Div(id = 'solar_fourth_card')
             ], className = 'adjust_card'),
             html.Div([
-                html.Div(id = 'solar_wind_fifth_card')
+                html.Div(id = 'solar_fifth_card')
             ], className = 'adjust_last_card'),
         ], className = 'background1')
     ], className = 'adjust_margin1'),
