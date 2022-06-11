@@ -13,9 +13,10 @@ while True:
     split_string = data.split(',')  # split string
     voltage = split_string[0]  # convert first part of string into float
     current = split_string[1]  # convert second part of string into float
+    wind_current = split_string[2]  # convert third part of string into float
     now = datetime.now()
     dt_string = now.strftime("%Y-%m-%d %H:%M:%S")
     with open("sensors_data.csv", "a", newline = '\n') as f:
         writer = csv.writer(f, delimiter = ",")
-        writer.writerow([dt_string, voltage, current])
-        print(dt_string, voltage, current)
+        writer.writerow([dt_string, voltage, current, wind_current])
+        print(dt_string, voltage, current, wind_current)
