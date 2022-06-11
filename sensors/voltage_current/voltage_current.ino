@@ -55,6 +55,15 @@ double resADC1 = vRef1/resConvert1;
 double zeroPoint1 = vRef1/2;
 ///////wind current//////
 
+///////wind voltage//////
+const int voltageSensor1 = A3;
+float vOUT1 = 0.0;
+float vIN1 = 0.0;
+float R11 = 30000.0;
+float R21 = 7500.0;
+int value1 = 0;
+///////solar voltage//////
+
 void setup() {
   Serial.begin(9600);
 }
@@ -103,12 +112,19 @@ void loop(){
   Current1 = (Vout1 - zeroPoint1)/ scale_factor1;
   if(Current1 < zeroValue1){
   Serial.print(" , ");                  
-  Serial.println(zeroValue1,5);                                   
+  Serial.print(zeroValue1,5);                                   
   }
   else {
   Serial.print(" , ");                  
-  Serial.println(Current1,5);
+  Serial.print(Current1,5);
   }
 ///////wind current//////
+
+///////wind voltage//////
+  value1 = analogRead(voltageSensor1);
+  vOUT1 = (value1 * 5.0) / 1024.0;
+  vIN1 = vOUT1 / (R21/(R11+R21));
+  Serial.println(vIN1, 5);
+///////wind voltage//////
   delay(60000);
 }
