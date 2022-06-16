@@ -7,6 +7,7 @@ from dash.exceptions import PreventUpdate
 import pandas as pd
 import numpy as np
 from datetime import datetime, date, time
+from datetime import timedelta
 from sklearn import linear_model
 import sqlalchemy
 from dash import dash_table as dt
@@ -40,7 +41,8 @@ def solar_today_power_chart_value(n_intervals):
     df['time'] = df['time'].astype(str)
     df['hour'] = df['hour'].astype(str)
     today_date = df['Date'].unique()
-    now = datetime.now()
+    n = 1
+    now = datetime.now() + timedelta(hours = n)
     time_name = now.strftime('%H:%M:%S')
 
     if time_name >= '00:00:00' and time_name <= '00:59:59':
