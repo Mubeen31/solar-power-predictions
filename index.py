@@ -6,7 +6,8 @@ import plotly.graph_objs as go
 from dash.exceptions import PreventUpdate
 import pandas as pd
 from datetime import datetime
-from components.header import header_value
+from components.last_data_update_time import last_data_update_time_value
+# from components.header import header_value
 from components.solar_first_card import solar_first_card_value
 from components.solar_second_card import solar_second_card_value
 from components.solar_third_card import solar_third_card_value
@@ -75,10 +76,14 @@ app.layout = html.Div([
                     className = 'title'
                     ),
         ], className = 'logo_title'),
-        html.P(id = 'get_date_time',
+        html.P(id = 'last_data_update_time',
                style = {'color': '#eb6e4b'},
                className = 'adjust_date_time'
-               )
+               ),
+        # html.P(id = 'get_date_time',
+        #        style = {'color': '#eb6e4b'},
+        #        className = 'adjust_date_time'
+        #        )
     ], className = 'title_date_time_container'),
     html.Div([
         dcc.Interval(id = 'update_time',
@@ -155,12 +160,20 @@ app.layout = html.Div([
 ])
 
 
-@app.callback(Output('get_date_time', 'children'),
-              [Input('update_time', 'n_intervals')])
-def header_value_callback(n_intervals):
-    header_value_data = header_value(n_intervals)
+@app.callback(Output('last_data_update_time', 'children'),
+              [Input('update_date_time_value', 'n_intervals')])
+def last_data_update_time_value_callback(n_intervals):
+    last_data_update_time_value_data = last_data_update_time_value(n_intervals)
 
-    return header_value_data
+    return last_data_update_time_value_data
+
+
+# @app.callback(Output('get_date_time', 'children'),
+#               [Input('update_time', 'n_intervals')])
+# def header_value_callback(n_intervals):
+#     header_value_data = header_value(n_intervals)
+#
+#     return header_value_data
 
 
 @app.callback(Output('solar_first_card', 'children'),
