@@ -12,6 +12,7 @@ from sklearn import linear_model
 import sqlalchemy
 from dash import dash_table as dt
 import time
+import requests
 
 font_awesome = "https://use.fontawesome.com/releases/v5.10.2/css/all.css"
 meta_tags = [{"name": "viewport", "content": "width=device-width"}]
@@ -27,16 +28,27 @@ html.Div([
 
 
 def second_hour_forecast_weather_value(n_intervals):
-    header_list = ['Time', 'Weather Status', 'Temperature', 'Real Feel Temperature', 'Precipitation']
-    df = pd.read_csv('forecast_weather_data.csv', names = header_list)
-    df['Time'] = pd.to_datetime(df['Time'])
-    df['time'] = pd.to_datetime(df['Time']).dt.time
-    tme = df['time'].tail(-2).iloc[-2].strftime('%H:%M')
-    tme1 = df['time'].tail(-2).iloc[-2].strftime('%H:%M:%S')
-    weather_status = df['Weather Status'].tail(-2).iloc[-2]
-    temp = df['Temperature'].tail(-2).iloc[-2]
-    real_feel_temp = df['Real Feel Temperature'].tail(-2).iloc[-2]
-    pr = df['Precipitation'].tail(-2).iloc[-2]
+    # header_list = ['Time', 'Weather Status', 'Temperature', 'Real Feel Temperature', 'Precipitation']
+    # df = pd.read_csv('forecast_weather_data.csv', names = header_list)
+    # df['Time'] = pd.to_datetime(df['Time'])
+    # df['time'] = pd.to_datetime(df['Time']).dt.time
+    # tme = df['time'].tail(-2).iloc[-2].strftime('%H:%M')
+    # tme1 = df['time'].tail(-2).iloc[-2].strftime('%H:%M:%S')
+    # weather_status = df['Weather Status'].tail(-2).iloc[-2]
+    # temp = df['Temperature'].tail(-2).iloc[-2]
+    # real_feel_temp = df['Real Feel Temperature'].tail(-2).iloc[-2]
+    # pr = df['Precipitation'].tail(-2).iloc[-2]
+    complete_api_link = 'http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/331595?apikey=vnwz1buClrE9YhGJFG3mhNVq23tnIACH&details=true&metric=true'
+    api_link = requests.get(complete_api_link)
+    api_data = api_link.json()
+    date_time_0 = api_data[1]['DateTime']
+    get_date_time = datetime.strptime(date_time_0, '%Y-%m-%dT%H:%M:%S%z')
+    tme = get_date_time.strftime('%H:%M')
+    tme1 = get_date_time.strftime('%H:%M:%S')
+    weather_status = api_data[1]['IconPhrase']
+    temp = api_data[1]['Temperature']['Value']
+    real_feel_temp = api_data[1]['RealFeelTemperature']['Value']
+    pr = api_data[1]['PrecipitationProbability']
     now = datetime.now()
     time_name = now.strftime('%H:%M:%S')
     sun_time1 = '21:00:00'

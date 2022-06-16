@@ -7,10 +7,12 @@ from dash.exceptions import PreventUpdate
 import pandas as pd
 import numpy as np
 from datetime import datetime, date, time
+from datetime import timedelta
 from sklearn import linear_model
 import sqlalchemy
 from dash import dash_table as dt
 import time
+import requests
 
 font_awesome = "https://use.fontawesome.com/releases/v5.10.2/css/all.css"
 meta_tags = [{"name": "viewport", "content": "width=device-width"}]
@@ -26,19 +28,32 @@ html.Div([
 
 
 def current_weather_value(n_intervals):
-    header_list = ['Date Time', 'Weather Status', 'Temperature', 'Real Feel Temperature', 'Humidity', 'Dew Point',
-                   'Wind Direction', 'Wind Speed', 'Visibility', 'Pressure']
-    df = pd.read_csv('accu_weather_data.csv', names = header_list)
-    weather_status = df['Weather Status'].tail(1).iloc[0]
-    temp = df['Temperature'].tail(1).iloc[0]
-    feels_like_temp = df['Real Feel Temperature'].tail(1).iloc[0]
-    wind_speed = df['Wind Speed'].tail(1).iloc[0]
-    wind_direction = df['Wind Direction'].tail(1).iloc[0]
-    hum = df['Humidity'].tail(1).iloc[0]
-    pr = df['Pressure'].tail(1).iloc[0]
-    dew_point = df['Dew Point'].tail(1).iloc[0]
-    vs = df['Visibility'].tail(1).iloc[0]
-    now = datetime.now()
+    # header_list = ['Date Time', 'Weather Status', 'Temperature', 'Real Feel Temperature', 'Humidity', 'Dew Point',
+    #                'Wind Direction', 'Wind Speed', 'Visibility', 'Pressure']
+    # df = pd.read_csv('accu_weather_data.csv', names = header_list)
+    # weather_status = df['Weather Status'].tail(1).iloc[0]
+    # temp = df['Temperature'].tail(1).iloc[0]
+    # feels_like_temp = df['Real Feel Temperature'].tail(1).iloc[0]
+    # wind_speed = df['Wind Speed'].tail(1).iloc[0]
+    # wind_direction = df['Wind Direction'].tail(1).iloc[0]
+    # hum = df['Humidity'].tail(1).iloc[0]
+    # pr = df['Pressure'].tail(1).iloc[0]
+    # dew_point = df['Dew Point'].tail(1).iloc[0]
+    # vs = df['Visibility'].tail(1).iloc[0]
+    complete_api_link = 'http://dataservice.accuweather.com/currentconditions/v1/331595?apikey=vnwz1buClrE9YhGJFG3mhNVq23tnIACH&details=true'
+    api_link = requests.get(complete_api_link)
+    api_data = api_link.json()
+    weather_status = api_data[0]['WeatherText']
+    temp = api_data[0]['Temperature']['Metric']['Value']
+    feels_like_temp = api_data[0]['RealFeelTemperature']['Metric']['Value']
+    hum = api_data[0]['RelativeHumidity']
+    dew_point = api_data[0]['DewPoint']['Metric']['Value']
+    wind_direction = api_data[0]['Wind']['Direction']['Localized']
+    wind_speed = api_data[0]['Wind']['Speed']['Metric']['Value']
+    vs = api_data[0]['Visibility']['Metric']['Value']
+    pr = api_data[0]['Pressure']['Metric']['Value']
+    n = 1
+    now = datetime.now() + timedelta(hours = n)
     time_name = now.strftime('%H:%M:%S')
     sun_time1 = '21:00:00'
     sun_time2 = '23:59:59'
