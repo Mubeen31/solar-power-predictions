@@ -187,7 +187,7 @@ rain_proba_11 = api_data[11]['RainProbability']
 cloud_cover_11 = api_data[11]['CloudCover']
 
 
-with open("forecasted_data.csv", "a", newline = '\n') as f:
+with open("hourly_weather_forecasted_data.csv", "a", newline = '\n') as f:
     writer = csv.writer(f, delimiter = ",")
     writer.writerow(
         [solar_irradiance_0, icon_phrase_0, temperature_0, real_feel_temperature_0, dew_point_0, wind_speed_0,
