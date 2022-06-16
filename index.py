@@ -25,6 +25,7 @@ meta_tags = [{"name": "viewport", "content": "width=device-width"}]
 external_stylesheets = [meta_tags, font_awesome]
 
 app = dash.Dash(__name__, external_stylesheets = external_stylesheets)
+server = app.server
 
 tabs_styles = {
     "flex-direction": "row",
