@@ -590,7 +590,7 @@ def first_hour_forecast_weather_value(n_intervals):
             html.Div([
                 html.Div([
                     html.P(tme, className = 'time'),
-                    html.Img(src = app.get_asset_url('hazy-sunshine.png'),
+                    html.Img(src = app.get_asset_url('hazy-sun-shine.png'),
                              className = 'weather_image'),
                     html.P('RealFeel ' + '{0:,.0f}°C'.format(real_feel_temp),
                            className = 'real_feel_temp'
