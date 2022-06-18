@@ -11,7 +11,7 @@ int value = 0;
 // Variables for Measured Voltage and Calculated Current
 double Vout = 0;
 double Current = 0;
-double zeroValue1 = 0;
+double zeroValue = 0;
  
 // Constants for Scale Factor
 // Use one that matches your version of ACS712
