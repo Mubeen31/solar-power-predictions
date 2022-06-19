@@ -39,7 +39,8 @@ def energy_forecasting_chart_value(n_intervals):
     # df['Hour'] = df['Hour'].astype(str)
     rearrange_columns = ['Date Time', 'Date', 'Time', 'Hour', 'Voltage', 'Current', 'Power (W)', 'Power (KW)']
     df = df[rearrange_columns]
-    filter_daily_values = df[df['Date'] == '2022-06-18'][['Date', 'Hour', 'Power (KW)']]
+    unique_date = df['Date'].unique()
+    filter_daily_values = df[df['Date'] == unique_date[-2]][['Date', 'Hour', 'Power (KW)']]
     daily_hourly_values = filter_daily_values.groupby(['Date', 'Hour'])['Power (KW)'].sum().reset_index()
 
     header_list = ['SolarIrradiance (W/m2)', 'weather status', 'Temp (°C)', 'RealFeelTemp (°C)', 'DewPoint (°C)',
@@ -78,19 +79,36 @@ def energy_forecasting_chart_value(n_intervals):
 
     data_dataframe = pd.DataFrame(data_dict)
 
+    # today data
+    filter_today_values = df[df['Date'] == unique_date[-1]][['Date', 'Hour', 'Power (KW)']]
+    today_hourly_values = filter_today_values.groupby(['Date', 'Hour'])['Power (KW)'].sum().reset_index()
+
     return {
         'data': [go.Scatter(
-            x = data_dataframe['Hour'],
-            y = data_dataframe['Power (KW)'],
+            x = today_hourly_values['Hour'],
+            y = today_hourly_values['Power (KW)'],
+            name = 'Today Solar Energy',
             mode = 'lines',
-            line = dict(color = 'firebrick', dash = 'dash'),
-            marker = dict(color = '#4DBFF1'),
+            line = dict(width = 2, color = '#F1AB4D'),
             hoverinfo = 'text',
             hovertext =
-            '<b>Date</b>: ' + data_dataframe['Date'].astype(str) + '<br>' +
-            '<b>Hour</b>: ' + data_dataframe['Hour'].astype(str) + '<br>' +
-            '<b>Predicted Solar Energy</b>: ' + [f'{x:,.5f} KWh' for x in data_dataframe['Power (KW)']] + '<br>'
-        )],
+            '<b>Date</b>: ' + today_hourly_values['Date'].astype(str) + '<br>' +
+            '<b>Hour</b>: ' + today_hourly_values['Hour'].astype(str) + '<br>' +
+            '<b>Today Solar Energy</b>: ' + [f'{x:,.5f} KWh' for x in today_hourly_values['Power (KW)']] + '<br>'
+        ),
+            go.Scatter(
+                x = data_dataframe['Hour'],
+                y = data_dataframe['Power (KW)'],
+                name = 'Predicted Solar Energy',
+                mode = 'lines',
+                line = dict(color = 'firebrick', dash = 'dash'),
+                marker = dict(color = '#4DBFF1'),
+                hoverinfo = 'text',
+                hovertext =
+                '<b>Date</b>: ' + data_dataframe['Date'].astype(str) + '<br>' +
+                '<b>Hour</b>: ' + data_dataframe['Hour'].astype(str) + '<br>' +
+                '<b>Predicted Solar Energy</b>: ' + [f'{x:,.5f} KWh' for x in data_dataframe['Power (KW)']] + '<br>'
+            )],
 
         'layout': go.Layout(
             plot_bgcolor = 'rgba(255, 255, 255, 0)',
@@ -138,10 +156,17 @@ def energy_forecasting_chart_value(n_intervals):
                     color = '#1a1a1a')
 
             ),
+            legend = {
+                'orientation': 'h',
+                'bgcolor': 'rgba(255, 255, 255, 0)',
+                'x': 0.5,
+                'y': 1.2,
+                'xanchor': 'center',
+                'yanchor': 'top'},
             font = dict(
                 family = "sans-serif",
                 size = 12,
-                color = 'white')
+                color = 'black')
 
         )
 
