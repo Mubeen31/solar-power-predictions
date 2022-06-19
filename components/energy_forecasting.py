@@ -83,6 +83,7 @@ def energy_forecasting_chart_value(n_intervals):
             x = data_dataframe['Hour'],
             y = data_dataframe['Power (KW)'],
             mode = 'lines',
+            line = dict(color = 'firebrick', dash = 'dash'),
             marker = dict(color = '#4DBFF1'),
             hoverinfo = 'text',
             hovertext =
