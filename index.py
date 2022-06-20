@@ -77,7 +77,7 @@ app.layout = html.Div([
                      style = {'height': '30px'},
                      className = 'title_image'
                      ),
-            html.H6('Solar Power Predictions',
+            html.H6('Solar Energy Predictions',
                     style = {'color': '#1a1a1a'},
                     className = 'title'
                     ),
