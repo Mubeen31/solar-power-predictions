@@ -45,7 +45,7 @@ def energy_forcasting_card_value(n_intervals):
     rearrange_columns = ['Date Time', 'Date', 'Time', 'Hour', 'Voltage', 'Current', 'Power (W)', 'Power (KW)']
     df = df[rearrange_columns]
     unique_date = df['Date'].unique()
-    filter_daily_values = df[(df['Date'] >= unique_date[-3]) & (df['Date'] <= unique_date[-2])][
+    filter_daily_values = df[(df['Date'] >= '2022-06-18') & (df['Date'] <= unique_date[-2])][
         ['Date', 'Hour', 'Power (KW)']]
     daily_hourly_values = filter_daily_values.groupby(['Date', 'Hour'])['Power (KW)'].sum().reset_index()
 
