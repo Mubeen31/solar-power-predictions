@@ -19,13 +19,13 @@ external_stylesheets = [meta_tags, font_awesome]
 app = dash.Dash(__name__, external_stylesheets = external_stylesheets)
 
 html.Div([
-    dcc.Interval(id = 'update_date_time_value',
-                 interval = 60000,
-                 n_intervals = 0),
-]),
+        dcc.Interval(id = 'solar_energy_forcasting_card',
+                     interval = 30000,
+                     n_intervals = 0),
+    ]),
 
 
-def energy_forecasting_chart_value(n_intervals):
+def energy_forcasting_card_value(n_intervals):
     # now = datetime.now()
     # time_name = now.strftime('%H:%M:%S')
     # if time_name >= '23:30:00' and time_name <= '00:00:00' and time_name >= '00:00:00' and time_name <= '11:30:00':
@@ -88,94 +88,15 @@ def energy_forecasting_chart_value(n_intervals):
 
     data_dataframe = pd.DataFrame(data_dict)
 
-    # today data
-    filter_today_values = df[df['Date'] == unique_date[-1]][['Date', 'Hour', 'Power (KW)']]
-    today_hourly_values = filter_today_values.groupby(['Date', 'Hour'])['Power (KW)'].sum().reset_index()
+    energy_kwh = data_dataframe['Power (KW)'].sum()
+    energy_wh = (data_dataframe['Power (KW)'].sum()) * 1000
 
-    return {
-        'data': [go.Scatter(
-            x = today_hourly_values['Hour'],
-            y = today_hourly_values['Power (KW)'],
-            name = 'Today Solar Energy',
-            mode = 'lines',
-            line = dict(width = 2, color = '#F1AB4D'),
-            hoverinfo = 'text',
-            hovertext =
-            '<b>Date</b>: ' + today_hourly_values['Date'].astype(str) + '<br>' +
-            '<b>Hour</b>: ' + today_hourly_values['Hour'].astype(str) + '<br>' +
-            '<b>Today Solar Energy</b>: ' + [f'{x:,.5f} KWh' for x in today_hourly_values['Power (KW)']] + '<br>'
-        ),
-            go.Scatter(
-                x = data_dataframe['Hour'],
-                y = data_dataframe['Power (KW)'],
-                name = 'Today Predicted Solar Energy',
-                mode = 'lines',
-                line = dict(color = 'firebrick', dash = 'dash'),
-                hoverinfo = 'text',
-                hovertext =
-                '<b>Date</b>: ' + data_dataframe['Date'].astype(str) + '<br>' +
-                '<b>Hour</b>: ' + data_dataframe['Hour'].astype(str) + '<br>' +
-                '<b>Predicted Solar Energy</b>: ' + [f'{x:,.5f} KWh' for x in data_dataframe['Power (KW)']] + '<br>'
-            )],
-
-        'layout': go.Layout(
-            plot_bgcolor = 'rgba(255, 255, 255, 0)',
-            paper_bgcolor = 'rgba(255, 255, 255, 0)',
-            title = {
-                'text': '',
-                'y': 0.97,
-                'x': 0.5,
-                'xanchor': 'center',
-                'yanchor': 'top'},
-            titlefont = {
-                'color': 'white',
-                'size': 17},
-            hovermode = 'closest',
-            margin = dict(t = 50, r = 40),
-            xaxis = dict(
-                title = '<b>Hours</b>',
-                color = '#1a1a1a',
-                showline = True,
-                tick0 = 0,
-                dtick = 1,
-                showgrid = False,
-                linecolor = '#1a1a1a',
-                linewidth = 1,
-                ticks = 'outside',
-                tickfont = dict(
-                    family = 'Arial',
-                    size = 12,
-                    color = '#1a1a1a')
-
-            ),
-
-            yaxis = dict(
-                title = '<b>Solar Energy (KWh)</b>',
-                color = '#1a1a1a',
-                zeroline = False,
-                showline = True,
-                showgrid = False,
-                linecolor = '#1a1a1a',
-                linewidth = 1,
-                ticks = 'outside',
-                tickfont = dict(
-                    family = 'Arial',
-                    size = 12,
-                    color = '#1a1a1a')
-
-            ),
-            legend = {
-                'orientation': 'h',
-                'bgcolor': 'rgba(255, 255, 255, 0)',
-                'x': 0.5,
-                'y': 1.2,
-                'xanchor': 'center',
-                'yanchor': 'top'},
-            font = dict(
-                family = "sans-serif",
-                size = 12,
-                color = 'black')
-
-        )
-
-    }
+    return [
+        html.P('Today Predicted Solar Energy', className = 'predicted_card_text'),
+        html.Div([
+            html.P('{0:,.5f}'.format(energy_kwh) + ' ' + 'KWh',
+                   className = 'predicted_card_value1'),
+            html.P('{0:,.5f}'.format(energy_wh) + ' ' + 'Wh',
+                   className = 'predicted_card_value2')
+        ], className = 'card_values_gap')
+    ]
