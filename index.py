@@ -103,7 +103,7 @@ app.layout = html.Div([
     ]),
     html.Div([
         dcc.Interval(id = 'solar_energy_forcasting_card',
-                     interval = 30000,
+                     interval = 10000,
                      n_intervals = 0),
     ]),
 
