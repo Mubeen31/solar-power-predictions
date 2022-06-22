@@ -40,8 +40,21 @@ tab_style = {
     "font-family": "Calibri",
     "font-size": "16px",
     "backgroundColor": '#d9d9d9',
+    'border-bottom': '2px #ffffff solid',
+    'border-left': '1px #ffffff solid',
 #     'width': '120px',
 }
+
+tab_style1 = {
+    "padding": "0vh",
+    "color": '#1a1a1a',
+    "font-family": "Calibri",
+    "font-size": "16px",
+    "backgroundColor": '#d9d9d9',
+    'border-bottom': '2px #ffffff solid',
+#     'width': '120px',
+}
+
 
 tab_selected_style = {
     "color": '#FF0000',
@@ -142,7 +155,7 @@ app.layout = html.Div([
                 dcc.Tab(solar_current_power_chart,
                         label = 'Current Power',
                         value = 'solar_current_power_chart',
-                        style = tab_style,
+                        style = tab_style1,
                         selected_style = tab_selected_style,
                         ),
                 dcc.Tab(solar_today_power_chart,
