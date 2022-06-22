@@ -85,7 +85,7 @@ body {
   background-color: rgb(255, 255, 255);
   height: 415px;
   /*box-shadow:  4px 4px 4px 1px lightgrey;*/
-  border-top: 1px solid rgb(255, 255, 255);
+  border-top: 1px solid #cccccc;
 }
 
 .tabs {
