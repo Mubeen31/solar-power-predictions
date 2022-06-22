@@ -91,7 +91,7 @@ body {
 .tabs {
   display: flex;
   flex-direction: column;
-  background-color: rgb(255, 255, 255);
+  background-color: #d9d9d9;
   box-shadow:  1px 1px 4px 4px lightgrey;
 }
 
