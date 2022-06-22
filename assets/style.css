@@ -141,6 +141,7 @@ body {
   margin-top: 20px;
   justify-content: center;
   column-gap: 7px;
+  margin-bottom: 20px;
 }
 
 .card_text {
