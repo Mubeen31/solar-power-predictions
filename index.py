@@ -40,7 +40,7 @@ tab_style = {
     "font-family": "Calibri",
     "font-size": "16px",
     "backgroundColor": '#d9d9d9',
-    'border-bottom': '2px #ffffff solid',
+#     'border-bottom': '2px #ffffff solid',
     'border-left': '2px #ffffff solid',
 #     'width': '120px',
 }
@@ -51,7 +51,7 @@ tab_style1 = {
     "font-family": "Calibri",
     "font-size": "16px",
     "backgroundColor": '#d9d9d9',
-    'border-bottom': '2px #ffffff solid',
+#     'border-bottom': '2px #ffffff solid',
 #     'width': '120px',
 }
 
