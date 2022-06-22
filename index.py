@@ -40,9 +40,9 @@ tab_style = {
     "font-family": "Calibri",
     "font-size": "16px",
     "backgroundColor": '#d9d9d9',
-#     'border-bottom': '2px #ffffff solid',
+    # 'border-bottom': '2px #FF0000 solid',
     'border-left': '2px #ffffff solid',
-#     'width': '120px',
+    # 'width': '120px',
 }
 
 tab_style1 = {
@@ -51,10 +51,9 @@ tab_style1 = {
     "font-family": "Calibri",
     "font-size": "16px",
     "backgroundColor": '#d9d9d9',
-#     'border-bottom': '2px #ffffff solid',
-#     'width': '120px',
+    # 'border-bottom': '2px #FF0000 solid',
+    # 'width': '120px',
 }
-
 
 tab_selected_style = {
     "color": '#FF0000',
@@ -62,8 +61,7 @@ tab_selected_style = {
     "font-size": "16px",
     "padding": "0vh",
     "backgroundColor": 'rgb(255, 255, 255)',
-    'border-bottom': '2px #FF0000 solid',
-#     'width': '120px',
+    # 'width': '120px',
 }
 
 solar_current_power_chart = dcc.Graph(id = 'solar_current_power_chart',
@@ -83,13 +81,13 @@ energy_forcasting_chart = dcc.Graph(id = 'energy_forcasting_chart',
                                     config = {'displayModeBar': False},
                                     className = 'background2')
 support_vector_regression_chart = dcc.Graph(id = 'support_vector_regression_chart',
-                                    animate = True,
-                                    config = {'displayModeBar': False},
-                                    className = 'background2')
+                                            animate = True,
+                                            config = {'displayModeBar': False},
+                                            className = 'background2')
 random_forest_regression_chart = dcc.Graph(id = 'random_forest_regression_chart',
-                                    animate = True,
-                                    config = {'displayModeBar': False},
-                                    className = 'background2')
+                                           animate = True,
+                                           config = {'displayModeBar': False},
+                                           className = 'background2')
 summary = html.Div(id = 'summary',
                    className = 'background2')
 
