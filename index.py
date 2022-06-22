@@ -39,7 +39,7 @@ tab_style = {
     "color": '#1a1a1a',
     "font-family": "Calibri",
     "font-size": "16px",
-    "backgroundColor": 'rgb(255, 255, 255)',
+    "backgroundColor": '#d9d9d9',
 #     'width': '120px',
 }
 
