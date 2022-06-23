@@ -69,7 +69,7 @@ def energy_forecasting_chart_value(n_intervals):
                           0:count_total_rows]
     dependent_column = df1['Power (KW)'][0:count_total_rows]
 
-    reg = linear_model.LinearRegression(fit_intercept = False)
+    reg = linear_model.LinearRegression()
     reg.fit(independent_columns, dependent_column)
 
     forcasted_data = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'Hum (%)', 'CloudCover (%)']].tail(24)
