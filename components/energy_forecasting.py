@@ -64,7 +64,7 @@ def energy_forecasting_chart_value(n_intervals):
     df1.drop(['Date', 'Hour'], axis = 1, inplace = True)
     df1.loc[df1['SolarIrradiance (W/m2)'] == 0, ['Temp (°C)', 'Hum (%)', 'CloudCover (%)']] = 0
 
-    count_total_rows = len(df1) - 12
+    count_total_rows = len(df1) - 24
     independent_columns = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'Hum (%)', 'CloudCover (%)']][
                           0:count_total_rows]
     dependent_column = df1['Power (KW)'][0:count_total_rows]
@@ -72,7 +72,7 @@ def energy_forecasting_chart_value(n_intervals):
     reg = linear_model.LinearRegression(fit_intercept = False)
     reg.fit(independent_columns, dependent_column)
 
-    forcasted_data = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'Hum (%)', 'CloudCover (%)']].tail(12)
+    forcasted_data = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'Hum (%)', 'CloudCover (%)']].tail(24)
 
     return_array = list(reg.predict(forcasted_data))
 
@@ -85,7 +85,7 @@ def energy_forecasting_chart_value(n_intervals):
     hours_24 = list(daily_hourly_values['Hour'][0:24])
     hours_12 = list(daily_hourly_values['Hour'][0:12])
 
-    data_dict = {'Date': current_date_12, 'Hour': hours_12, 'Power (KW)': return_array}
+    data_dict = {'Date': current_date_24, 'Hour': hours_24, 'Power (KW)': return_array}
 
     data_dataframe = pd.DataFrame(data_dict)
 
