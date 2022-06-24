@@ -93,14 +93,13 @@ def energy_forecasting_chart_value(n_intervals):
         reg = linear_model.LinearRegression(fit_intercept = False)
         reg.fit(independent_columns, dependent_column)
 
-        forcasted_data = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'Hum (%)', 'CloudCover (%)']].tail(12)
+        forcasted_data = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'Hum (%)', 'CloudCover (%)']].tail(24)
 
         return_array = list(reg.predict(forcasted_data))
 
         date = now.strftime('%Y-%m-%d')
         current_date_24 = [date, date, date, date, date, date, date, date, date, date, date, date, date, date, date,
-                           date,
-                           date, date, date, date, date, date, date, date]
+                           date, date, date, date, date, date, date, date, date]
 
         hours_24 = list(daily_hourly_values['Hour'][0:24])
 
