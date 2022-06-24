@@ -26,11 +26,8 @@ html.Div([
 
 
 def energy_forecasting_chart_value(n_intervals):
-    # now = datetime.now()
-    # time_name = now.strftime('%H:%M:%S')
-    # if time_name >= '23:30:00' and time_name <= '00:00:00' and time_name >= '00:00:00' and time_name <= '11:30:00':
-    #     raise PreventUpdate
-    # else:
+    now = datetime.now()
+    time_name = now.strftime('%H:%M:%S')
     header_list = ['Date Time', 'Voltage', 'Current']
     df = pd.read_csv('sensors_data.csv', names = header_list)
     df['Power (W)'] = df['Voltage'] * df['Current']
@@ -45,7 +42,8 @@ def energy_forecasting_chart_value(n_intervals):
     rearrange_columns = ['Date Time', 'Date', 'Time', 'Hour', 'Voltage', 'Current', 'Power (W)', 'Power (KW)']
     df = df[rearrange_columns]
     unique_date = df['Date'].unique()
-    filter_daily_values = df[(df['Date'] >= '2022-06-18') & (df['Date'] <= unique_date[-2])][['Date', 'Hour', 'Power (KW)']]
+    filter_daily_values = df[(df['Date'] >= '2022-06-18') & (df['Date'] <= unique_date[-2])][
+        ['Date', 'Hour', 'Power (KW)']]
     daily_hourly_values = filter_daily_values.groupby(['Date', 'Hour'])['Power (KW)'].sum().reset_index()
 
     header_list = ['SolarIrradiance (W/m2)', 'weather status', 'Temp (°C)', 'RealFeelTemp (°C)', 'DewPoint (°C)',
@@ -64,30 +62,51 @@ def energy_forecasting_chart_value(n_intervals):
     df1.drop(['Date', 'Hour'], axis = 1, inplace = True)
     df1.loc[df1['SolarIrradiance (W/m2)'] == 0, ['Temp (°C)', 'Hum (%)', 'CloudCover (%)']] = 0
 
-    count_total_rows = len(df1) - 12
-    independent_columns = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'Hum (%)', 'CloudCover (%)']][
-                          0:count_total_rows]
-    dependent_column = df1['Power (KW)'][0:count_total_rows]
+    if time_name >= '00:00:00' and time_name <= '11:59:59':
+        count_total_rows = len(df1) - 12
+        independent_columns = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'Hum (%)', 'CloudCover (%)']][
+                              0:count_total_rows]
+        dependent_column = df1['Power (KW)'][0:count_total_rows]
 
-    reg = linear_model.LinearRegression(fit_intercept = False)
-    reg.fit(independent_columns, dependent_column)
+        reg = linear_model.LinearRegression(fit_intercept = False)
+        reg.fit(independent_columns, dependent_column)
 
-    forcasted_data = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'Hum (%)', 'CloudCover (%)']].tail(12)
+        forcasted_data = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'Hum (%)', 'CloudCover (%)']].tail(12)
 
-    return_array = list(reg.predict(forcasted_data))
+        return_array = list(reg.predict(forcasted_data))
 
-    now = datetime.now()
-    date = now.strftime('%Y-%m-%d')
-    current_date_24 = [date, date, date, date, date, date, date, date, date, date, date, date, date, date, date, date,
-                    date, date, date, date, date, date, date, date]
-    current_date_12 = [date, date, date, date, date, date, date, date, date, date, date, date]
+        date = now.strftime('%Y-%m-%d')
+        current_date_12 = [date, date, date, date, date, date, date, date, date, date, date, date]
 
-    hours_24 = list(daily_hourly_values['Hour'][0:24])
-    hours_12 = list(daily_hourly_values['Hour'][0:12])
+        hours_12 = list(daily_hourly_values['Hour'][0:12])
 
-    data_dict = {'Date': current_date_12, 'Hour': hours_12, 'Power (KW)': return_array}
+        data_dict = {'Date': current_date_12, 'Hour': hours_12, 'Power (KW)': return_array}
 
-    data_dataframe = pd.DataFrame(data_dict)
+        data_dataframe = pd.DataFrame(data_dict)
+
+    elif time_name >= '12:00:00' and time_name <= '23:59:59':
+        count_total_rows = len(df1) - 24
+        independent_columns = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'Hum (%)', 'CloudCover (%)']][
+                              0:count_total_rows]
+        dependent_column = df1['Power (KW)'][0:count_total_rows]
+
+        reg = linear_model.LinearRegression(fit_intercept = False)
+        reg.fit(independent_columns, dependent_column)
+
+        forcasted_data = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'Hum (%)', 'CloudCover (%)']].tail(12)
+
+        return_array = list(reg.predict(forcasted_data))
+
+        date = now.strftime('%Y-%m-%d')
+        current_date_24 = [date, date, date, date, date, date, date, date, date, date, date, date, date, date, date,
+                           date,
+                           date, date, date, date, date, date, date, date]
+
+        hours_24 = list(daily_hourly_values['Hour'][0:24])
+
+        data_dict = {'Date': current_date_24, 'Hour': hours_24, 'Power (KW)': return_array}
+
+        data_dataframe = pd.DataFrame(data_dict)
 
     # today data
     filter_today_values = df[df['Date'] == unique_date[-1]][['Date', 'Hour', 'Power (KW)']]
