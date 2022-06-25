@@ -188,140 +188,140 @@ def summary_value(n_intervals, select_trees, select_random_state):
                 ], className = 'error_container3')
             ], className = 'error_container_column'),
 
-            html.Div([
-                html.Div([
-                    html.Div([
-                        html.P('Yesterday Results', className = 'stat_results'),
-                    ]),
-                ], className = 'error_container1'),
-                html.Div([
-                    html.Div([
-                        html.P('PE', className = 'error_text'),
-                    ], className = 'error_bg'),
-                    html.Div([
-                        html.P('AE', className = 'error_text'),
-                    ], className = 'error_bg'),
-                    html.Div([
-                        html.P('MSE', className = 'error_text'),
-                    ], className = 'error_bg'),
-                    html.Div([
-                        html.P('RMSE', className = 'error_text'),
-                    ], className = 'error_bg'),
-                    html.Div([
-                        html.P('MAE', className = 'error_text'),
-                    ], className = 'error_bg'),
-                    html.Div([
-                        html.P('R²', className = 'error_text')
-                    ], className = 'error_bg')
-                ], className = 'error_container2'),
-
-                html.Div([
-                    html.Div([
-                        html.P('Multivariable Linear Regression Model', className = 'error_text'),
-                    ], className = 'error_bg1'),
-                    html.Div([
-                        html.P('RMSE',
-                               # html.P('{0:,.5f}'.format(energy_kilo_watts)),
-                               className = 'error_text'),
-                    ], className = 'error_bg'),
-                    html.Div([
-                        html.P('RMSE',
-                               # html.P('{0:,.5f}'.format(energy_kilo_watts)),
-                               className = 'error_text'),
-                    ], className = 'error_bg'),
-                    html.Div([
-                        html.P('RMSE',
-                               # html.P('{0:,.5f}'.format(energy_kilo_watts)),
-                               className = 'error_text'),
-                    ], className = 'error_bg'),
-                    html.Div([
-                        html.P('MAE',
-                               # html.P('{0:,.5f}'.format(energy_kilo_watts)),
-                               className = 'error_text'),
-                    ], className = 'error_bg'),
-                    html.Div([
-                        html.P('R²',
-                               # html.P('{0:,.5f}'.format(energy_kilo_watts)),
-                               className = 'error_text')
-                    ], className = 'error_bg'),
-                    html.Div([
-                        html.P('R²',
-                               # html.P('{0:,.5f}'.format(energy_kilo_watts)),
-                               className = 'error_text')
-                    ], className = 'error_bg')
-                ], className = 'error_container3'),
-
-                html.Div([
-                    html.Div([
-                        html.P('Support Vector Regression Model', className = 'error_text'),
-                    ], className = 'error_bg1'),
-                    html.Div([
-                        html.P('RMSE',
-                               # html.P('{0:,.5f}'.format(energy_kilo_watts)),
-                               className = 'error_text'),
-                    ], className = 'error_bg'),
-                    html.Div([
-                        html.P('RMSE',
-                               # html.P('{0:,.5f}'.format(energy_kilo_watts)),
-                               className = 'error_text'),
-                    ], className = 'error_bg'),
-                    html.Div([
-                        html.P('RMSE',
-                               # html.P('{0:,.5f}'.format(energy_kilo_watts)),
-                               className = 'error_text'),
-                    ], className = 'error_bg'),
-                    html.Div([
-                        html.P('MAE',
-                               # html.P('{0:,.5f}'.format(energy_kilo_watts)),
-                               className = 'error_text'),
-                    ], className = 'error_bg'),
-                    html.Div([
-                        html.P('R²',
-                               # html.P('{0:,.5f}'.format(energy_kilo_watts)),
-                               className = 'error_text')
-                    ], className = 'error_bg'),
-                    html.Div([
-                        html.P('R²',
-                               # html.P('{0:,.5f}'.format(energy_kilo_watts)),
-                               className = 'error_text')
-                    ], className = 'error_bg')
-                ], className = 'error_container3'),
-
-                html.Div([
-                    html.Div([
-                        html.P('Random Forest Regression Model', className = 'error_text'),
-                    ], className = 'error_bg1'),
-                    html.Div([
-                        html.P('RMSE',
-                               # html.P('{0:,.5f}'.format(energy_kilo_watts)),
-                               className = 'error_text'),
-                    ], className = 'error_bg'),
-                    html.Div([
-                        html.P('RMSE',
-                               # html.P('{0:,.5f}'.format(energy_kilo_watts)),
-                               className = 'error_text'),
-                    ], className = 'error_bg'),
-                    html.Div([
-                        html.P('RMSE',
-                               # html.P('{0:,.5f}'.format(energy_kilo_watts)),
-                               className = 'error_text'),
-                    ], className = 'error_bg'),
-                    html.Div([
-                        html.P('MAE',
-                               # html.P('{0:,.5f}'.format(energy_kilo_watts)),
-                               className = 'error_text'),
-                    ], className = 'error_bg'),
-                    html.Div([
-                        html.P('R²',
-                               # html.P('{0:,.5f}'.format(energy_kilo_watts)),
-                               className = 'error_text')
-                    ], className = 'error_bg'),
-                    html.Div([
-                        html.P('R²',
-                               # html.P('{0:,.5f}'.format(energy_kilo_watts)),
-                               className = 'error_text')
-                    ], className = 'error_bg')
-                ], className = 'error_container3')
-            ], className = 'error_container_column')
+            # html.Div([
+            #     html.Div([
+            #         html.Div([
+            #             html.P('Yesterday Results', className = 'stat_results'),
+            #         ]),
+            #     ], className = 'error_container1'),
+            #     html.Div([
+            #         html.Div([
+            #             html.P('PE', className = 'error_text'),
+            #         ], className = 'error_bg'),
+            #         html.Div([
+            #             html.P('AE', className = 'error_text'),
+            #         ], className = 'error_bg'),
+            #         html.Div([
+            #             html.P('MSE', className = 'error_text'),
+            #         ], className = 'error_bg'),
+            #         html.Div([
+            #             html.P('RMSE', className = 'error_text'),
+            #         ], className = 'error_bg'),
+            #         html.Div([
+            #             html.P('MAE', className = 'error_text'),
+            #         ], className = 'error_bg'),
+            #         html.Div([
+            #             html.P('R²', className = 'error_text')
+            #         ], className = 'error_bg')
+            #     ], className = 'error_container2'),
+            #
+            #     html.Div([
+            #         html.Div([
+            #             html.P('Multivariable Linear Regression Model', className = 'error_text'),
+            #         ], className = 'error_bg1'),
+            #         html.Div([
+            #             html.P('RMSE',
+            #                    # html.P('{0:,.5f}'.format(energy_kilo_watts)),
+            #                    className = 'error_text'),
+            #         ], className = 'error_bg'),
+            #         html.Div([
+            #             html.P('RMSE',
+            #                    # html.P('{0:,.5f}'.format(energy_kilo_watts)),
+            #                    className = 'error_text'),
+            #         ], className = 'error_bg'),
+            #         html.Div([
+            #             html.P('RMSE',
+            #                    # html.P('{0:,.5f}'.format(energy_kilo_watts)),
+            #                    className = 'error_text'),
+            #         ], className = 'error_bg'),
+            #         html.Div([
+            #             html.P('MAE',
+            #                    # html.P('{0:,.5f}'.format(energy_kilo_watts)),
+            #                    className = 'error_text'),
+            #         ], className = 'error_bg'),
+            #         html.Div([
+            #             html.P('R²',
+            #                    # html.P('{0:,.5f}'.format(energy_kilo_watts)),
+            #                    className = 'error_text')
+            #         ], className = 'error_bg'),
+            #         html.Div([
+            #             html.P('R²',
+            #                    # html.P('{0:,.5f}'.format(energy_kilo_watts)),
+            #                    className = 'error_text')
+            #         ], className = 'error_bg')
+            #     ], className = 'error_container3'),
+            #
+            #     html.Div([
+            #         html.Div([
+            #             html.P('Support Vector Regression Model', className = 'error_text'),
+            #         ], className = 'error_bg1'),
+            #         html.Div([
+            #             html.P('RMSE',
+            #                    # html.P('{0:,.5f}'.format(energy_kilo_watts)),
+            #                    className = 'error_text'),
+            #         ], className = 'error_bg'),
+            #         html.Div([
+            #             html.P('RMSE',
+            #                    # html.P('{0:,.5f}'.format(energy_kilo_watts)),
+            #                    className = 'error_text'),
+            #         ], className = 'error_bg'),
+            #         html.Div([
+            #             html.P('RMSE',
+            #                    # html.P('{0:,.5f}'.format(energy_kilo_watts)),
+            #                    className = 'error_text'),
+            #         ], className = 'error_bg'),
+            #         html.Div([
+            #             html.P('MAE',
+            #                    # html.P('{0:,.5f}'.format(energy_kilo_watts)),
+            #                    className = 'error_text'),
+            #         ], className = 'error_bg'),
+            #         html.Div([
+            #             html.P('R²',
+            #                    # html.P('{0:,.5f}'.format(energy_kilo_watts)),
+            #                    className = 'error_text')
+            #         ], className = 'error_bg'),
+            #         html.Div([
+            #             html.P('R²',
+            #                    # html.P('{0:,.5f}'.format(energy_kilo_watts)),
+            #                    className = 'error_text')
+            #         ], className = 'error_bg')
+            #     ], className = 'error_container3'),
+            #
+            #     html.Div([
+            #         html.Div([
+            #             html.P('Random Forest Regression Model', className = 'error_text'),
+            #         ], className = 'error_bg1'),
+            #         html.Div([
+            #             html.P('RMSE',
+            #                    # html.P('{0:,.5f}'.format(energy_kilo_watts)),
+            #                    className = 'error_text'),
+            #         ], className = 'error_bg'),
+            #         html.Div([
+            #             html.P('RMSE',
+            #                    # html.P('{0:,.5f}'.format(energy_kilo_watts)),
+            #                    className = 'error_text'),
+            #         ], className = 'error_bg'),
+            #         html.Div([
+            #             html.P('RMSE',
+            #                    # html.P('{0:,.5f}'.format(energy_kilo_watts)),
+            #                    className = 'error_text'),
+            #         ], className = 'error_bg'),
+            #         html.Div([
+            #             html.P('MAE',
+            #                    # html.P('{0:,.5f}'.format(energy_kilo_watts)),
+            #                    className = 'error_text'),
+            #         ], className = 'error_bg'),
+            #         html.Div([
+            #             html.P('R²',
+            #                    # html.P('{0:,.5f}'.format(energy_kilo_watts)),
+            #                    className = 'error_text')
+            #         ], className = 'error_bg'),
+            #         html.Div([
+            #             html.P('R²',
+            #                    # html.P('{0:,.5f}'.format(energy_kilo_watts)),
+            #                    className = 'error_text')
+            #         ], className = 'error_bg')
+            #     ], className = 'error_container3')
+            # ], className = 'error_container_column')
         ], className = 'results_column')
     ]
