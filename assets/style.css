@@ -504,6 +504,7 @@ body {
   color: #48484a;
   margin: 0 auto;
   align-items: center;
+  /*white-space: pre;*/
 }
 
 .error_container1 {
