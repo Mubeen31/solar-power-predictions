@@ -26,6 +26,10 @@ html.Div([
 ]),
 
 
+n_estimator_list = [100, 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 5500]
+random_state_list = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110]
+
+
 def random_forest_regression_chart_value(n_intervals):
     now = datetime.now()
     time_name = now.strftime('%H:%M:%S')

@@ -88,6 +88,58 @@ body {
   border-top: 2px #FF0000 solid;
 }
 
+.random_forest_regression_chart {
+   display: flex;
+   flex-direction: row;
+
+}
+
+.drop_down_list_title {
+   display: flex;
+   flex-direction: row;
+   margin-top: 20px;
+   z-index: 0;
+}
+
+.drop_down_list {
+   display: flex;
+   flex-direction: row;
+   width: 180px;
+   margin-top: 10px;
+}
+
+.Select-input{
+    height: 25px;
+}
+
+.Select-control{
+    height: 30px;
+}
+
+.Select-placeholder{
+    line-height: 33px;
+}
+
+.title_drop_down_list {
+   display: flex;
+   flex-direction: row;
+   gap: 3px;
+   justify-content: center;
+   margin-top: -425px;
+}
+
+.drop_down_list_row {
+   display: flex;
+   flex-direction: row;
+   gap: 15px;
+   justify-content: center;
+}
+
+.three_elements_column {
+  display: flex;
+  flex-direction: column;
+}
+
 .tabs {
   display: flex;
   flex-direction: column;
