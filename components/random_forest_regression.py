@@ -25,12 +25,31 @@ html.Div([
                  n_intervals = 0),
 ]),
 
-
 n_estimator_list = [100, 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 5500]
 random_state_list = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110]
 
+dcc.Dropdown(id = 'select_trees',
+             multi = False,
+             clearable = True,
+             disabled = False,
+             style = {'display': True},
+             value = 100,
+             placeholder = 'Select trees',
+             options = n_estimator_list,
+             className = 'drop_down_list'),
 
-def random_forest_regression_chart_value(n_intervals):
+dcc.Dropdown(id = 'select_random_state',
+             multi = False,
+             clearable = True,
+             disabled = False,
+             style = {'display': True},
+             value = 0,
+             placeholder = 'Select random states',
+             options = random_state_list,
+             className = 'drop_down_list'),
+
+
+def random_forest_regression_chart_value(n_intervals, select_trees, select_random_state):
     now = datetime.now()
     time_name = now.strftime('%H:%M:%S')
     header_list = ['Date Time', 'Voltage', 'Current']
@@ -74,7 +93,7 @@ def random_forest_regression_chart_value(n_intervals):
                               0:count_total_rows]
         dependent_column = df1['Power (KW)'][0:count_total_rows]
 
-        rfr = RandomForestRegressor(n_estimators = 100, random_state = 0)
+        rfr = RandomForestRegressor(select_trees, select_random_state)
         rfr.fit(independent_columns, dependent_column)
 
         forcasted_data = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'Hum (%)', 'CloudCover (%)']].tail(12)
