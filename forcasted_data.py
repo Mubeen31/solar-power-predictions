@@ -27,7 +27,7 @@ rain_proba_0 = api_data[0]['RainProbability']
 cloud_cover_0 = api_data[0]['CloudCover']
 
 date_time_1 = api_data[1]['DateTime']
-get_date_time = datetime.strptime(date_time_0, '%Y-%m-%dT%H:%M:%S%z')
+get_date_time = datetime.strptime(date_time_1, '%Y-%m-%dT%H:%M:%S%z')
 dte_1 = get_date_time.strftime('%Y-%m-%d')
 tme_1 = get_date_time.strftime('%H')
 solar_irradiance_1 = api_data[1]['SolarIrradiance']['Value']
@@ -46,7 +46,7 @@ rain_proba_1 = api_data[1]['RainProbability']
 cloud_cover_1 = api_data[1]['CloudCover']
 
 date_time_2 = api_data[2]['DateTime']
-get_date_time = datetime.strptime(date_time_0, '%Y-%m-%dT%H:%M:%S%z')
+get_date_time = datetime.strptime(date_time_2, '%Y-%m-%dT%H:%M:%S%z')
 dte_2 = get_date_time.strftime('%Y-%m-%d')
 tme_2 = get_date_time.strftime('%H')
 solar_irradiance_2 = api_data[2]['SolarIrradiance']['Value']
@@ -65,7 +65,7 @@ rain_proba_2 = api_data[2]['RainProbability']
 cloud_cover_2 = api_data[2]['CloudCover']
 
 date_time_3 = api_data[3]['DateTime']
-get_date_time = datetime.strptime(date_time_0, '%Y-%m-%dT%H:%M:%S%z')
+get_date_time = datetime.strptime(date_time_3, '%Y-%m-%dT%H:%M:%S%z')
 dte_3 = get_date_time.strftime('%Y-%m-%d')
 tme_3 = get_date_time.strftime('%H')
 solar_irradiance_3 = api_data[3]['SolarIrradiance']['Value']
@@ -84,7 +84,7 @@ rain_proba_3 = api_data[3]['RainProbability']
 cloud_cover_3 = api_data[3]['CloudCover']
 
 date_time_4 = api_data[4]['DateTime']
-get_date_time = datetime.strptime(date_time_0, '%Y-%m-%dT%H:%M:%S%z')
+get_date_time = datetime.strptime(date_time_4, '%Y-%m-%dT%H:%M:%S%z')
 dte_4 = get_date_time.strftime('%Y-%m-%d')
 tme_4 = get_date_time.strftime('%H')
 solar_irradiance_4 = api_data[4]['SolarIrradiance']['Value']
@@ -103,7 +103,7 @@ rain_proba_4 = api_data[4]['RainProbability']
 cloud_cover_4 = api_data[4]['CloudCover']
 
 date_time_5 = api_data[5]['DateTime']
-get_date_time = datetime.strptime(date_time_0, '%Y-%m-%dT%H:%M:%S%z')
+get_date_time = datetime.strptime(date_time_5, '%Y-%m-%dT%H:%M:%S%z')
 dte_5 = get_date_time.strftime('%Y-%m-%d')
 tme_5 = get_date_time.strftime('%H')
 solar_irradiance_5 = api_data[5]['SolarIrradiance']['Value']
@@ -122,7 +122,7 @@ rain_proba_5 = api_data[5]['RainProbability']
 cloud_cover_5 = api_data[5]['CloudCover']
 
 date_time_6 = api_data[6]['DateTime']
-get_date_time = datetime.strptime(date_time_0, '%Y-%m-%dT%H:%M:%S%z')
+get_date_time = datetime.strptime(date_time_6, '%Y-%m-%dT%H:%M:%S%z')
 dte_6 = get_date_time.strftime('%Y-%m-%d')
 tme_6 = get_date_time.strftime('%H')
 solar_irradiance_6 = api_data[6]['SolarIrradiance']['Value']
@@ -141,7 +141,7 @@ rain_proba_6 = api_data[6]['RainProbability']
 cloud_cover_6 = api_data[6]['CloudCover']
 
 date_time_7 = api_data[7]['DateTime']
-get_date_time = datetime.strptime(date_time_0, '%Y-%m-%dT%H:%M:%S%z')
+get_date_time = datetime.strptime(date_time_7, '%Y-%m-%dT%H:%M:%S%z')
 dte_7 = get_date_time.strftime('%Y-%m-%d')
 tme_7 = get_date_time.strftime('%H')
 solar_irradiance_7 = api_data[7]['SolarIrradiance']['Value']
@@ -160,7 +160,7 @@ rain_proba_7 = api_data[7]['RainProbability']
 cloud_cover_7 = api_data[7]['CloudCover']
 
 date_time_8 = api_data[8]['DateTime']
-get_date_time = datetime.strptime(date_time_0, '%Y-%m-%dT%H:%M:%S%z')
+get_date_time = datetime.strptime(date_time_8, '%Y-%m-%dT%H:%M:%S%z')
 dte_8 = get_date_time.strftime('%Y-%m-%d')
 tme_8 = get_date_time.strftime('%H')
 solar_irradiance_8 = api_data[8]['SolarIrradiance']['Value']
@@ -179,7 +179,7 @@ rain_proba_8 = api_data[8]['RainProbability']
 cloud_cover_8 = api_data[8]['CloudCover']
 
 date_time_9 = api_data[9]['DateTime']
-get_date_time = datetime.strptime(date_time_0, '%Y-%m-%dT%H:%M:%S%z')
+get_date_time = datetime.strptime(date_time_9, '%Y-%m-%dT%H:%M:%S%z')
 dte_9 = get_date_time.strftime('%Y-%m-%d')
 tme_9 = get_date_time.strftime('%H')
 solar_irradiance_9 = api_data[9]['SolarIrradiance']['Value']
@@ -198,7 +198,7 @@ rain_proba_9 = api_data[9]['RainProbability']
 cloud_cover_9 = api_data[9]['CloudCover']
 
 date_time_10 = api_data[10]['DateTime']
-get_date_time = datetime.strptime(date_time_0, '%Y-%m-%dT%H:%M:%S%z')
+get_date_time = datetime.strptime(date_time_10, '%Y-%m-%dT%H:%M:%S%z')
 dte_10 = get_date_time.strftime('%Y-%m-%d')
 tme_10 = get_date_time.strftime('%H')
 solar_irradiance_10 = api_data[10]['SolarIrradiance']['Value']
@@ -217,7 +217,7 @@ rain_proba_10 = api_data[10]['RainProbability']
 cloud_cover_10 = api_data[10]['CloudCover']
 
 date_time_11 = api_data[11]['DateTime']
-get_date_time = datetime.strptime(date_time_0, '%Y-%m-%dT%H:%M:%S%z')
+get_date_time = datetime.strptime(date_time_11, '%Y-%m-%dT%H:%M:%S%z')
 dte_11 = get_date_time.strftime('%Y-%m-%d')
 tme_11 = get_date_time.strftime('%H')
 solar_irradiance_11 = api_data[11]['SolarIrradiance']['Value']
