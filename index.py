@@ -18,7 +18,8 @@ from components.solar_current_power_chart import solar_current_power_chart_value
 from components.solar_today_power_chart import solar_today_power_chart_value
 from components.solar_yesterday_power_chart import solar_yesterday_power_chart_value
 from components.energy_forecasting import energy_forecasting_chart_value
-from components.random_forest_regression import random_forest_regression_chart_value
+from components.random_forest_regression import random_forest_regression_chart_value, n_estimator_list, \
+    random_state_list
 from components.current_weather import current_weather_value
 from components.first_hour_forecast import first_hour_forecast_weather_value
 from components.second_hour_forecast import second_hour_forecast_weather_value
@@ -85,10 +86,50 @@ support_vector_regression_chart = dcc.Graph(id = 'support_vector_regression_char
                                             animate = True,
                                             config = {'displayModeBar': False},
                                             className = 'background2')
-random_forest_regression_chart = dcc.Graph(id = 'random_forest_regression_chart',
-                                           animate = True,
-                                           config = {'displayModeBar': False},
-                                           className = 'background2')
+random_forest_regression_chart = html.Div([
+    html.Div([
+        html.Div([
+            dcc.Graph(id = 'random_forest_regression_chart',
+                      animate = True,
+                      config = {'displayModeBar': False},
+                      className = 'background2')
+        ], className = 'random_forest_regression_chart'),
+        html.Div([
+            html.Div([
+                html.P('N estimators',
+                       style = {'color': '#D35940'},
+                       className = 'drop_down_list_title'
+                       ),
+                dcc.Dropdown(id = 'select_trees',
+                             multi = False,
+                             clearable = True,
+                             disabled = False,
+                             style = {'display': True},
+                             value = 100,
+                             placeholder = 'Select trees',
+                             options = n_estimator_list,
+                             className = 'drop_down_list'),
+            ], className = 'title_drop_down_list'),
+            html.Div([
+                html.P('Random states',
+                       style = {'color': '#D35940'},
+                       className = 'drop_down_list_title'
+                       ),
+                dcc.Dropdown(id = 'select_random_state',
+                             multi = False,
+                             clearable = True,
+                             disabled = False,
+                             style = {'display': True},
+                             value = 0,
+                             placeholder = 'Select random states',
+                             options = random_state_list,
+                             className = 'drop_down_list'),
+            ], className = 'title_drop_down_list')
+        ], className = 'drop_down_list_row')
+    ], className = 'three_elements_column'),
+
+]),
+
 summary = html.Div(id = 'summary',
                    className = 'background2')
 
