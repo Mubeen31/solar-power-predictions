@@ -149,7 +149,7 @@ def energy_forecasting_chart_value(n_intervals):
             titlefont = {
                 'color': '#0000FF',
                 'size': 15},
-            hovermode = 'closest',
+            hovermode = 'x unified',
             margin = dict(t = 50, r = 40),
             xaxis = dict(
                 title = '<b>Hours</b>',

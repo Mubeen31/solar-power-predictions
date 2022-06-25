@@ -180,7 +180,7 @@ def random_forest_regression_chart_value(n_intervals, select_trees, select_rando
             titlefont = {
                 'color': '#0000FF',
                 'size': 15},
-            hovermode = 'closest',
+            hovermode = 'x unified',
             margin = dict(t = 50, r = 40),
             xaxis = dict(
                 title = '<b>Hours</b>',

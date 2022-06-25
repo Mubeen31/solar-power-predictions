@@ -147,7 +147,7 @@ def solar_yesterday_power_chart_value(n_intervals):
             titlefont = {
                 'color': 'white',
                 'size': 17},
-            hovermode = 'closest',
+            hovermode = 'x unified',
             margin = dict(t = 50, r = 40),
             xaxis = dict(
                 title = '<b>Hours</b>',
@@ -184,7 +184,7 @@ def solar_yesterday_power_chart_value(n_intervals):
             font = dict(
                 family = "sans-serif",
                 size = 12,
-                color = 'white')
+                color = 'black')
 
         )
 
