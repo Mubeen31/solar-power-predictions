@@ -352,9 +352,11 @@ def energy_forecasting_chart_value_callback(n_intervals):
 
 
 @app.callback(Output('random_forest_regression_chart', 'figure'),
-              [Input('update_date_time_value', 'n_intervals')])
-def random_forest_regression_chart_value_callback(n_intervals):
-    random_forest_regression_chart_value_data = random_forest_regression_chart_value(n_intervals)
+              [Input('update_date_time_value', 'n_intervals')],
+              [Input('select_trees', 'value')],
+              [Input('select_random_state', 'value')])
+def random_forest_regression_chart_value_callback(n_intervals, select_trees, select_random_state):
+    random_forest_regression_chart_value_data = random_forest_regression_chart_value(n_intervals, select_trees, select_random_state)
 
     return random_forest_regression_chart_value_data
 
