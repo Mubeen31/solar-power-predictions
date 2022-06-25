@@ -84,7 +84,7 @@ def summary_value(n_intervals, select_trees, select_random_state):
                         html.P('Multivariable Linear Regression Model', className = 'error_text'),
                     ], className = 'error_bg1'),
                     html.Div([
-                        html.P('RMSE',
+                        html.P('16.99 KWh',
                                # html.P('{0:,.5f}'.format(energy_kilo_watts)),
                                className = 'error_text'),
                     ], className = 'error_bg'),
