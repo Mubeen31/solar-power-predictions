@@ -1,11 +1,16 @@
 import requests
 import csv
 import time
+from datetime import datetime
 
 complete_api_link = 'http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/331595?apikey=vnwz1buClrE9YhGJFG3mhNVq23tnIACH&details=true&metric=true'
 api_link = requests.get(complete_api_link)
 api_data = api_link.json()
 print(api_data[0])
+date_time_0 = api_data[0]['DateTime']
+get_date_time = datetime.strptime(date_time_0, '%Y-%m-%dT%H:%M:%S%z')
+dte_0 = get_date_time.strftime('%Y-%m-%d')
+tme_0 = get_date_time.strftime('%H')
 solar_irradiance_0 = api_data[0]['SolarIrradiance']['Value']
 icon_phrase_0 = api_data[0]['IconPhrase']
 temperature_0 = api_data[0]['Temperature']['Value']
@@ -21,6 +26,10 @@ pre_proba_0 = api_data[0]['PrecipitationProbability']
 rain_proba_0 = api_data[0]['RainProbability']
 cloud_cover_0 = api_data[0]['CloudCover']
 
+date_time_1 = api_data[1]['DateTime']
+get_date_time = datetime.strptime(date_time_0, '%Y-%m-%dT%H:%M:%S%z')
+dte_1 = get_date_time.strftime('%Y-%m-%d')
+tme_1 = get_date_time.strftime('%H')
 solar_irradiance_1 = api_data[1]['SolarIrradiance']['Value']
 icon_phrase_1 = api_data[1]['IconPhrase']
 temperature_1 = api_data[1]['Temperature']['Value']
@@ -36,6 +45,10 @@ pre_proba_1 = api_data[1]['PrecipitationProbability']
 rain_proba_1 = api_data[1]['RainProbability']
 cloud_cover_1 = api_data[1]['CloudCover']
 
+date_time_2 = api_data[2]['DateTime']
+get_date_time = datetime.strptime(date_time_0, '%Y-%m-%dT%H:%M:%S%z')
+dte_2 = get_date_time.strftime('%Y-%m-%d')
+tme_2 = get_date_time.strftime('%H')
 solar_irradiance_2 = api_data[2]['SolarIrradiance']['Value']
 icon_phrase_2 = api_data[2]['IconPhrase']
 temperature_2 = api_data[2]['Temperature']['Value']
@@ -51,6 +64,10 @@ pre_proba_2 = api_data[2]['PrecipitationProbability']
 rain_proba_2 = api_data[2]['RainProbability']
 cloud_cover_2 = api_data[2]['CloudCover']
 
+date_time_3 = api_data[3]['DateTime']
+get_date_time = datetime.strptime(date_time_0, '%Y-%m-%dT%H:%M:%S%z')
+dte_3 = get_date_time.strftime('%Y-%m-%d')
+tme_3 = get_date_time.strftime('%H')
 solar_irradiance_3 = api_data[3]['SolarIrradiance']['Value']
 icon_phrase_3 = api_data[3]['IconPhrase']
 temperature_3 = api_data[3]['Temperature']['Value']
@@ -66,6 +83,10 @@ pre_proba_3 = api_data[3]['PrecipitationProbability']
 rain_proba_3 = api_data[3]['RainProbability']
 cloud_cover_3 = api_data[3]['CloudCover']
 
+date_time_4 = api_data[4]['DateTime']
+get_date_time = datetime.strptime(date_time_0, '%Y-%m-%dT%H:%M:%S%z')
+dte_4 = get_date_time.strftime('%Y-%m-%d')
+tme_4 = get_date_time.strftime('%H')
 solar_irradiance_4 = api_data[4]['SolarIrradiance']['Value']
 icon_phrase_4 = api_data[4]['IconPhrase']
 temperature_4 = api_data[4]['Temperature']['Value']
@@ -81,6 +102,10 @@ pre_proba_4 = api_data[4]['PrecipitationProbability']
 rain_proba_4 = api_data[4]['RainProbability']
 cloud_cover_4 = api_data[4]['CloudCover']
 
+date_time_5 = api_data[5]['DateTime']
+get_date_time = datetime.strptime(date_time_0, '%Y-%m-%dT%H:%M:%S%z')
+dte_5 = get_date_time.strftime('%Y-%m-%d')
+tme_5 = get_date_time.strftime('%H')
 solar_irradiance_5 = api_data[5]['SolarIrradiance']['Value']
 icon_phrase_5 = api_data[5]['IconPhrase']
 temperature_5 = api_data[5]['Temperature']['Value']
@@ -96,6 +121,10 @@ pre_proba_5 = api_data[5]['PrecipitationProbability']
 rain_proba_5 = api_data[5]['RainProbability']
 cloud_cover_5 = api_data[5]['CloudCover']
 
+date_time_6 = api_data[6]['DateTime']
+get_date_time = datetime.strptime(date_time_0, '%Y-%m-%dT%H:%M:%S%z')
+dte_6 = get_date_time.strftime('%Y-%m-%d')
+tme_6 = get_date_time.strftime('%H')
 solar_irradiance_6 = api_data[6]['SolarIrradiance']['Value']
 icon_phrase_6 = api_data[6]['IconPhrase']
 temperature_6 = api_data[6]['Temperature']['Value']
@@ -111,6 +140,10 @@ pre_proba_6 = api_data[6]['PrecipitationProbability']
 rain_proba_6 = api_data[6]['RainProbability']
 cloud_cover_6 = api_data[6]['CloudCover']
 
+date_time_7 = api_data[7]['DateTime']
+get_date_time = datetime.strptime(date_time_0, '%Y-%m-%dT%H:%M:%S%z')
+dte_7 = get_date_time.strftime('%Y-%m-%d')
+tme_7 = get_date_time.strftime('%H')
 solar_irradiance_7 = api_data[7]['SolarIrradiance']['Value']
 icon_phrase_7 = api_data[7]['IconPhrase']
 temperature_7 = api_data[7]['Temperature']['Value']
@@ -126,6 +159,10 @@ pre_proba_7 = api_data[7]['PrecipitationProbability']
 rain_proba_7 = api_data[7]['RainProbability']
 cloud_cover_7 = api_data[7]['CloudCover']
 
+date_time_8 = api_data[8]['DateTime']
+get_date_time = datetime.strptime(date_time_0, '%Y-%m-%dT%H:%M:%S%z')
+dte_8 = get_date_time.strftime('%Y-%m-%d')
+tme_8 = get_date_time.strftime('%H')
 solar_irradiance_8 = api_data[8]['SolarIrradiance']['Value']
 icon_phrase_8 = api_data[8]['IconPhrase']
 temperature_8 = api_data[8]['Temperature']['Value']
@@ -141,6 +178,10 @@ pre_proba_8 = api_data[8]['PrecipitationProbability']
 rain_proba_8 = api_data[8]['RainProbability']
 cloud_cover_8 = api_data[8]['CloudCover']
 
+date_time_9 = api_data[9]['DateTime']
+get_date_time = datetime.strptime(date_time_0, '%Y-%m-%dT%H:%M:%S%z')
+dte_9 = get_date_time.strftime('%Y-%m-%d')
+tme_9 = get_date_time.strftime('%H')
 solar_irradiance_9 = api_data[9]['SolarIrradiance']['Value']
 icon_phrase_9 = api_data[9]['IconPhrase']
 temperature_9 = api_data[9]['Temperature']['Value']
@@ -156,6 +197,10 @@ pre_proba_9 = api_data[9]['PrecipitationProbability']
 rain_proba_9 = api_data[9]['RainProbability']
 cloud_cover_9 = api_data[9]['CloudCover']
 
+date_time_10 = api_data[10]['DateTime']
+get_date_time = datetime.strptime(date_time_0, '%Y-%m-%dT%H:%M:%S%z')
+dte_10 = get_date_time.strftime('%Y-%m-%d')
+tme_10 = get_date_time.strftime('%H')
 solar_irradiance_10 = api_data[10]['SolarIrradiance']['Value']
 icon_phrase_10 = api_data[10]['IconPhrase']
 temperature_10 = api_data[10]['Temperature']['Value']
@@ -171,6 +216,10 @@ pre_proba_10 = api_data[10]['PrecipitationProbability']
 rain_proba_10 = api_data[10]['RainProbability']
 cloud_cover_10 = api_data[10]['CloudCover']
 
+date_time_11 = api_data[11]['DateTime']
+get_date_time = datetime.strptime(date_time_0, '%Y-%m-%dT%H:%M:%S%z')
+dte_11 = get_date_time.strftime('%Y-%m-%d')
+tme_11 = get_date_time.strftime('%H')
 solar_irradiance_11 = api_data[11]['SolarIrradiance']['Value']
 icon_phrase_11 = api_data[11]['IconPhrase']
 temperature_11 = api_data[11]['Temperature']['Value']
@@ -186,13 +235,12 @@ pre_proba_11 = api_data[11]['PrecipitationProbability']
 rain_proba_11 = api_data[11]['RainProbability']
 cloud_cover_11 = api_data[11]['CloudCover']
 
-
 with open("hourly_weather_forecasted_data.csv", "a", newline = '\n') as f:
     writer = csv.writer(f, delimiter = ",")
     writer.writerow(
-        [solar_irradiance_0, icon_phrase_0, temperature_0, real_feel_temperature_0, dew_point_0, wind_speed_0,
-         wind_direction_0, humidity_0, visibility_0, uvi_index_0, uvi_index_text_0, pre_proba_0, rain_proba_0,
-         cloud_cover_0])
+        [dte_0, tme_0, solar_irradiance_0, icon_phrase_0, temperature_0, real_feel_temperature_0, dew_point_0,
+         wind_speed_0, wind_direction_0, humidity_0, visibility_0, uvi_index_0, uvi_index_text_0, pre_proba_0,
+         rain_proba_0, cloud_cover_0])
     writer.writerow(
         [solar_irradiance_1, icon_phrase_1, temperature_1, real_feel_temperature_1, dew_point_1, wind_speed_1,
          wind_direction_1, humidity_1, visibility_1, uvi_index_1, uvi_index_text_1, pre_proba_1, rain_proba_1,
