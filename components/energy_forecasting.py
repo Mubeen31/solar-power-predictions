@@ -129,7 +129,7 @@ def energy_forecasting_chart_value(n_intervals):
                 y = data_dataframe['Power (KW)'],
                 name = 'Today Predicted Solar Energy',
                 mode = 'lines',
-                line = dict(color = 'firebrick', dash = 'dash'),
+                line = dict(color = 'firebrick', dash = 'dot'),
                 hoverinfo = 'text',
                 hovertext =
                 '<b>Date</b>: ' + data_dataframe['Date'].astype(str) + '<br>' +
@@ -143,7 +143,7 @@ def energy_forecasting_chart_value(n_intervals):
             title = {
                 'text': 'Multivariable Linear Regression Model',
                 'y': 0.88,
-                'x': 0.2,
+                'x': 0.28,
                 'xanchor': 'center',
                 'yanchor': 'top'},
             titlefont = {
@@ -186,7 +186,7 @@ def energy_forecasting_chart_value(n_intervals):
             legend = {
                 'orientation': 'v',
                 'bgcolor': 'rgba(255, 255, 255, 0)',
-                'x': 0.1,
+                'x': 0.18,
                 'y': 0.90,
                 'xanchor': 'center',
                 'yanchor': 'top'},

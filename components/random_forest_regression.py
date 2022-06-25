@@ -50,42 +50,48 @@ dcc.Dropdown(id = 'select_random_state',
 
 
 def random_forest_regression_chart_value(n_intervals, select_trees, select_random_state):
-    now = datetime.now()
-    time_name = now.strftime('%H:%M:%S')
-    header_list = ['Date Time', 'Voltage', 'Current']
-    df = pd.read_csv('sensors_data.csv', names = header_list)
-    df['Power (W)'] = df['Voltage'] * df['Current']
-    df['Power (KW)'] = df['Power (W)'] / 1000
-    df['Date Time'] = pd.to_datetime(df['Date Time'])
-    df['Date'] = df['Date Time'].dt.date
-    df['Date'] = pd.to_datetime(df['Date'])
-    df['Time'] = pd.to_datetime(df['Date Time']).dt.time
-    df['Hour'] = pd.to_datetime(df['Date Time']).dt.hour
-    df['Time'] = df['Time'].astype(str)
-    # df['Hour'] = df['Hour'].astype(str)
-    rearrange_columns = ['Date Time', 'Date', 'Time', 'Hour', 'Voltage', 'Current', 'Power (W)', 'Power (KW)']
-    df = df[rearrange_columns]
-    unique_date = df['Date'].unique()
-    filter_daily_values = df[(df['Date'] > '2022-06-24') & (df['Date'] <= unique_date[-2])][
-        ['Date', 'Hour', 'Power (KW)']]
-    daily_hourly_values = filter_daily_values.groupby(['Date', 'Hour'])['Power (KW)'].sum().reset_index()
+    if select_trees is None:
+        raise PreventUpdate
+    if select_random_state is None:
+        raise PreventUpdate
+    else:
+        now = datetime.now()
+        time_name = now.strftime('%H:%M:%S')
+        header_list = ['Date Time', 'Voltage', 'Current']
+        df = pd.read_csv('sensors_data.csv', names = header_list)
+        df['Power (W)'] = df['Voltage'] * df['Current']
+        df['Power (KW)'] = df['Power (W)'] / 1000
+        df['Date Time'] = pd.to_datetime(df['Date Time'])
+        df['Date'] = df['Date Time'].dt.date
+        df['Date'] = pd.to_datetime(df['Date'])
+        df['Time'] = pd.to_datetime(df['Date Time']).dt.time
+        df['Hour'] = pd.to_datetime(df['Date Time']).dt.hour
+        df['Time'] = df['Time'].astype(str)
+        # df['Hour'] = df['Hour'].astype(str)
+        rearrange_columns = ['Date Time', 'Date', 'Time', 'Hour', 'Voltage', 'Current', 'Power (W)', 'Power (KW)']
+        df = df[rearrange_columns]
+        unique_date = df['Date'].unique()
+        filter_daily_values = df[(df['Date'] > '2022-06-24') & (df['Date'] <= unique_date[-2])][
+            ['Date', 'Hour', 'Power (KW)']]
+        daily_hourly_values = filter_daily_values.groupby(['Date', 'Hour'])['Power (KW)'].sum().reset_index()
 
-    header_list = ['Date', 'Time', 'SolarIrradiance (W/m2)', 'weather status', 'Temp (°C)', 'RealFeelTemp (°C)',
-                   'DewPoint (°C)',
-                   'Wind (km/h)',
-                   'Direction', 'Hum (%)', 'Visibility (km)', 'UVIndex', 'UVIndexText', 'PreProbability (%)',
-                   'RainProbability (%)',
-                   'CloudCover (%)']
-    weather_data = pd.read_csv('hourly_weather_forecasted_data.csv', names = header_list,
-                               encoding = 'unicode_escape')
-    weather_data.drop(
-        ['Date', 'Time', 'RealFeelTemp (°C)', 'DewPoint (°C)', 'Wind (km/h)', 'Direction', 'Visibility (km)', 'UVIndex',
-         'UVIndexText', 'PreProbability (%)', 'RainProbability (%)', 'weather status'], axis = 1,
-        inplace = True)
+        header_list = ['Date', 'Time', 'SolarIrradiance (W/m2)', 'weather status', 'Temp (°C)', 'RealFeelTemp (°C)',
+                       'DewPoint (°C)',
+                       'Wind (km/h)',
+                       'Direction', 'Hum (%)', 'Visibility (km)', 'UVIndex', 'UVIndexText', 'PreProbability (%)',
+                       'RainProbability (%)',
+                       'CloudCover (%)']
+        weather_data = pd.read_csv('hourly_weather_forecasted_data.csv', names = header_list,
+                                   encoding = 'unicode_escape')
+        weather_data.drop(
+            ['Date', 'Time', 'RealFeelTemp (°C)', 'DewPoint (°C)', 'Wind (km/h)', 'Direction', 'Visibility (km)',
+             'UVIndex',
+             'UVIndexText', 'PreProbability (%)', 'RainProbability (%)', 'weather status'], axis = 1,
+            inplace = True)
 
-    df1 = pd.concat([daily_hourly_values, weather_data], axis = 1)
-    df1.drop(['Date', 'Hour'], axis = 1, inplace = True)
-    df1.loc[df1['SolarIrradiance (W/m2)'] == 0, ['Temp (°C)', 'Hum (%)', 'CloudCover (%)']] = 0
+        df1 = pd.concat([daily_hourly_values, weather_data], axis = 1)
+        df1.drop(['Date', 'Hour'], axis = 1, inplace = True)
+        df1.loc[df1['SolarIrradiance (W/m2)'] == 0, ['Temp (°C)', 'Hum (%)', 'CloudCover (%)']] = 0
 
     if time_name >= '00:00:00' and time_name <= '11:59:59':
         count_total_rows = len(df1) - 12
@@ -93,7 +99,7 @@ def random_forest_regression_chart_value(n_intervals, select_trees, select_rando
                               0:count_total_rows]
         dependent_column = df1['Power (KW)'][0:count_total_rows]
 
-        rfr = RandomForestRegressor(select_trees, select_random_state)
+        rfr = RandomForestRegressor(n_estimators = select_trees, random_state = select_random_state)
         rfr.fit(independent_columns, dependent_column)
 
         forcasted_data = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'Hum (%)', 'CloudCover (%)']].tail(12)
@@ -115,7 +121,7 @@ def random_forest_regression_chart_value(n_intervals, select_trees, select_rando
                               0:count_total_rows]
         dependent_column = df1['Power (KW)'][0:count_total_rows]
 
-        rfr = RandomForestRegressor(n_estimators = 100, random_state = 0)
+        rfr = RandomForestRegressor(n_estimators = select_trees, random_state = select_random_state)
         rfr.fit(independent_columns, dependent_column)
 
         forcasted_data = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'Hum (%)', 'CloudCover (%)']].tail(24)
@@ -154,7 +160,7 @@ def random_forest_regression_chart_value(n_intervals, select_trees, select_rando
                 y = data_dataframe['Power (KW)'],
                 name = 'Today Predicted Solar Energy',
                 mode = 'lines',
-                line = dict(color = 'firebrick', dash = 'dash'),
+                line = dict(color = 'firebrick', dash = 'dot'),
                 hoverinfo = 'text',
                 hovertext =
                 '<b>Date</b>: ' + data_dataframe['Date'].astype(str) + '<br>' +
@@ -168,7 +174,7 @@ def random_forest_regression_chart_value(n_intervals, select_trees, select_rando
             title = {
                 'text': 'Random Forest Regression Model',
                 'y': 0.88,
-                'x': 0.2,
+                'x': 0.28,
                 'xanchor': 'center',
                 'yanchor': 'top'},
             titlefont = {
@@ -211,7 +217,7 @@ def random_forest_regression_chart_value(n_intervals, select_trees, select_rando
             legend = {
                 'orientation': 'v',
                 'bgcolor': 'rgba(255, 255, 255, 0)',
-                'x': 0.1,
+                'x': 0.18,
                 'y': 0.90,
                 'xanchor': 'center',
                 'yanchor': 'top'},
