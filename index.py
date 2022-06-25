@@ -20,6 +20,7 @@ from components.solar_yesterday_power_chart import solar_yesterday_power_chart_v
 from components.energy_forecasting import energy_forecasting_chart_value
 from components.random_forest_regression import random_forest_regression_chart_value, n_estimator_list, \
     random_state_list
+from components.summary import summary_value
 from components.current_weather import current_weather_value
 from components.first_hour_forecast import first_hour_forecast_weather_value
 from components.second_hour_forecast import second_hour_forecast_weather_value
@@ -359,6 +360,16 @@ def random_forest_regression_chart_value_callback(n_intervals, select_trees, sel
     random_forest_regression_chart_value_data = random_forest_regression_chart_value(n_intervals, select_trees, select_random_state)
 
     return random_forest_regression_chart_value_data
+
+
+@app.callback(Output('summary', 'children'),
+              [Input('update_date_time_value', 'n_intervals')],
+              [Input('select_trees', 'value')],
+              [Input('select_random_state', 'value')])
+def summary_value_callback(n_intervals, select_trees, select_random_state):
+    summary_value_data = summary_value(n_intervals, select_trees, select_random_state)
+
+    return summary_value_data
 
 
 @app.callback(Output('current_weather', 'children'),
