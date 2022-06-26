@@ -655,3 +655,26 @@ def third_hour_forecast_weather_value(n_intervals):
                 ], className = 'forecast_bg')
             ], className = 'forecast_card'),
         ]
+    elif weather_status == 'Partly sunny w/ showers':
+        return [
+            html.Div([
+                html.Div([
+                    html.P(tme, className = 'time'),
+                    html.Img(src = app.get_asset_url('partly sunny w-showers.png'),
+                             className = 'weather_image'),
+                    html.P('RealFeel ' + '{0:,.0f}°C'.format(real_feel_temp),
+                           className = 'real_feel_temp'
+                           ),
+                    html.P('{0:,.0f}°C'.format(temp),
+                           className = 'forecast_temperature_value'
+                           ),
+                    html.Div([
+                        html.Img(src = app.get_asset_url('pre.png'),
+                                 className = 'forecast_pre_image'),
+                        html.P('{0:,.0f}%'.format(pr),
+                               className = 'forecast_pre_value'
+                               ),
+                    ], className = 'forecast_pre_row')
+                ], className = 'forecast_bg')
+            ], className = 'forecast_card'),
+        ]
