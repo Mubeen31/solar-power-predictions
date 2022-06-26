@@ -83,10 +83,10 @@ energy_forcasting_chart = dcc.Graph(id = 'energy_forcasting_chart',
                                     animate = True,
                                     config = {'displayModeBar': False},
                                     className = 'background2')
-support_vector_regression_chart = dcc.Graph(id = 'support_vector_regression_chart',
-                                            animate = True,
-                                            config = {'displayModeBar': False},
-                                            className = 'background2')
+# support_vector_regression_chart = dcc.Graph(id = 'support_vector_regression_chart',
+#                                             animate = True,
+#                                             config = {'displayModeBar': False},
+#                                             className = 'background2')
 random_forest_regression_chart = html.Div([
     html.Div([
         html.Div([
@@ -217,12 +217,12 @@ app.layout = html.Div([
                         style = tab_style,
                         selected_style = tab_selected_style,
                         ),
-                dcc.Tab(support_vector_regression_chart,
-                        label = 'SVR Model',
-                        value = 'support_vector_regression_chart',
-                        style = tab_style,
-                        selected_style = tab_selected_style,
-                        ),
+                # dcc.Tab(support_vector_regression_chart,
+                #         label = 'SVR Model',
+                #         value = 'support_vector_regression_chart',
+                #         style = tab_style,
+                #         selected_style = tab_selected_style,
+                #         ),
                 dcc.Tab(random_forest_regression_chart,
                         label = 'RFR Model',
                         value = 'random_forest_regression_chart',
