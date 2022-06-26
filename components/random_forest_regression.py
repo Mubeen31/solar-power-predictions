@@ -7,6 +7,7 @@ from dash.exceptions import PreventUpdate
 import pandas as pd
 import numpy as np
 from datetime import datetime, date, time
+from datetime import timedelta
 from sklearn import linear_model
 from sklearn.ensemble import RandomForestRegressor
 import sqlalchemy
@@ -55,7 +56,8 @@ def random_forest_regression_chart_value(n_intervals, select_trees, select_rando
     if select_random_state is None:
         raise PreventUpdate
     else:
-        now = datetime.now()
+        n = 1
+        now = datetime.now() + timedelta(hours = n)
         time_name = now.strftime('%H:%M:%S')
         header_list = ['Date Time', 'Voltage', 'Current']
         df = pd.read_csv('sensors_data.csv', names = header_list)
