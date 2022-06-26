@@ -40,6 +40,15 @@ def current_weather_value(n_intervals):
     # pr = df['Pressure'].tail(1).iloc[0]
     # dew_point = df['Dew Point'].tail(1).iloc[0]
     # vs = df['Visibility'].tail(1).iloc[0]
+    sun_complete_api_link = 'http://dataservice.accuweather.com/forecasts/v1/daily/1day/331595?apikey=vnwz1buClrE9YhGJFG3mhNVq23tnIACH&details=true&metric=true'
+    sun_api_link = requests.get(sun_complete_api_link)
+    sun_api_data = sun_api_link.json()
+    sun_rise = sun_api_data['DailyForecasts'][0]['Sun']['Rise']
+    rise_date_time = datetime.strptime(sun_rise, '%Y-%m-%dT%H:%M:%S%z')
+    sun_rise_time = rise_date_time.strftime('%H:%M')
+    sun_set = sun_api_data['DailyForecasts'][0]['Sun']['Set']
+    set_date_time = datetime.strptime(sun_set, '%Y-%m-%dT%H:%M:%S%z')
+    sun_set_time = set_date_time.strftime('%H:%M')
     complete_api_link = 'http://dataservice.accuweather.com/currentconditions/v1/331595?apikey=vnwz1buClrE9YhGJFG3mhNVq23tnIACH&details=true'
     api_link = requests.get(complete_api_link)
     api_data = api_link.json()
@@ -98,6 +107,14 @@ def current_weather_value(n_intervals):
                                className = 'visibility'
                                ),
                     ], className = 's_d_p3'),
+                    html.Div([
+                        html.P('Sun Rise: ' + sun_rise_time,
+                               className = 'dew_point'
+                               ),
+                        html.P('Sun Set: ' + sun_set_time,
+                               className = 'visibility'
+                               ),
+                    ], className = 's_d_p3'),
                 ], className = 'bg_color1')
             ], className = 'bg_color2')
         ]
@@ -136,6 +153,14 @@ def current_weather_value(n_intervals):
                                className = 'dew_point'
                                ),
                         html.P('Visibility: ' + '{0:.1f}km'.format(vs),
+                               className = 'visibility'
+                               ),
+                    ], className = 's_d_p3'),
+                    html.Div([
+                        html.P('Sun Rise: ' + sun_rise_time,
+                               className = 'dew_point'
+                               ),
+                        html.P('Sun Set: ' + sun_set_time,
                                className = 'visibility'
                                ),
                     ], className = 's_d_p3'),
@@ -180,6 +205,14 @@ def current_weather_value(n_intervals):
                                className = 'visibility'
                                ),
                     ], className = 's_d_p3'),
+                    html.Div([
+                        html.P('Sun Rise: ' + sun_rise_time,
+                               className = 'dew_point'
+                               ),
+                        html.P('Sun Set: ' + sun_set_time,
+                               className = 'visibility'
+                               ),
+                    ], className = 's_d_p3'),
                 ], className = 'bg_color1')
             ], className = 'bg_color2')
         ]
@@ -218,6 +251,14 @@ def current_weather_value(n_intervals):
                                className = 'dew_point'
                                ),
                         html.P('Visibility: ' + '{0:.1f}km'.format(vs),
+                               className = 'visibility'
+                               ),
+                    ], className = 's_d_p3'),
+                    html.Div([
+                        html.P('Sun Rise: ' + sun_rise_time,
+                               className = 'dew_point'
+                               ),
+                        html.P('Sun Set: ' + sun_set_time,
                                className = 'visibility'
                                ),
                     ], className = 's_d_p3'),
@@ -262,6 +303,14 @@ def current_weather_value(n_intervals):
                                className = 'visibility'
                                ),
                     ], className = 's_d_p3'),
+                    html.Div([
+                        html.P('Sun Rise: ' + sun_rise_time,
+                               className = 'dew_point'
+                               ),
+                        html.P('Sun Set: ' + sun_set_time,
+                               className = 'visibility'
+                               ),
+                    ], className = 's_d_p3'),
                 ], className = 'bg_color1')
             ], className = 'bg_color2')
         ]
@@ -300,6 +349,14 @@ def current_weather_value(n_intervals):
                                className = 'dew_point'
                                ),
                         html.P('Visibility: ' + '{0:.1f}km'.format(vs),
+                               className = 'visibility'
+                               ),
+                    ], className = 's_d_p3'),
+                    html.Div([
+                        html.P('Sun Rise: ' + sun_rise_time,
+                               className = 'dew_point'
+                               ),
+                        html.P('Sun Set: ' + sun_set_time,
                                className = 'visibility'
                                ),
                     ], className = 's_d_p3'),
@@ -344,6 +401,22 @@ def current_weather_value(n_intervals):
                                className = 'visibility'
                                ),
                     ], className = 's_d_p3'),
+                    html.Div([
+                        html.P('Sun Rise: ' + sun_rise_time,
+                               className = 'dew_point'
+                               ),
+                        html.P('Sun Set: ' + sun_set_time,
+                               className = 'visibility'
+                               ),
+                    ], className = 's_d_p3'),
+                    html.Div([
+                        html.P('Sun Rise: ' + sun_rise_time,
+                               className = 'dew_point'
+                               ),
+                        html.P('Sun Set: ' + sun_set_time,
+                               className = 'visibility'
+                               ),
+                    ], className = 's_d_p3'),
                 ], className = 'bg_color1')
             ], className = 'bg_color2')
         ]
@@ -382,6 +455,14 @@ def current_weather_value(n_intervals):
                                className = 'dew_point'
                                ),
                         html.P('Visibility: ' + '{0:.1f}km'.format(vs),
+                               className = 'visibility'
+                               ),
+                    ], className = 's_d_p3'),
+                    html.Div([
+                        html.P('Sun Rise: ' + sun_rise_time,
+                               className = 'dew_point'
+                               ),
+                        html.P('Sun Set: ' + sun_set_time,
                                className = 'visibility'
                                ),
                     ], className = 's_d_p3'),
@@ -426,6 +507,14 @@ def current_weather_value(n_intervals):
                                className = 'visibility'
                                ),
                     ], className = 's_d_p3'),
+                    html.Div([
+                        html.P('Sun Rise: ' + sun_rise_time,
+                               className = 'dew_point'
+                               ),
+                        html.P('Sun Set: ' + sun_set_time,
+                               className = 'visibility'
+                               ),
+                    ], className = 's_d_p3'),
                 ], className = 'bg_color1')
             ], className = 'bg_color2')
         ]
@@ -464,6 +553,14 @@ def current_weather_value(n_intervals):
                                className = 'dew_point'
                                ),
                         html.P('Visibility: ' + '{0:.1f}km'.format(vs),
+                               className = 'visibility'
+                               ),
+                    ], className = 's_d_p3'),
+                    html.Div([
+                        html.P('Sun Rise: ' + sun_rise_time,
+                               className = 'dew_point'
+                               ),
+                        html.P('Sun Set: ' + sun_set_time,
                                className = 'visibility'
                                ),
                     ], className = 's_d_p3'),
@@ -508,6 +605,14 @@ def current_weather_value(n_intervals):
                                className = 'visibility'
                                ),
                     ], className = 's_d_p3'),
+                    html.Div([
+                        html.P('Sun Rise: ' + sun_rise_time,
+                               className = 'dew_point'
+                               ),
+                        html.P('Sun Set: ' + sun_set_time,
+                               className = 'visibility'
+                               ),
+                    ], className = 's_d_p3'),
                 ], className = 'bg_color1')
             ], className = 'bg_color2')
         ]
@@ -546,6 +651,14 @@ def current_weather_value(n_intervals):
                                className = 'dew_point'
                                ),
                         html.P('Visibility: ' + '{0:.1f}km'.format(vs),
+                               className = 'visibility'
+                               ),
+                    ], className = 's_d_p3'),
+                    html.Div([
+                        html.P('Sun Rise: ' + sun_rise_time,
+                               className = 'dew_point'
+                               ),
+                        html.P('Sun Set: ' + sun_set_time,
                                className = 'visibility'
                                ),
                     ], className = 's_d_p3'),
@@ -590,6 +703,14 @@ def current_weather_value(n_intervals):
                                className = 'visibility'
                                ),
                     ], className = 's_d_p3'),
+                    html.Div([
+                        html.P('Sun Rise: ' + sun_rise_time,
+                               className = 'dew_point'
+                               ),
+                        html.P('Sun Set: ' + sun_set_time,
+                               className = 'visibility'
+                               ),
+                    ], className = 's_d_p3'),
                 ], className = 'bg_color1')
             ], className = 'bg_color2')
         ]
@@ -628,6 +749,14 @@ def current_weather_value(n_intervals):
                                className = 'dew_point'
                                ),
                         html.P('Visibility: ' + '{0:.1f}km'.format(vs),
+                               className = 'visibility'
+                               ),
+                    ], className = 's_d_p3'),
+                    html.Div([
+                        html.P('Sun Rise: ' + sun_rise_time,
+                               className = 'dew_point'
+                               ),
+                        html.P('Sun Set: ' + sun_set_time,
                                className = 'visibility'
                                ),
                     ], className = 's_d_p3'),
@@ -672,6 +801,14 @@ def current_weather_value(n_intervals):
                                className = 'visibility'
                                ),
                     ], className = 's_d_p3'),
+                    html.Div([
+                        html.P('Sun Rise: ' + sun_rise_time,
+                               className = 'dew_point'
+                               ),
+                        html.P('Sun Set: ' + sun_set_time,
+                               className = 'visibility'
+                               ),
+                    ], className = 's_d_p3'),
                 ], className = 'bg_color1')
             ], className = 'bg_color2')
         ]
@@ -710,6 +847,14 @@ def current_weather_value(n_intervals):
                                className = 'dew_point'
                                ),
                         html.P('Visibility: ' + '{0:.1f}km'.format(vs),
+                               className = 'visibility'
+                               ),
+                    ], className = 's_d_p3'),
+                    html.Div([
+                        html.P('Sun Rise: ' + sun_rise_time,
+                               className = 'dew_point'
+                               ),
+                        html.P('Sun Set: ' + sun_set_time,
                                className = 'visibility'
                                ),
                     ], className = 's_d_p3'),
@@ -754,6 +899,14 @@ def current_weather_value(n_intervals):
                                className = 'visibility'
                                ),
                     ], className = 's_d_p3'),
+                    html.Div([
+                        html.P('Sun Rise: ' + sun_rise_time,
+                               className = 'dew_point'
+                               ),
+                        html.P('Sun Set: ' + sun_set_time,
+                               className = 'visibility'
+                               ),
+                    ], className = 's_d_p3'),
                 ], className = 'bg_color1')
             ], className = 'bg_color2')
         ]
@@ -792,6 +945,14 @@ def current_weather_value(n_intervals):
                                className = 'dew_point'
                                ),
                         html.P('Visibility: ' + '{0:.1f}km'.format(vs),
+                               className = 'visibility'
+                               ),
+                    ], className = 's_d_p3'),
+                    html.Div([
+                        html.P('Sun Rise: ' + sun_rise_time,
+                               className = 'dew_point'
+                               ),
+                        html.P('Sun Set: ' + sun_set_time,
                                className = 'visibility'
                                ),
                     ], className = 's_d_p3'),
@@ -836,6 +997,14 @@ def current_weather_value(n_intervals):
                                className = 'visibility'
                                ),
                     ], className = 's_d_p3'),
+                    html.Div([
+                        html.P('Sun Rise: ' + sun_rise_time,
+                               className = 'dew_point'
+                               ),
+                        html.P('Sun Set: ' + sun_set_time,
+                               className = 'visibility'
+                               ),
+                    ], className = 's_d_p3'),
                 ], className = 'bg_color1')
             ], className = 'bg_color2')
         ]
@@ -877,6 +1046,14 @@ def current_weather_value(n_intervals):
                                className = 'visibility'
                                ),
                     ], className = 's_d_p3'),
+                    html.Div([
+                        html.P('Sun Rise: ' + sun_rise_time,
+                               className = 'dew_point'
+                               ),
+                        html.P('Sun Set: ' + sun_set_time,
+                               className = 'visibility'
+                               ),
+                    ], className = 's_d_p3'),
                 ], className = 'bg_color1')
             ], className = 'bg_color2')
         ]
@@ -915,6 +1092,14 @@ def current_weather_value(n_intervals):
                                className = 'dew_point'
                                ),
                         html.P('Visibility: ' + '{0:.1f}km'.format(vs),
+                               className = 'visibility'
+                               ),
+                    ], className = 's_d_p3'),
+                    html.Div([
+                        html.P('Sun Rise: ' + sun_rise_time,
+                               className = 'dew_point'
+                               ),
+                        html.P('Sun Set: ' + sun_set_time,
                                className = 'visibility'
                                ),
                     ], className = 's_d_p3'),
