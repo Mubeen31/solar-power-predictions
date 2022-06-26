@@ -7,6 +7,7 @@ from dash.exceptions import PreventUpdate
 import pandas as pd
 import numpy as np
 from datetime import datetime, date, time
+from datetime import timedelta
 from sklearn import linear_model
 import sqlalchemy
 from dash import dash_table as dt
@@ -26,7 +27,8 @@ html.Div([
 
 
 def energy_forcasting_card_value(n_intervals):
-    now = datetime.now()
+    n = 1
+    now = datetime.now() + timedelta(hours = n)
     time_name = now.strftime('%H:%M:%S')
     header_list = ['Date Time', 'Voltage', 'Current']
     df = pd.read_csv('sensors_data.csv', names = header_list)
