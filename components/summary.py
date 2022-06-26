@@ -296,41 +296,41 @@ def summary_value(n_intervals, select_trees, select_random_state):
                         ], className = 'error_bg')
                     ], className = 'error_container3'),
 
-                    html.Div([
-                        html.Div([
-                            html.P('Support Vector Regression Model', className = 'error_text'),
-                        ], className = 'error_bg1'),
-                        html.Div([
-                            html.P('',
-                                   # html.P('{0:,.5f}'.format(energy_kilo_watts)),
-                                   className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('',
-                                   # html.P('{0:,.5f}'.format(energy_kilo_watts)),
-                                   className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('',
-                                   # html.P('{0:,.5f}'.format(energy_kilo_watts)),
-                                   className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('',
-                                   # html.P('{0:,.5f}'.format(energy_kilo_watts)),
-                                   className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('',
-                                   # html.P('{0:,.5f}'.format(energy_kilo_watts)),
-                                   className = 'error_text')
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('',
-                                   # html.P('{0:,.5f}'.format(energy_kilo_watts)),
-                                   className = 'error_text')
-                        ], className = 'error_bg')
-                    ], className = 'error_container3'),
+                    # html.Div([
+                    #     html.Div([
+                    #         html.P('Support Vector Regression Model', className = 'error_text'),
+                    #     ], className = 'error_bg1'),
+                    #     html.Div([
+                    #         html.P('',
+                    #                # html.P('{0:,.5f}'.format(energy_kilo_watts)),
+                    #                className = 'error_text'),
+                    #     ], className = 'error_bg'),
+                    #     html.Div([
+                    #         html.P('',
+                    #                # html.P('{0:,.5f}'.format(energy_kilo_watts)),
+                    #                className = 'error_text'),
+                    #     ], className = 'error_bg'),
+                    #     html.Div([
+                    #         html.P('',
+                    #                # html.P('{0:,.5f}'.format(energy_kilo_watts)),
+                    #                className = 'error_text'),
+                    #     ], className = 'error_bg'),
+                    #     html.Div([
+                    #         html.P('',
+                    #                # html.P('{0:,.5f}'.format(energy_kilo_watts)),
+                    #                className = 'error_text'),
+                    #     ], className = 'error_bg'),
+                    #     html.Div([
+                    #         html.P('',
+                    #                # html.P('{0:,.5f}'.format(energy_kilo_watts)),
+                    #                className = 'error_text')
+                    #     ], className = 'error_bg'),
+                    #     html.Div([
+                    #         html.P('',
+                    #                # html.P('{0:,.5f}'.format(energy_kilo_watts)),
+                    #                className = 'error_text')
+                    #     ], className = 'error_bg')
+                    # ], className = 'error_container3'),
 
                     html.Div([
                         html.Div([
@@ -560,41 +560,41 @@ def summary_value(n_intervals, select_trees, select_random_state):
                         ], className = 'error_bg')
                     ], className = 'error_container3'),
 
-                    html.Div([
-                        html.Div([
-                            html.P('Support Vector Regression Model', className = 'error_text'),
-                        ], className = 'error_bg1'),
-                        html.Div([
-                            html.P('',
-                                   # html.P('{0:,.5f}'.format(energy_kilo_watts)),
-                                   className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('',
-                                   # html.P('{0:,.5f}'.format(energy_kilo_watts)),
-                                   className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('',
-                                   # html.P('{0:,.5f}'.format(energy_kilo_watts)),
-                                   className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('',
-                                   # html.P('{0:,.5f}'.format(energy_kilo_watts)),
-                                   className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('',
-                                   # html.P('{0:,.5f}'.format(energy_kilo_watts)),
-                                   className = 'error_text')
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('',
-                                   # html.P('{0:,.5f}'.format(energy_kilo_watts)),
-                                   className = 'error_text')
-                        ], className = 'error_bg')
-                    ], className = 'error_container3'),
+                    # html.Div([
+                    #     html.Div([
+                    #         html.P('Support Vector Regression Model', className = 'error_text'),
+                    #     ], className = 'error_bg1'),
+                    #     html.Div([
+                    #         html.P('',
+                    #                # html.P('{0:,.5f}'.format(energy_kilo_watts)),
+                    #                className = 'error_text'),
+                    #     ], className = 'error_bg'),
+                    #     html.Div([
+                    #         html.P('',
+                    #                # html.P('{0:,.5f}'.format(energy_kilo_watts)),
+                    #                className = 'error_text'),
+                    #     ], className = 'error_bg'),
+                    #     html.Div([
+                    #         html.P('',
+                    #                # html.P('{0:,.5f}'.format(energy_kilo_watts)),
+                    #                className = 'error_text'),
+                    #     ], className = 'error_bg'),
+                    #     html.Div([
+                    #         html.P('',
+                    #                # html.P('{0:,.5f}'.format(energy_kilo_watts)),
+                    #                className = 'error_text'),
+                    #     ], className = 'error_bg'),
+                    #     html.Div([
+                    #         html.P('',
+                    #                # html.P('{0:,.5f}'.format(energy_kilo_watts)),
+                    #                className = 'error_text')
+                    #     ], className = 'error_bg'),
+                    #     html.Div([
+                    #         html.P('',
+                    #                # html.P('{0:,.5f}'.format(energy_kilo_watts)),
+                    #                className = 'error_text')
+                    #     ], className = 'error_bg')
+                    # ], className = 'error_container3'),
 
                     html.Div([
                         html.Div([
