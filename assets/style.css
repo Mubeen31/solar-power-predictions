@@ -214,6 +214,8 @@ body {
   font-family: Calibri;
   font-size: 16px;
   margin-top: 10px;
+  line-height: 1em;
+  text-align: center
 }
 
 .card_value1 {
@@ -392,7 +394,7 @@ body {
   width: 250px;
   border-radius: 0px;
   background-color: rgba(255, 255, 255, 0);
-  height: 73px;
+  height: 90px;
   border-left: 1px solid #eb6e4b;
 }
 
@@ -400,6 +402,7 @@ body {
   display: flex;
   flex-direction: row;
   margin-left: 8px;
+  margin-top: -8px;
 }
 
 .time {
