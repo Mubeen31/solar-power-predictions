@@ -192,7 +192,7 @@ app.layout = html.Div([
     ], className = 'adjust_margin1'),
     html.Div([
         html.Div([
-            dcc.Tabs(value = 'energy_forcasting_chart', children = [
+            dcc.Tabs(value = 'random_forest_regression_chart', children = [
                 dcc.Tab(solar_current_power_chart,
                         label = 'Current Power',
                         value = 'solar_current_power_chart',
@@ -291,7 +291,8 @@ def solar_energy_forcasting_second_card_value_callback(n_intervals, select_trees
     if n_intervals == None or n_intervals % 2 == 1:
         solar_energy_forcasting_second_card_value_data = solar_second_card_value(n_intervals)
     elif n_intervals % 2 == 0:
-        solar_energy_forcasting_second_card_value_data = random_forest_regression_card_value(n_intervals, select_trees, select_random_state)
+        solar_energy_forcasting_second_card_value_data = random_forest_regression_card_value(n_intervals, select_trees,
+                                                                                             select_random_state)
     else:
         solar_energy_forcasting_second_card_value_data = "None"
 
