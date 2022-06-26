@@ -214,6 +214,8 @@ body {
   font-family: Calibri;
   font-size: 16px;
   margin-top: 10px;
+  line-height: 1em;
+  text-align: center
 }
 
 .card_value1 {

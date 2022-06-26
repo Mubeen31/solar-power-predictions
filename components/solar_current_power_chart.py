@@ -56,7 +56,7 @@ def solar_current_power_chart_value(n_intervals):
             titlefont = {
                 'color': 'white',
                 'size': 17},
-            hovermode = 'x unified',
+            hovermode = 'closest',
             margin = dict(t = 50, r = 40),
             xaxis = dict(range = [min(date_time), max(date_time)],
                          title = '<b>Time</b>',
