@@ -42,11 +42,11 @@ def energy_forecasting_chart_value(n_intervals):
     rearrange_columns = ['Date Time', 'Date', 'Time', 'Hour', 'Voltage', 'Current', 'Power (W)', 'Power (KW)']
     df = df[rearrange_columns]
     unique_date = df['Date'].unique()
-    filter_daily_values = df[(df['Date'] >= '2022-06-18') & (df['Date'] <= unique_date[-2])][
+    filter_daily_values = df[(df['Date'] > '2022-06-24') & (df['Date'] <= unique_date[-2])][
         ['Date', 'Hour', 'Power (KW)']]
     daily_hourly_values = filter_daily_values.groupby(['Date', 'Hour'])['Power (KW)'].sum().reset_index()
 
-    header_list = ['SolarIrradiance (W/m2)', 'weather status', 'Temp (°C)', 'RealFeelTemp (°C)', 'DewPoint (°C)',
+    header_list = ['Date', 'Time', 'SolarIrradiance (W/m2)', 'weather status', 'Temp (°C)', 'RealFeelTemp (°C)', 'DewPoint (°C)',
                    'Wind (km/h)',
                    'Direction', 'Hum (%)', 'Visibility (km)', 'UVIndex', 'UVIndexText', 'PreProbability (%)',
                    'RainProbability (%)',
@@ -54,7 +54,7 @@ def energy_forecasting_chart_value(n_intervals):
     weather_data = pd.read_csv('hourly_weather_forecasted_data.csv', names = header_list,
                                encoding = 'unicode_escape')
     weather_data.drop(
-        ['RealFeelTemp (°C)', 'DewPoint (°C)', 'Wind (km/h)', 'Direction', 'Visibility (km)', 'UVIndex',
+        ['Date', 'Time', 'RealFeelTemp (°C)', 'DewPoint (°C)', 'Wind (km/h)', 'Direction', 'Visibility (km)', 'UVIndex',
          'UVIndexText', 'PreProbability (%)', 'RainProbability (%)', 'weather status'], axis = 1,
         inplace = True)
 
@@ -129,7 +129,7 @@ def energy_forecasting_chart_value(n_intervals):
                 y = data_dataframe['Power (KW)'],
                 name = 'Today Predicted Solar Energy',
                 mode = 'lines',
-                line = dict(color = 'firebrick', dash = 'dash'),
+                line = dict(color = 'firebrick', dash = 'dot'),
                 hoverinfo = 'text',
                 hovertext =
                 '<b>Date</b>: ' + data_dataframe['Date'].astype(str) + '<br>' +
@@ -143,13 +143,13 @@ def energy_forecasting_chart_value(n_intervals):
             title = {
                 'text': 'Multivariable Linear Regression Model',
                 'y': 0.88,
-                'x': 0.2,
+                'x': 0.28,
                 'xanchor': 'center',
                 'yanchor': 'top'},
             titlefont = {
                 'color': '#0000FF',
                 'size': 15},
-            hovermode = 'closest',
+            hovermode = 'x unified',
             margin = dict(t = 50, r = 40),
             xaxis = dict(
                 title = '<b>Hours</b>',
@@ -186,7 +186,7 @@ def energy_forecasting_chart_value(n_intervals):
             legend = {
                 'orientation': 'v',
                 'bgcolor': 'rgba(255, 255, 255, 0)',
-                'x': 0.1,
+                'x': 0.18,
                 'y': 0.90,
                 'xanchor': 'center',
                 'yanchor': 'top'},
