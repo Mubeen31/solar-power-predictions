@@ -10,7 +10,7 @@ from components.last_data_update_time import last_data_update_time_value
 # from components.header import header_value
 from components.solar_first_card import solar_first_card_value
 from components.solar_second_card import solar_second_card_value
-from components.energy_forcasting_card import energy_forcasting_card_value
+from components.energy_forcasting_card import random_forest_regression_card_value
 from components.solar_third_card import solar_third_card_value
 from components.solar_fourth_card import solar_fourth_card_value
 from components.solar_fifth_card import solar_fifth_card_value
@@ -284,12 +284,14 @@ def solar_first_card_value_callback(n_intervals):
 
 
 @app.callback(Output('solar_second_card', 'children'),
-              [Input('solar_energy_forcasting_card', 'n_intervals')])
-def solar_energy_forcasting_second_card_value_callback(n_intervals):
+              [Input('solar_energy_forcasting_card', 'n_intervals')],
+              [Input('select_trees', 'value')],
+              [Input('select_random_state', 'value')])
+def solar_energy_forcasting_second_card_value_callback(n_intervals, select_trees, select_random_state):
     if n_intervals == None or n_intervals % 2 == 1:
         solar_energy_forcasting_second_card_value_data = solar_second_card_value(n_intervals)
     elif n_intervals % 2 == 0:
-        solar_energy_forcasting_second_card_value_data = energy_forcasting_card_value(n_intervals)
+        solar_energy_forcasting_second_card_value_data = random_forest_regression_card_value(n_intervals, select_trees, select_random_state)
     else:
         solar_energy_forcasting_second_card_value_data = "None"
 
@@ -357,7 +359,8 @@ def energy_forecasting_chart_value_callback(n_intervals):
               [Input('select_trees', 'value')],
               [Input('select_random_state', 'value')])
 def random_forest_regression_chart_value_callback(n_intervals, select_trees, select_random_state):
-    random_forest_regression_chart_value_data = random_forest_regression_chart_value(n_intervals, select_trees, select_random_state)
+    random_forest_regression_chart_value_data = random_forest_regression_chart_value(n_intervals, select_trees,
+                                                                                     select_random_state)
 
     return random_forest_regression_chart_value_data
 
