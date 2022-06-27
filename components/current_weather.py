@@ -409,14 +409,6 @@ def current_weather_value(n_intervals):
                                className = 'visibility'
                                ),
                     ], className = 's_d_p3'),
-                    html.Div([
-                        html.P('Sun Rise: ' + sun_rise_time,
-                               className = 'dew_point'
-                               ),
-                        html.P('Sun Set: ' + sun_set_time,
-                               className = 'visibility'
-                               ),
-                    ], className = 's_d_p3'),
                 ], className = 'bg_color1')
             ], className = 'bg_color2')
         ]
