@@ -28,9 +28,6 @@ html.Div([
 
 
 def solar_yesterday_power_chart_value(n_intervals):
-    n = 1
-    now = datetime.now() + timedelta(hours = n)
-    time_name = now.strftime('%H:%M:%S')
     header_list = ['Date Time', 'Voltage', 'Current']
     df = pd.read_csv('sensors_data.csv', names = header_list)
     df['Power (W)'] = df['Voltage'] * df['Current']
