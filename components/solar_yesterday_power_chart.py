@@ -201,6 +201,17 @@ def solar_yesterday_power_chart_value(n_intervals):
     return {
         'data': [go.Scatter(
                 x = hourly_data_and_hours_df['Hours'],
+                y = hourly_data_and_hours_df['Hourly Data'],
+                name = 'Yesterday Solar Energy',
+                mode = 'lines',
+                marker = dict(color = '#4DBFF1'),
+                hoverinfo = 'text',
+                hovertext =
+                '<b>Hour</b>: ' + hourly_data_and_hours_df['Hours'].astype(str) + '<br>' +
+                '<b>Yesterday Solar Energy</b>: ' + [f'{x:,.5f} KWh' for x in hourly_data_and_hours_df['Hourly Data']] + '<br>'
+            ),
+            go.Scatter(
+                x = hourly_data_and_hours_df['Hours'],
                 y = predicted_data['Power (KW)'],
                 name = 'Yesterday Predicted Solar Energy (MVLR Model)',
                 mode = 'lines',
@@ -232,17 +243,7 @@ def solar_yesterday_power_chart_value(n_intervals):
             #     '<b>Hour</b>: ' + hourly_data_and_hours_df['Hours'].astype(str) + '<br>' +
             #     '<b>Yesterday Predicted Solar Energy (XGBoost Model)</b>: ' + [f'{x:,.5f} KWh' for x in xgb_yes_predicted_data['Power (KW)']] + '<br>'
             # ),
-            go.Scatter(
-                x = hourly_data_and_hours_df['Hours'],
-                y = hourly_data_and_hours_df['Hourly Data'],
-                name = 'Yesterday Solar Energy',
-                mode = 'lines',
-                marker = dict(color = '#4DBFF1'),
-                hoverinfo = 'text',
-                hovertext =
-                '<b>Hour</b>: ' + hourly_data_and_hours_df['Hours'].astype(str) + '<br>' +
-                '<b>Yesterday Solar Energy</b>: ' + [f'{x:,.5f} KWh' for x in hourly_data_and_hours_df['Hourly Data']] + '<br>'
-            )],
+            ],
 
         'layout': go.Layout(
             plot_bgcolor = 'rgba(255, 255, 255, 0)',
