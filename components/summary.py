@@ -53,7 +53,7 @@ dcc.Dropdown(id = 'select_random_state',
 
 max_depth_list = [6, 7, 8, 9, 10, 11, 12]
 
-dcc.Dropdown(id = 'max_depth',
+dcc.Dropdown(id = 'max_depth_value',
              multi = False,
              clearable = True,
              disabled = False,
@@ -64,7 +64,7 @@ dcc.Dropdown(id = 'max_depth',
              className = 'drop_down_list'),
 
 
-def summary_value(n_intervals, select_trees, select_random_state, max_depth):
+def summary_value(n_intervals, select_trees, select_random_state, max_depth_value):
     n = 1
     now = datetime.now() + timedelta(hours = n)
     time_name = now.strftime('%H:%M:%S')
@@ -155,13 +155,13 @@ def summary_value(n_intervals, select_trees, select_random_state, max_depth):
                                               rfr_yes_predicted_data['Power (KW)'])
     rfr_yes_rs = metrics.r2_score(last_day_hourly_values['Power (KW)'], rfr_yes_predicted_data['Power (KW)'])
 
-    xgb_yes = XGBRegressor(max_depth = max_depth)
+    xgb_yes = XGBRegressor(max_depth = max_depth_value)
     xgb_yes.fit(yes_independent_columns, yes_dependent_column)
     xgb_yes_return_array = xgb_yes.predict(forcasted_yes_values)
     xgb_yes_predicted_data = pd.DataFrame(xgb_yes_return_array, columns = ['Power (KW)'])
     xgb_yes_pe = xgb_yes_predicted_data['Power (KW)'].sum()
     xgb_yes_mse = metrics.mean_squared_error(last_day_hourly_values['Power (KW)'], xgb_yes_predicted_data['Power (KW)'])
-    xgb_yes_rmse = np.sqrt(rfr_yes_mse)
+    xgb_yes_rmse = np.sqrt(xgb_yes_mse)
     xgb_yes_mae = metrics.mean_absolute_error(last_day_hourly_values['Power (KW)'],
                                               xgb_yes_predicted_data['Power (KW)'])
     xgb_yes_rs = metrics.r2_score(last_day_hourly_values['Power (KW)'], xgb_yes_predicted_data['Power (KW)'])
@@ -318,7 +318,7 @@ def summary_value(n_intervals, select_trees, select_random_state, max_depth):
                               0:count_total_rows]
         dependent_column = df1['Power (KW)'][0:count_total_rows]
 
-        x_g_b = XGBRegressor(max_depth = max_depth)
+        x_g_b = XGBRegressor(max_depth = max_depth_value)
         x_g_b.fit(independent_columns, dependent_column)
 
         forcasted_data = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'Hum (%)', 'CloudCover (%)']].tail(12)
@@ -355,7 +355,7 @@ def summary_value(n_intervals, select_trees, select_random_state, max_depth):
                               0:count_total_rows]
         dependent_column = df1['Power (KW)'][0:count_total_rows]
 
-        x_g_b = XGBRegressor(max_depth = max_depth)
+        x_g_b = XGBRegressor(max_depth = max_depth_value)
         x_g_b.fit(independent_columns, dependent_column)
 
         forcasted_data = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'Hum (%)', 'CloudCover (%)']].tail(24)

@@ -29,7 +29,7 @@ html.Div([
 
 max_depth_list = [6, 7, 8, 9, 10, 11, 12]
 
-dcc.Dropdown(id = 'max_depth',
+dcc.Dropdown(id = 'max_depth_value',
              multi = False,
              clearable = True,
              disabled = False,
@@ -40,8 +40,8 @@ dcc.Dropdown(id = 'max_depth',
              className = 'drop_down_list'),
 
 
-def xgboost_regression_chart_value(n_intervals, max_depth):
-    if max_depth is None:
+def xgboost_regression_chart_value(n_intervals, max_depth_value):
+    if max_depth_value is None:
         raise PreventUpdate
     else:
         n = 1
@@ -89,7 +89,7 @@ def xgboost_regression_chart_value(n_intervals, max_depth):
                               0:count_total_rows]
         dependent_column = df1['Power (KW)'][0:count_total_rows]
 
-        x_g_b = XGBRegressor(max_depth = max_depth)
+        x_g_b = XGBRegressor(max_depth = max_depth_value)
         x_g_b.fit(independent_columns, dependent_column)
 
         forcasted_data = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'Hum (%)', 'CloudCover (%)']].tail(12)
@@ -111,7 +111,7 @@ def xgboost_regression_chart_value(n_intervals, max_depth):
                               0:count_total_rows]
         dependent_column = df1['Power (KW)'][0:count_total_rows]
 
-        x_g_b = XGBRegressor(max_depth = max_depth)
+        x_g_b = XGBRegressor(max_depth = max_depth_value)
         x_g_b.fit(independent_columns, dependent_column)
 
         forcasted_data = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'Hum (%)', 'CloudCover (%)']].tail(24)
