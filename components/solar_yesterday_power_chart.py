@@ -10,7 +10,7 @@ from datetime import datetime, date, time
 from datetime import timedelta
 from sklearn import linear_model
 from sklearn.ensemble import RandomForestRegressor
-from xgboost import XGBRegressor
+import xgboost as xgb
 import sqlalchemy
 from dash import dash_table as dt
 import time
@@ -194,7 +194,7 @@ def solar_yesterday_power_chart_value(n_intervals):
     rfr_yes_return_array = rfr_yes.predict(forcasted_yes_values)
     rfr_yes_predicted_data = pd.DataFrame(rfr_yes_return_array, columns = ['Power (KW)'])
 
-    xgb_yes = XGBRegressor(max_depth = 6)
+    xgb_yes = xgb.XGBRegressor(max_depth = 6)
     xgb_yes.fit(yes_independent_columns, yes_dependent_column)
     xgb_yes_return_array = xgb_yes.predict(forcasted_yes_values)
     xgb_yes_predicted_data = pd.DataFrame(xgb_yes_return_array, columns = ['Power (KW)'])

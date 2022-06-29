@@ -10,7 +10,7 @@ from datetime import datetime, date, time
 from datetime import timedelta
 from sklearn import linear_model
 from sklearn.ensemble import RandomForestRegressor
-from xgboost import XGBRegressor
+import xgboost as xgb
 import sqlalchemy
 from dash import dash_table as dt
 import time
@@ -89,7 +89,7 @@ def xgboost_regression_chart_value(n_intervals, max_depth_value):
                               0:count_total_rows]
         dependent_column = df1['Power (KW)'][0:count_total_rows]
 
-        x_g_b = XGBRegressor(max_depth = max_depth_value)
+        x_g_b = xgb.XGBRegressor(max_depth = max_depth_value)
         x_g_b.fit(independent_columns, dependent_column)
 
         forcasted_data = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'Hum (%)', 'CloudCover (%)']].tail(12)
@@ -111,7 +111,7 @@ def xgboost_regression_chart_value(n_intervals, max_depth_value):
                               0:count_total_rows]
         dependent_column = df1['Power (KW)'][0:count_total_rows]
 
-        x_g_b = XGBRegressor(max_depth = max_depth_value)
+        x_g_b = xgb.XGBRegressor(max_depth = max_depth_value)
         x_g_b.fit(independent_columns, dependent_column)
 
         forcasted_data = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'Hum (%)', 'CloudCover (%)']].tail(24)

@@ -404,7 +404,8 @@ def random_forest_regression_chart_value_callback(n_intervals, select_trees, sel
               [Input('update_date_time_value', 'n_intervals')],
               [Input('select_trees', 'value')],
               [Input('select_random_state', 'value')],
-              [Input('max_depth_value', 'value')])
+              [Input('max_depth_value', 'value')]
+              )
 def summary_value_callback(n_intervals, select_trees, select_random_state, max_depth_value):
     summary_value_data = summary_value(n_intervals, select_trees, select_random_state, max_depth_value)
 

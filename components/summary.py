@@ -10,7 +10,7 @@ from datetime import datetime, date, time
 from datetime import timedelta
 from sklearn import linear_model
 from sklearn.ensemble import RandomForestRegressor
-from xgboost import XGBRegressor
+import xgboost as xgb
 from sklearn import metrics
 import sqlalchemy
 from dash import dash_table as dt
@@ -155,7 +155,7 @@ def summary_value(n_intervals, select_trees, select_random_state, max_depth_valu
                                               rfr_yes_predicted_data['Power (KW)'])
     rfr_yes_rs = metrics.r2_score(last_day_hourly_values['Power (KW)'], rfr_yes_predicted_data['Power (KW)'])
 
-    xgb_yes = XGBRegressor(max_depth = max_depth_value)
+    xgb_yes = xgb.XGBRegressor(max_depth = max_depth_value)
     xgb_yes.fit(yes_independent_columns, yes_dependent_column)
     xgb_yes_return_array = xgb_yes.predict(forcasted_yes_values)
     xgb_yes_predicted_data = pd.DataFrame(xgb_yes_return_array, columns = ['Power (KW)'])
@@ -318,7 +318,7 @@ def summary_value(n_intervals, select_trees, select_random_state, max_depth_valu
                               0:count_total_rows]
         dependent_column = df1['Power (KW)'][0:count_total_rows]
 
-        x_g_b = XGBRegressor(max_depth = max_depth_value)
+        x_g_b = xgb.XGBRegressor(max_depth = max_depth_value)
         x_g_b.fit(independent_columns, dependent_column)
 
         forcasted_data = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'Hum (%)', 'CloudCover (%)']].tail(12)
@@ -355,7 +355,7 @@ def summary_value(n_intervals, select_trees, select_random_state, max_depth_valu
                               0:count_total_rows]
         dependent_column = df1['Power (KW)'][0:count_total_rows]
 
-        x_g_b = XGBRegressor(max_depth = max_depth_value)
+        x_g_b = xgb.XGBRegressor(max_depth = max_depth_value)
         x_g_b.fit(independent_columns, dependent_column)
 
         forcasted_data = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'Hum (%)', 'CloudCover (%)']].tail(24)
