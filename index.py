@@ -20,7 +20,7 @@ from components.solar_yesterday_power_chart import solar_yesterday_power_chart_v
 from components.energy_forecasting import energy_forecasting_chart_value
 from components.random_forest_regression import random_forest_regression_chart_value, n_estimator_list, \
     random_state_list
-from components.xgboost_regression import xgboost_regression_chart_value, max_depth_list
+# from components.xgboost_regression import xgboost_regression_chart_value, max_depth_list
 from components.summary import summary_value
 from components.current_weather import current_weather_value
 from components.first_hour_forecast import first_hour_forecast_weather_value
@@ -84,34 +84,34 @@ energy_forcasting_chart = dcc.Graph(id = 'energy_forcasting_chart',
                                     animate = True,
                                     config = {'displayModeBar': False},
                                     className = 'background2')
-xgboost_regression_chart = html.Div([
-    html.Div([
-        html.Div([
-            dcc.Graph(id = 'xgboost_regression_chart',
-                      animate = True,
-                      config = {'displayModeBar': False},
-                      className = 'background2')
-        ], className = 'random_forest_regression_chart'),
-        html.Div([
-            html.Div([
-                html.P('Max depth',
-                       style = {'color': '#D35940'},
-                       className = 'drop_down_list_title'
-                       ),
-                dcc.Dropdown(id = 'max_depth',
-                             multi = False,
-                             clearable = True,
-                             disabled = False,
-                             style = {'display': True},
-                             value = 6,
-                             placeholder = 'Select trees',
-                             options = max_depth_list,
-                             className = 'drop_down_list'),
-            ], className = 'title_drop_down_list'),
-        ], className = 'drop_down_list_row')
-    ], className = 'three_elements_column'),
+# xgboost_regression_chart = html.Div([
+#     html.Div([
+#         html.Div([
+#             dcc.Graph(id = 'xgboost_regression_chart',
+#                       animate = True,
+#                       config = {'displayModeBar': False},
+#                       className = 'background2')
+#         ], className = 'random_forest_regression_chart'),
+#         html.Div([
+#             html.Div([
+#                 html.P('Max depth',
+#                        style = {'color': '#D35940'},
+#                        className = 'drop_down_list_title'
+#                        ),
+#                 dcc.Dropdown(id = 'max_depth_value',
+#                              multi = False,
+#                              clearable = True,
+#                              disabled = False,
+#                              style = {'display': True},
+#                              value = 6,
+#                              placeholder = 'Select trees',
+#                              options = max_depth_list,
+#                              className = 'drop_down_list'),
+#             ], className = 'title_drop_down_list'),
+#         ], className = 'drop_down_list_row')
+#     ], className = 'three_elements_column'),
 
-]),
+# ]),
 random_forest_regression_chart = html.Div([
     html.Div([
         html.Div([
@@ -242,12 +242,12 @@ app.layout = html.Div([
                         style = tab_style,
                         selected_style = tab_selected_style,
                         ),
-                dcc.Tab(xgboost_regression_chart,
-                        label = 'XGBoost Model',
-                        value = 'xgboost_regression_chart',
-                        style = tab_style,
-                        selected_style = tab_selected_style,
-                        ),
+                # dcc.Tab(xgboost_regression_chart,
+                #         label = 'XGBoost Model',
+                #         value = 'xgboost_regression_chart',
+                #         style = tab_style,
+                #         selected_style = tab_selected_style,
+                #         ),
                 dcc.Tab(random_forest_regression_chart,
                         label = 'RFR Model',
                         value = 'random_forest_regression_chart',
@@ -380,13 +380,13 @@ def energy_forecasting_chart_value_callback(n_intervals):
     return energy_forecasting_chart_value_data
 
 
-@app.callback(Output('xgboost_regression_chart', 'figure'),
-              [Input('update_date_time_value', 'n_intervals')],
-              [Input('max_depth', 'value')])
-def xgboost_regression_chart_value_callback(n_intervals, max_depth):
-    xgboost_regression_chart_value_data = xgboost_regression_chart_value(n_intervals, max_depth)
-
-    return xgboost_regression_chart_value_data
+# @app.callback(Output('xgboost_regression_chart', 'figure'),
+#               [Input('update_date_time_value', 'n_intervals')],
+#               [Input('max_depth_value', 'value')])
+# def xgboost_regression_chart_value_callback(n_intervals, max_depth_value):
+#     xgboost_regression_chart_value_data = xgboost_regression_chart_value(n_intervals, max_depth_value)
+#
+#     return xgboost_regression_chart_value_data
 
 
 @app.callback(Output('random_forest_regression_chart', 'figure'),
@@ -404,9 +404,10 @@ def random_forest_regression_chart_value_callback(n_intervals, select_trees, sel
               [Input('update_date_time_value', 'n_intervals')],
               [Input('select_trees', 'value')],
               [Input('select_random_state', 'value')],
-              [Input('max_depth', 'value')])
-def summary_value_callback(n_intervals, select_trees, select_random_state, max_depth):
-    summary_value_data = summary_value(n_intervals, select_trees, select_random_state, max_depth)
+              # [Input('max_depth_value', 'value')]
+              )
+def summary_value_callback(n_intervals, select_trees, select_random_state):
+    summary_value_data = summary_value(n_intervals, select_trees, select_random_state)
 
     return summary_value_data
 
