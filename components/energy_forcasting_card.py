@@ -114,14 +114,14 @@ def random_forest_regression_card_value(n_intervals, select_trees, select_random
 
     if time_name >= '00:00:00' and time_name <= '11:59:59':
         count_total_rows = len(df1) - 12
-        independent_columns = df1[['Temp (°C)', 'Hum (%)', 'modified_weather_status', 'CloudCover (%)']][
+        independent_columns = df1[['Temp (°C)', 'Hum (%)', 'modified_weather_status']][
                               0:count_total_rows]
         dependent_column = df1['Power (KW)'][0:count_total_rows]
 
         rfr = RandomForestRegressor(n_estimators = select_trees, random_state = select_random_state)
         rfr.fit(independent_columns, dependent_column)
 
-        forcasted_data = df1[['Temp (°C)', 'Hum (%)', 'modified_weather_status', 'CloudCover (%)']].tail(12)
+        forcasted_data = df1[['Temp (°C)', 'Hum (%)', 'modified_weather_status']].tail(12)
 
         return_array = list(rfr.predict(forcasted_data))
 
@@ -139,14 +139,14 @@ def random_forest_regression_card_value(n_intervals, select_trees, select_random
 
     elif time_name >= '12:00:00' and time_name <= '23:59:59':
         count_total_rows = len(df1) - 24
-        independent_columns = df1[['Temp (°C)', 'Hum (%)', 'modified_weather_status', 'CloudCover (%)']][
+        independent_columns = df1[['Temp (°C)', 'Hum (%)', 'modified_weather_status']][
                               0:count_total_rows]
         dependent_column = df1['Power (KW)'][0:count_total_rows]
 
         rfr = RandomForestRegressor(n_estimators = select_trees, random_state = select_random_state)
         rfr.fit(independent_columns, dependent_column)
 
-        forcasted_data = df1[['Temp (°C)', 'Hum (%)', 'modified_weather_status', 'CloudCover (%)']].tail(24)
+        forcasted_data = df1[['Temp (°C)', 'Hum (%)', 'modified_weather_status']].tail(24)
 
         return_array = list(rfr.predict(forcasted_data))
 
