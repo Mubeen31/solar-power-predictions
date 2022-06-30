@@ -198,6 +198,8 @@ def solar_yesterday_power_chart_value(n_intervals):
     yes_count_total_rows = len(yes_df1)
     yes_independent_columns = yes_df1[['Temp (°C)', 'Hum (%)', 'modified_weather_status', 'CloudCover (%)']][
                               0:yes_count_total_rows]
+    yes_independent_columns1 = yes_df1[['Temp (°C)', 'Hum (%)', 'modified_weather_status']][
+                              0:yes_count_total_rows]
     yes_dependent_column = yes_df1['Power (KW)'][0:yes_count_total_rows]
     yes_reg = linear_model.LinearRegression(fit_intercept = False)
     yes_reg.fit(yes_independent_columns, yes_dependent_column)
@@ -211,7 +213,7 @@ def solar_yesterday_power_chart_value(n_intervals):
     predicted_data = pd.DataFrame(return_array, columns = ['Power (KW)'])
 
     rfr_yes = RandomForestRegressor(n_estimators = 100, random_state = 0)
-    rfr_yes.fit(yes_independent_columns, yes_dependent_column)
+    rfr_yes.fit(yes_independent_columns1, yes_dependent_column)
     rfr_yes_return_array = rfr_yes.predict(forcasted_yes_values1)
     rfr_yes_predicted_data = pd.DataFrame(rfr_yes_return_array, columns = ['Power (KW)'])
 
