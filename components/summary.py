@@ -50,6 +50,7 @@ dcc.Dropdown(id = 'select_random_state',
              options = random_state_list,
              className = 'drop_down_list'),
 
+
 # max_depth_list = [6, 7, 8, 9, 10, 11, 12]
 #
 # dcc.Dropdown(id = 'max_depth_value',
@@ -85,22 +86,38 @@ def summary_value(n_intervals, select_trees, select_random_state):
         ['Date', 'Hour', 'Power (KW)']]
     daily_hourly_values = filter_daily_values.groupby(['Date', 'Hour'])['Power (KW)'].sum().reset_index()
 
+    data_selection = {'Mostly sunny': 3,
+                      'Partly sunny': 2,
+                      'Partly cloudy': 2,
+                      'Intermittent clouds': 2,
+                      'Partly sunny w/ showers': 1.5,
+                      'Partly cloudy w/ showers': 1.5,
+                      'Mostly clear': 1,
+                      'Clear': 1,
+                      'Mostly cloudy w/ t-storms': 0.5,
+                      'Mostly cloudy': 0.5,
+                      'Showers': 0.5,
+                      'Cloudy': 0.5,
+                      'Thunderstorms': 0.5,
+                      'Mostly cloudy w/ showers': 0.5,
+                      'Rain': 0}
+
     header_list = ['Date', 'Time', 'SolarIrradiance (W/m2)', 'weather status', 'Temp (°C)', 'RealFeelTemp (°C)',
-                   'DewPoint (°C)',
-                   'Wind (km/h)',
+                   'DewPoint (°C)', 'Wind (km/h)',
                    'Direction', 'Hum (%)', 'Visibility (km)', 'UVIndex', 'UVIndexText', 'PreProbability (%)',
                    'RainProbability (%)',
                    'CloudCover (%)']
-    weather_data = pd.read_csv('hourly_weather_forecasted_data.csv', names = header_list,
-                               encoding = 'unicode_escape')
+    weather_data = pd.read_csv('hourly_weather_forecasted_data.csv', names = header_list, encoding = 'unicode_escape')
+    weather_data['modified_weather_status'] = weather_data['weather status'].map(data_selection)
+    weather_data.loc[weather_data['SolarIrradiance (W/m2)'] == 0, ['modified_weather_status', 'Temp (°C)', 'Hum (%)',
+                                                                   'CloudCover (%)']] = 0
     weather_data.drop(
-        ['Date', 'Time', 'RealFeelTemp (°C)', 'DewPoint (°C)', 'Wind (km/h)', 'Direction', 'Visibility (km)', 'UVIndex',
-         'UVIndexText', 'PreProbability (%)', 'RainProbability (%)', 'weather status'], axis = 1,
-        inplace = True)
+        ['SolarIrradiance (W/m2)', 'Date', 'Time', 'RealFeelTemp (°C)', 'DewPoint (°C)', 'Wind (km/h)', 'Direction',
+         'Visibility (km)', 'UVIndex',
+         'UVIndexText', 'PreProbability (%)', 'RainProbability (%)', 'weather status'], axis = 1, inplace = True)
 
     df1 = pd.concat([daily_hourly_values, weather_data], axis = 1)
     df1.drop(['Date', 'Hour'], axis = 1, inplace = True)
-    df1.loc[df1['SolarIrradiance (W/m2)'] == 0, ['Temp (°C)', 'Hum (%)', 'CloudCover (%)']] = 0
 
     filter_last_day_values = df[df['Date'] == unique_date[-2]][['Date', 'Hour', 'Power (KW)']]
     last_day_hourly_values = filter_last_day_values.groupby(['Date', 'Hour'])['Power (KW)'].sum().reset_index()
@@ -115,26 +132,29 @@ def summary_value(n_intervals, select_trees, select_random_state):
                    'RainProbability (%)',
                    'CloudCover (%)']
     weather_data1 = pd.read_csv('hourly_weather_forecasted_data.csv', names = header_list, encoding = 'unicode_escape')
+    weather_data1['modified_weather_status'] = weather_data1['weather status'].map(data_selection)
     weather_unique_date = weather_data1['Date'].unique()
     filter_weather_yes_values = weather_data1[
         (weather_data1['Date'] >= '2022-06-25') &
-        (weather_data1['Date'] <= weather_unique_date[-3])][['SolarIrradiance (W/m2)',
-                                                             'Temp (°C)', 'Hum (%)',
-                                                             'CloudCover (%)']]
+        (weather_data1['Date'] <= weather_unique_date[-3])][
+        ['Temp (°C)', 'Hum (%)', 'modified_weather_status', 'CloudCover (%)']]
     yes_df1 = pd.concat([yes_hourly_values, filter_weather_yes_values], axis = 1)
     yes_df1.drop(['Date', 'Hour'], axis = 1, inplace = True)
-    yes_df1.loc[yes_df1['SolarIrradiance (W/m2)'] == 0, ['Temp (°C)', 'Hum (%)', 'CloudCover (%)']] = 0
+    # yes_df1.loc[yes_df1['SolarIrradiance (W/m2)'] == 0, ['Temp (°C)', 'Hum (%)', 'CloudCover (%)']] = 0
     yes_count_total_rows = len(yes_df1)
-    yes_independent_columns = yes_df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'Hum (%)', 'CloudCover (%)']][
+    yes_independent_columns = yes_df1[['Temp (°C)', 'Hum (%)', 'modified_weather_status', 'CloudCover (%)']][
                               0:yes_count_total_rows]
+    yes_independent_columns1 = yes_df1[['Temp (°C)', 'Hum (%)', 'modified_weather_status']][
+                               0:yes_count_total_rows]
     yes_dependent_column = yes_df1['Power (KW)'][0:yes_count_total_rows]
     yes_reg = linear_model.LinearRegression(fit_intercept = False)
     yes_reg.fit(yes_independent_columns, yes_dependent_column)
-    forcasted_yes_values = weather_data1[(weather_data1['Date'] == weather_unique_date[-2])][['SolarIrradiance (W/m2)',
-                                                                                              'Temp (°C)', 'Hum (%)',
-                                                                                              'CloudCover (%)']]
-    forcasted_yes_values.loc[
-        forcasted_yes_values['SolarIrradiance (W/m2)'] == 0, ['Temp (°C)', 'Hum (%)', 'CloudCover (%)']] = 0
+    forcasted_yes_values = weather_data1[(weather_data1['Date'] == weather_unique_date[-2])][
+        ['Temp (°C)', 'Hum (%)', 'modified_weather_status', 'CloudCover (%)']]
+    forcasted_yes_values1 = weather_data1[(weather_data1['Date'] == weather_unique_date[-2])][
+        ['Temp (°C)', 'Hum (%)', 'modified_weather_status']]
+    # forcasted_yes_values.loc[
+    #     forcasted_yes_values['SolarIrradiance (W/m2)'] == 0, ['Temp (°C)', 'Hum (%)', 'CloudCover (%)']] = 0
     return_array = yes_reg.predict(forcasted_yes_values)
     predicted_data = pd.DataFrame(return_array, columns = ['Power (KW)'])
     mv_pe = predicted_data['Power (KW)'].sum()
@@ -144,8 +164,8 @@ def summary_value(n_intervals, select_trees, select_random_state):
     mv_rs = metrics.r2_score(last_day_hourly_values['Power (KW)'], predicted_data['Power (KW)'])
 
     rfr_yes = RandomForestRegressor(n_estimators = 100, random_state = 0)
-    rfr_yes.fit(yes_independent_columns, yes_dependent_column)
-    rfr_yes_return_array = rfr_yes.predict(forcasted_yes_values)
+    rfr_yes.fit(yes_independent_columns1, yes_dependent_column)
+    rfr_yes_return_array = rfr_yes.predict(forcasted_yes_values1)
     rfr_yes_predicted_data = pd.DataFrame(rfr_yes_return_array, columns = ['Power (KW)'])
     rfr_yes_pe = rfr_yes_predicted_data['Power (KW)'].sum()
     rfr_yes_mse = metrics.mean_squared_error(last_day_hourly_values['Power (KW)'], rfr_yes_predicted_data['Power (KW)'])
@@ -167,14 +187,14 @@ def summary_value(n_intervals, select_trees, select_random_state):
 
     if time_name >= '00:00:00' and time_name <= '11:59:59':
         count_total_rows = len(df1) - 12
-        independent_columns = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'Hum (%)', 'CloudCover (%)']][
+        independent_columns = df1[['Temp (°C)', 'Hum (%)', 'modified_weather_status', 'CloudCover (%)']][
                               0:count_total_rows]
         dependent_column = df1['Power (KW)'][0:count_total_rows]
 
         reg = linear_model.LinearRegression(fit_intercept = False)
         reg.fit(independent_columns, dependent_column)
 
-        forcasted_data = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'Hum (%)', 'CloudCover (%)']].tail(12)
+        forcasted_data = df1[['Temp (°C)', 'Hum (%)', 'modified_weather_status', 'CloudCover (%)']].tail(12)
 
         return_array = list(reg.predict(forcasted_data))
 
@@ -204,14 +224,14 @@ def summary_value(n_intervals, select_trees, select_random_state):
 
     elif time_name >= '12:00:00' and time_name <= '23:59:59':
         count_total_rows = len(df1) - 24
-        independent_columns = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'Hum (%)', 'CloudCover (%)']][
+        independent_columns = df1[['Temp (°C)', 'Hum (%)', 'modified_weather_status', 'CloudCover (%)']][
                               0:count_total_rows]
         dependent_column = df1['Power (KW)'][0:count_total_rows]
 
         reg = linear_model.LinearRegression(fit_intercept = False)
         reg.fit(independent_columns, dependent_column)
 
-        forcasted_data = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'Hum (%)', 'CloudCover (%)']].tail(24)
+        forcasted_data = df1[['Temp (°C)', 'Hum (%)', 'modified_weather_status', 'CloudCover (%)']].tail(24)
 
         return_array = list(reg.predict(forcasted_data))
 
@@ -240,14 +260,14 @@ def summary_value(n_intervals, select_trees, select_random_state):
                                         data_dataframe['Power (KW)'].head(length_today_hourly_values))
     if time_name >= '00:00:00' and time_name <= '11:59:59':
         count_total_rows = len(df1) - 12
-        independent_columns = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'Hum (%)', 'CloudCover (%)']][
+        independent_columns = df1[['Temp (°C)', 'Hum (%)', 'modified_weather_status']][
                               0:count_total_rows]
         dependent_column = df1['Power (KW)'][0:count_total_rows]
 
         rfr = RandomForestRegressor(n_estimators = select_trees, random_state = select_random_state)
         rfr.fit(independent_columns, dependent_column)
 
-        forcasted_data = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'Hum (%)', 'CloudCover (%)']].tail(12)
+        forcasted_data = df1[['Temp (°C)', 'Hum (%)', 'modified_weather_status']].tail(12)
 
         return_array = list(rfr.predict(forcasted_data))
 
@@ -276,14 +296,14 @@ def summary_value(n_intervals, select_trees, select_random_state):
 
     elif time_name >= '12:00:00' and time_name <= '23:59:59':
         count_total_rows = len(df1) - 24
-        independent_columns = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'Hum (%)', 'CloudCover (%)']][
+        independent_columns = df1[['Temp (°C)', 'Hum (%)', 'modified_weather_status']][
                               0:count_total_rows]
         dependent_column = df1['Power (KW)'][0:count_total_rows]
 
         rfr = RandomForestRegressor(n_estimators = select_trees, random_state = select_random_state)
         rfr.fit(independent_columns, dependent_column)
 
-        forcasted_data = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'Hum (%)', 'CloudCover (%)']].tail(24)
+        forcasted_data = df1[['Temp (°C)', 'Hum (%)', 'modified_weather_status']].tail(24)
 
         return_array = list(rfr.predict(forcasted_data))
 
