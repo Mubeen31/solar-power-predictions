@@ -40,7 +40,6 @@ def energy_forecasting_chart_value(n_intervals):
     df['Time'] = pd.to_datetime(df['Date Time']).dt.time
     df['Hour'] = pd.to_datetime(df['Date Time']).dt.hour
     df['Time'] = df['Time'].astype(str)
-    # df['Hour'] = df['Hour'].astype(str)
     rearrange_columns = ['Date Time', 'Date', 'Time', 'Hour', 'Voltage', 'Current', 'Power (W)', 'Power (KW)']
     df = df[rearrange_columns]
     unique_date = df['Date'].unique()
@@ -83,14 +82,14 @@ def energy_forecasting_chart_value(n_intervals):
 
     if time_name >= '00:00:00' and time_name <= '11:59:59':
         count_total_rows = len(df1) - 12
-        independent_columns = df1[['Temp (°C)', 'Hum (%)', 'modified_weather_status', 'CloudCover (%)']][
+        independent_columns = df1[['Temp (°C)', 'Hum (%)', 'CloudCover (%)', 'modified_weather_status']][
                               0:count_total_rows]
         dependent_column = df1['Power (KW)'][0:count_total_rows]
 
         reg = linear_model.LinearRegression(fit_intercept = False)
         reg.fit(independent_columns, dependent_column)
 
-        forcasted_data = df1[['Temp (°C)', 'Hum (%)', 'modified_weather_status', 'CloudCover (%)']].tail(12)
+        forcasted_data = df1[['Temp (°C)', 'Hum (%)', 'CloudCover (%)', 'modified_weather_status']].tail(12)
 
         return_array = list(reg.predict(forcasted_data))
 
@@ -105,14 +104,14 @@ def energy_forecasting_chart_value(n_intervals):
 
     elif time_name >= '12:00:00' and time_name <= '23:59:59':
         count_total_rows = len(df1) - 24
-        independent_columns = df1[['Temp (°C)', 'Hum (%)', 'modified_weather_status', 'CloudCover (%)']][
+        independent_columns = df1[['Temp (°C)', 'Hum (%)', 'CloudCover (%)', 'modified_weather_status']][
                               0:count_total_rows]
         dependent_column = df1['Power (KW)'][0:count_total_rows]
 
         reg = linear_model.LinearRegression(fit_intercept = False)
         reg.fit(independent_columns, dependent_column)
 
-        forcasted_data = df1[['Temp (°C)', 'Hum (%)', 'modified_weather_status', 'CloudCover (%)']].tail(24)
+        forcasted_data = df1[['Temp (°C)', 'Hum (%)', 'CloudCover (%)', 'modified_weather_status']].tail(24)
 
         return_array = list(reg.predict(forcasted_data))
 

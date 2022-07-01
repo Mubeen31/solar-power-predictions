@@ -69,7 +69,6 @@ def random_forest_regression_chart_value(n_intervals, select_trees, select_rando
         df['Time'] = pd.to_datetime(df['Date Time']).dt.time
         df['Hour'] = pd.to_datetime(df['Date Time']).dt.hour
         df['Time'] = df['Time'].astype(str)
-        # df['Hour'] = df['Hour'].astype(str)
         rearrange_columns = ['Date Time', 'Date', 'Time', 'Hour', 'Voltage', 'Current', 'Power (W)', 'Power (KW)']
         df = df[rearrange_columns]
         unique_date = df['Date'].unique()
@@ -107,7 +106,8 @@ def random_forest_regression_chart_value(n_intervals, select_trees, select_rando
         weather_data.drop(
             ['SolarIrradiance (W/m2)', 'Date', 'Time', 'RealFeelTemp (°C)', 'DewPoint (°C)', 'Wind (km/h)', 'Direction',
              'Visibility (km)', 'UVIndex',
-             'UVIndexText', 'PreProbability (%)', 'RainProbability (%)', 'weather status'], axis = 1, inplace = True)
+             'UVIndexText', 'PreProbability (%)', 'RainProbability (%)', 'weather status', 'CloudCover (%)'], axis = 1,
+            inplace = True)
 
         df1 = pd.concat([daily_hourly_values, weather_data], axis = 1)
         df1.drop(['Date', 'Hour'], axis = 1, inplace = True)

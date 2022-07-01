@@ -194,7 +194,6 @@ def solar_yesterday_power_chart_value(n_intervals):
         ['Temp (°C)', 'Hum (%)', 'modified_weather_status', 'CloudCover (%)']]
     yes_df1 = pd.concat([yes_hourly_values, filter_weather_yes_values], axis = 1)
     yes_df1.drop(['Date', 'Hour'], axis = 1, inplace = True)
-    # yes_df1.loc[yes_df1['SolarIrradiance (W/m2)'] == 0, ['Temp (°C)', 'Hum (%)', 'CloudCover (%)']] = 0
     yes_count_total_rows = len(yes_df1)
     yes_independent_columns = yes_df1[['Temp (°C)', 'Hum (%)', 'modified_weather_status', 'CloudCover (%)']][
                               0:yes_count_total_rows]
@@ -207,8 +206,6 @@ def solar_yesterday_power_chart_value(n_intervals):
         ['Temp (°C)', 'Hum (%)', 'modified_weather_status', 'CloudCover (%)']]
     forcasted_yes_values1 = weather_data1[(weather_data1['Date'] == weather_unique_date[-2])][
         ['Temp (°C)', 'Hum (%)', 'modified_weather_status']]
-    # forcasted_yes_values.loc[
-    #     forcasted_yes_values['SolarIrradiance (W/m2)'] == 0, ['Temp (°C)', 'Hum (%)', 'CloudCover (%)']] = 0
     return_array = yes_reg.predict(forcasted_yes_values)
     predicted_data = pd.DataFrame(return_array, columns = ['Power (KW)'])
 
@@ -216,11 +213,6 @@ def solar_yesterday_power_chart_value(n_intervals):
     rfr_yes.fit(yes_independent_columns1, yes_dependent_column)
     rfr_yes_return_array = rfr_yes.predict(forcasted_yes_values1)
     rfr_yes_predicted_data = pd.DataFrame(rfr_yes_return_array, columns = ['Power (KW)'])
-
-    # xgb_yes = XGBRegressor(max_depth = 6)
-    # xgb_yes.fit(yes_independent_columns, yes_dependent_column)
-    # xgb_yes_return_array = xgb_yes.predict(forcasted_yes_values)
-    # xgb_yes_predicted_data = pd.DataFrame(xgb_yes_return_array, columns = ['Power (KW)'])
 
     return {
         'data': [go.Scatter(
@@ -259,19 +251,7 @@ def solar_yesterday_power_chart_value(n_intervals):
                 '<b>Yesterday Predicted Solar Energy (RFR Model)</b>: ' + [f'{x:,.5f} KWh' for x in
                                                                            rfr_yes_predicted_data[
                                                                                'Power (KW)']] + '<br>'
-            ),
-            # go.Scatter(
-            #     x = hourly_data_and_hours_df['Hours'],
-            #     y = xgb_yes_predicted_data['Power (KW)'],
-            #     name = 'Yesterday Predicted Solar Energy (XGBoost Model)',
-            #     mode = 'lines',
-            #     line = dict(color = '#FF00FF', dash = 'dot'),
-            #     hoverinfo = 'text',
-            #     hovertext =
-            #     '<b>Hour</b>: ' + hourly_data_and_hours_df['Hours'].astype(str) + '<br>' +
-            #     '<b>Yesterday Predicted Solar Energy (XGBoost Model)</b>: ' + [f'{x:,.5f} KWh' for x in xgb_yes_predicted_data['Power (KW)']] + '<br>'
-            # ),
-        ],
+            )],
 
         'layout': go.Layout(
             plot_bgcolor = 'rgba(255, 255, 255, 0)',
