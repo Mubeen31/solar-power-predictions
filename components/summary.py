@@ -133,6 +133,8 @@ def summary_value(n_intervals, select_trees, select_random_state):
                    'CloudCover (%)']
     weather_data1 = pd.read_csv('hourly_weather_forecasted_data.csv', names = header_list, encoding = 'unicode_escape')
     weather_data1['modified_weather_status'] = weather_data1['weather status'].map(data_selection)
+    weather_data1.loc[weather_data1['SolarIrradiance (W/m2)'] == 0, ['modified_weather_status', 'Temp (°C)', 'Hum (%)',
+                                                                     'CloudCover (%)']] = 0
     weather_unique_date = weather_data1['Date'].unique()
     filter_weather_yes_values = weather_data1[
         (weather_data1['Date'] >= '2022-06-25') &
