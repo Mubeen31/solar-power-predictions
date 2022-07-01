@@ -136,6 +136,7 @@ def random_forest_regression_card_value(n_intervals, select_trees, select_random
 
         energy_kwh = data_dataframe['Power (KW)'].sum()
         energy_wh = (data_dataframe['Power (KW)'].sum()) * 1000
+        # print(data_dataframe)
 
     elif time_name >= '12:00:00' and time_name <= '23:59:59':
         count_total_rows = len(df1) - 24

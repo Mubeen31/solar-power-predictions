@@ -139,12 +139,12 @@ def summary_value(n_intervals, select_trees, select_random_state):
     filter_weather_yes_values = weather_data1[
         (weather_data1['Date'] >= '2022-06-25') &
         (weather_data1['Date'] <= weather_unique_date[-3])][
-        ['Temp (°C)', 'Hum (%)', 'modified_weather_status', 'CloudCover (%)']]
+        ['Temp (°C)', 'Hum (%)', 'CloudCover (%)', 'modified_weather_status']]
     yes_df1 = pd.concat([yes_hourly_values, filter_weather_yes_values], axis = 1)
     yes_df1.drop(['Date', 'Hour'], axis = 1, inplace = True)
     # yes_df1.loc[yes_df1['SolarIrradiance (W/m2)'] == 0, ['Temp (°C)', 'Hum (%)', 'CloudCover (%)']] = 0
     yes_count_total_rows = len(yes_df1)
-    yes_independent_columns = yes_df1[['Temp (°C)', 'Hum (%)', 'modified_weather_status', 'CloudCover (%)']][
+    yes_independent_columns = yes_df1[['Temp (°C)', 'Hum (%)', 'CloudCover (%)', 'modified_weather_status']][
                               0:yes_count_total_rows]
     yes_independent_columns1 = yes_df1[['Temp (°C)', 'Hum (%)', 'modified_weather_status']][
                                0:yes_count_total_rows]
@@ -152,7 +152,7 @@ def summary_value(n_intervals, select_trees, select_random_state):
     yes_reg = linear_model.LinearRegression(fit_intercept = False)
     yes_reg.fit(yes_independent_columns, yes_dependent_column)
     forcasted_yes_values = weather_data1[(weather_data1['Date'] == weather_unique_date[-2])][
-        ['Temp (°C)', 'Hum (%)', 'modified_weather_status', 'CloudCover (%)']]
+        ['Temp (°C)', 'Hum (%)', 'CloudCover (%)', 'modified_weather_status']]
     forcasted_yes_values1 = weather_data1[(weather_data1['Date'] == weather_unique_date[-2])][
         ['Temp (°C)', 'Hum (%)', 'modified_weather_status']]
     # forcasted_yes_values.loc[
@@ -189,14 +189,14 @@ def summary_value(n_intervals, select_trees, select_random_state):
 
     if time_name >= '00:00:00' and time_name <= '11:59:59':
         count_total_rows = len(df1) - 12
-        independent_columns = df1[['Temp (°C)', 'Hum (%)', 'modified_weather_status', 'CloudCover (%)']][
+        independent_columns = df1[['Temp (°C)', 'Hum (%)', 'CloudCover (%)', 'modified_weather_status']][
                               0:count_total_rows]
         dependent_column = df1['Power (KW)'][0:count_total_rows]
 
         reg = linear_model.LinearRegression(fit_intercept = False)
         reg.fit(independent_columns, dependent_column)
 
-        forcasted_data = df1[['Temp (°C)', 'Hum (%)', 'modified_weather_status', 'CloudCover (%)']].tail(12)
+        forcasted_data = df1[['Temp (°C)', 'Hum (%)', 'CloudCover (%)', 'modified_weather_status']].tail(12)
 
         return_array = list(reg.predict(forcasted_data))
 
@@ -226,14 +226,14 @@ def summary_value(n_intervals, select_trees, select_random_state):
 
     elif time_name >= '12:00:00' and time_name <= '23:59:59':
         count_total_rows = len(df1) - 24
-        independent_columns = df1[['Temp (°C)', 'Hum (%)', 'modified_weather_status', 'CloudCover (%)']][
+        independent_columns = df1[['Temp (°C)', 'Hum (%)', 'CloudCover (%)', 'modified_weather_status']][
                               0:count_total_rows]
         dependent_column = df1['Power (KW)'][0:count_total_rows]
 
         reg = linear_model.LinearRegression(fit_intercept = False)
         reg.fit(independent_columns, dependent_column)
 
-        forcasted_data = df1[['Temp (°C)', 'Hum (%)', 'modified_weather_status', 'CloudCover (%)']].tail(24)
+        forcasted_data = df1[['Temp (°C)', 'Hum (%)', 'CloudCover (%)', 'modified_weather_status']].tail(24)
 
         return_array = list(reg.predict(forcasted_data))
 

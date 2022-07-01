@@ -83,14 +83,14 @@ def energy_forecasting_chart_value(n_intervals):
 
     if time_name >= '00:00:00' and time_name <= '11:59:59':
         count_total_rows = len(df1) - 12
-        independent_columns = df1[['Temp (°C)', 'Hum (%)', 'modified_weather_status', 'CloudCover (%)']][
+        independent_columns = df1[['Temp (°C)', 'Hum (%)', 'CloudCover (%)', 'modified_weather_status']][
                               0:count_total_rows]
         dependent_column = df1['Power (KW)'][0:count_total_rows]
 
         reg = linear_model.LinearRegression(fit_intercept = False)
         reg.fit(independent_columns, dependent_column)
 
-        forcasted_data = df1[['Temp (°C)', 'Hum (%)', 'modified_weather_status', 'CloudCover (%)']].tail(12)
+        forcasted_data = df1[['Temp (°C)', 'Hum (%)', 'CloudCover (%)', 'modified_weather_status']].tail(12)
 
         return_array = list(reg.predict(forcasted_data))
 
@@ -105,14 +105,14 @@ def energy_forecasting_chart_value(n_intervals):
 
     elif time_name >= '12:00:00' and time_name <= '23:59:59':
         count_total_rows = len(df1) - 24
-        independent_columns = df1[['Temp (°C)', 'Hum (%)', 'modified_weather_status', 'CloudCover (%)']][
+        independent_columns = df1[['Temp (°C)', 'Hum (%)', 'CloudCover (%)', 'modified_weather_status']][
                               0:count_total_rows]
         dependent_column = df1['Power (KW)'][0:count_total_rows]
 
         reg = linear_model.LinearRegression(fit_intercept = False)
         reg.fit(independent_columns, dependent_column)
 
-        forcasted_data = df1[['Temp (°C)', 'Hum (%)', 'modified_weather_status', 'CloudCover (%)']].tail(24)
+        forcasted_data = df1[['Temp (°C)', 'Hum (%)', 'CloudCover (%)', 'modified_weather_status']].tail(24)
 
         return_array = list(reg.predict(forcasted_data))
 
