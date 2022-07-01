@@ -51,19 +51,6 @@ dcc.Dropdown(id = 'select_random_state',
              className = 'drop_down_list'),
 
 
-# max_depth_list = [6, 7, 8, 9, 10, 11, 12]
-#
-# dcc.Dropdown(id = 'max_depth_value',
-#              multi = False,
-#              clearable = True,
-#              disabled = False,
-#              style = {'display': True},
-#              value = 6,
-#              placeholder = 'Select trees',
-#              options = max_depth_list,
-#              className = 'drop_down_list'),
-
-
 def summary_value(n_intervals, select_trees, select_random_state):
     n = 1
     now = datetime.now() + timedelta(hours = n)
@@ -78,7 +65,6 @@ def summary_value(n_intervals, select_trees, select_random_state):
     df['Time'] = pd.to_datetime(df['Date Time']).dt.time
     df['Hour'] = pd.to_datetime(df['Date Time']).dt.hour
     df['Time'] = df['Time'].astype(str)
-    # df['Hour'] = df['Hour'].astype(str)
     rearrange_columns = ['Date Time', 'Date', 'Time', 'Hour', 'Voltage', 'Current', 'Power (W)', 'Power (KW)']
     df = df[rearrange_columns]
     unique_date = df['Date'].unique()
@@ -142,7 +128,6 @@ def summary_value(n_intervals, select_trees, select_random_state):
         ['Temp (°C)', 'Hum (%)', 'CloudCover (%)', 'modified_weather_status']]
     yes_df1 = pd.concat([yes_hourly_values, filter_weather_yes_values], axis = 1)
     yes_df1.drop(['Date', 'Hour'], axis = 1, inplace = True)
-    # yes_df1.loc[yes_df1['SolarIrradiance (W/m2)'] == 0, ['Temp (°C)', 'Hum (%)', 'CloudCover (%)']] = 0
     yes_count_total_rows = len(yes_df1)
     yes_independent_columns = yes_df1[['Temp (°C)', 'Hum (%)', 'CloudCover (%)', 'modified_weather_status']][
                               0:yes_count_total_rows]
@@ -155,8 +140,6 @@ def summary_value(n_intervals, select_trees, select_random_state):
         ['Temp (°C)', 'Hum (%)', 'CloudCover (%)', 'modified_weather_status']]
     forcasted_yes_values1 = weather_data1[(weather_data1['Date'] == weather_unique_date[-2])][
         ['Temp (°C)', 'Hum (%)', 'modified_weather_status']]
-    # forcasted_yes_values.loc[
-    #     forcasted_yes_values['SolarIrradiance (W/m2)'] == 0, ['Temp (°C)', 'Hum (%)', 'CloudCover (%)']] = 0
     return_array = yes_reg.predict(forcasted_yes_values)
     predicted_data = pd.DataFrame(return_array, columns = ['Power (KW)'])
     mv_pe = predicted_data['Power (KW)'].sum()
@@ -175,17 +158,6 @@ def summary_value(n_intervals, select_trees, select_random_state):
     rfr_yes_mae = metrics.mean_absolute_error(last_day_hourly_values['Power (KW)'],
                                               rfr_yes_predicted_data['Power (KW)'])
     rfr_yes_rs = metrics.r2_score(last_day_hourly_values['Power (KW)'], rfr_yes_predicted_data['Power (KW)'])
-
-    # xgb_yes = XGBRegressor(max_depth = max_depth_value)
-    # xgb_yes.fit(yes_independent_columns, yes_dependent_column)
-    # xgb_yes_return_array = xgb_yes.predict(forcasted_yes_values)
-    # xgb_yes_predicted_data = pd.DataFrame(xgb_yes_return_array, columns = ['Power (KW)'])
-    # xgb_yes_pe = xgb_yes_predicted_data['Power (KW)'].sum()
-    # xgb_yes_mse = metrics.mean_squared_error(last_day_hourly_values['Power (KW)'], xgb_yes_predicted_data['Power (KW)'])
-    # xgb_yes_rmse = np.sqrt(xgb_yes_mse)
-    # xgb_yes_mae = metrics.mean_absolute_error(last_day_hourly_values['Power (KW)'],
-    #                                           xgb_yes_predicted_data['Power (KW)'])
-    # xgb_yes_rs = metrics.r2_score(last_day_hourly_values['Power (KW)'], xgb_yes_predicted_data['Power (KW)'])
 
     if time_name >= '00:00:00' and time_name <= '11:59:59':
         count_total_rows = len(df1) - 12
@@ -333,81 +305,6 @@ def summary_value(n_intervals, select_trees, select_random_state):
         rn_r_squared_24 = metrics.r2_score(today_hourly_values['Power (KW)'],
                                            data_dataframe['Power (KW)'].head(length_today_hourly_values))
 
-    # if time_name >= '00:00:00' and time_name <= '11:59:59':
-    #     count_total_rows = len(df1) - 12
-    #     independent_columns = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'Hum (%)', 'CloudCover (%)']][
-    #                           0:count_total_rows]
-    #     dependent_column = df1['Power (KW)'][0:count_total_rows]
-    #
-    #     x_g_b = XGBRegressor(max_depth = max_depth_value)
-    #     x_g_b.fit(independent_columns, dependent_column)
-    #
-    #     forcasted_data = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'Hum (%)', 'CloudCover (%)']].tail(12)
-    #
-    #     return_array = list(x_g_b.predict(forcasted_data))
-    #
-    #     date = now.strftime('%Y-%m-%d')
-    #     current_date_12 = [date, date, date, date, date, date, date, date, date, date, date, date]
-    #
-    #     hours_12 = list(daily_hourly_values['Hour'][0:12])
-    #
-    #     data_dict = {'Date': current_date_12, 'Hour': hours_12, 'Power (KW)': return_array}
-    #
-    #     data_dataframe = pd.DataFrame(data_dict)
-    #     xgb_data_12 = data_dataframe['Power (KW)'].sum()
-    #
-    #     filter_today_values = df[df['Date'] == unique_date[-1]][['Date', 'Hour', 'Power (KW)']]
-    #     today_hourly_values = filter_today_values.groupby(['Date', 'Hour'])['Power (KW)'].sum().reset_index()
-    #     length_today_hourly_values = len(today_hourly_values)
-    #     xgb_today_sum_12 = today_hourly_values['Power (KW)'].sum()
-    #
-    #     xgb_mean_sq_error_12 = metrics.mean_squared_error(today_hourly_values['Power (KW)'],
-    #                                                       data_dataframe['Power (KW)'].head(length_today_hourly_values))
-    #     xgb_root_mean_sq_error_12 = np.sqrt(xgb_mean_sq_error_12)
-    #     xgb_mean_ab_error_12 = metrics.mean_absolute_error(today_hourly_values['Power (KW)'],
-    #                                                        data_dataframe['Power (KW)'].head(
-    #                                                            length_today_hourly_values))
-    #     xgb_r_squared_12 = metrics.r2_score(today_hourly_values['Power (KW)'],
-    #                                         data_dataframe['Power (KW)'].head(length_today_hourly_values))
-    #
-    # elif time_name >= '12:00:00' and time_name <= '23:59:59':
-    #     count_total_rows = len(df1) - 24
-    #     independent_columns = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'Hum (%)', 'CloudCover (%)']][
-    #                           0:count_total_rows]
-    #     dependent_column = df1['Power (KW)'][0:count_total_rows]
-    #
-    #     x_g_b = XGBRegressor(max_depth = max_depth_value)
-    #     x_g_b.fit(independent_columns, dependent_column)
-    #
-    #     forcasted_data = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'Hum (%)', 'CloudCover (%)']].tail(24)
-    #
-    #     return_array = list(x_g_b.predict(forcasted_data))
-    #
-    #     date = now.strftime('%Y-%m-%d')
-    #     current_date_24 = [date, date, date, date, date, date, date, date, date, date, date, date, date, date, date,
-    #                        date, date, date, date, date, date, date, date, date]
-    #
-    #     hours_24 = list(daily_hourly_values['Hour'][0:24])
-    #
-    #     data_dict = {'Date': current_date_24, 'Hour': hours_24, 'Power (KW)': return_array}
-    #
-    #     data_dataframe = pd.DataFrame(data_dict)
-    #     xgb_data_24 = data_dataframe['Power (KW)'].sum()
-    #
-    #     filter_today_values = df[df['Date'] == unique_date[-1]][['Date', 'Hour', 'Power (KW)']]
-    #     today_hourly_values = filter_today_values.groupby(['Date', 'Hour'])['Power (KW)'].sum().reset_index()
-    #     length_today_hourly_values = len(today_hourly_values)
-    #     xgb_today_sum_24 = today_hourly_values['Power (KW)'].sum()
-    #
-    #     xgb_mean_sq_error_24 = metrics.mean_squared_error(today_hourly_values['Power (KW)'],
-    #                                                       data_dataframe['Power (KW)'].head(length_today_hourly_values))
-    #     xgb_root_mean_sq_error_24 = np.sqrt(xgb_mean_sq_error_24)
-    #     xgb_mean_ab_error_24 = metrics.mean_absolute_error(today_hourly_values['Power (KW)'],
-    #                                                        data_dataframe['Power (KW)'].head(
-    #                                                            length_today_hourly_values))
-    #     xgb_r_squared_24 = metrics.r2_score(today_hourly_values['Power (KW)'],
-    #                                         data_dataframe['Power (KW)'].head(length_today_hourly_values))
-
     if time_name >= '00:00:00' and time_name <= '11:59:59':
         return [
             html.Div([
@@ -467,36 +364,6 @@ def summary_value(n_intervals, select_trees, select_random_state):
                                    className = 'error_text')
                         ], className = 'error_bg')
                     ], className = 'error_container3'),
-
-                    # html.Div([
-                    #     html.Div([
-                    #         html.P('XGBoost Regression Model', className = 'error_text'),
-                    #     ], className = 'error_bg1'),
-                    #     html.Div([
-                    #         html.P('{0:,.2f} KWh'.format(xgb_data_12),
-                    #                className = 'error_text'),
-                    #     ], className = 'error_bg'),
-                    #     html.Div([
-                    #         html.P('{0:,.2f} KWh'.format(xgb_today_sum_12),
-                    #                className = 'error_text'),
-                    #     ], className = 'error_bg'),
-                    #     html.Div([
-                    #         html.P('{0:,.4f}'.format(xgb_mean_sq_error_12),
-                    #                className = 'error_text'),
-                    #     ], className = 'error_bg'),
-                    #     html.Div([
-                    #         html.P('{0:,.4f}'.format(xgb_root_mean_sq_error_12),
-                    #                className = 'error_text'),
-                    #     ], className = 'error_bg'),
-                    #     html.Div([
-                    #         html.P('{0:,.4f}'.format(xgb_mean_ab_error_12),
-                    #                className = 'error_text')
-                    #     ], className = 'error_bg'),
-                    #     html.Div([
-                    #         html.P('{0:,.4f}'.format(xgb_r_squared_12),
-                    #                className = 'error_text')
-                    #     ], className = 'error_bg')
-                    # ], className = 'error_container3'),
 
                     html.Div([
                         html.Div([
@@ -585,36 +452,6 @@ def summary_value(n_intervals, select_trees, select_random_state):
                                    className = 'error_text')
                         ], className = 'error_bg')
                     ], className = 'error_container3'),
-
-                    # html.Div([
-                    #     html.Div([
-                    #         html.P('XGBoost Regression Model', className = 'error_text'),
-                    #     ], className = 'error_bg1'),
-                    #     html.Div([
-                    #         html.P('{0:,.2f} KWh'.format(xgb_yes_pe),
-                    #                className = 'error_text'),
-                    #     ], className = 'error_bg'),
-                    #     html.Div([
-                    #         html.P('{0:,.2f} KWh'.format(last_day_hourly_values_sum),
-                    #                className = 'error_text'),
-                    #     ], className = 'error_bg'),
-                    #     html.Div([
-                    #         html.P('{0:,.4f}'.format(xgb_yes_mse),
-                    #                className = 'error_text'),
-                    #     ], className = 'error_bg'),
-                    #     html.Div([
-                    #         html.P('{0:,.4f}'.format(xgb_yes_rmse),
-                    #                className = 'error_text'),
-                    #     ], className = 'error_bg'),
-                    #     html.Div([
-                    #         html.P('{0:,.4f}'.format(xgb_yes_mae),
-                    #                className = 'error_text')
-                    #     ], className = 'error_bg'),
-                    #     html.Div([
-                    #         html.P('{0:,.4f}'.format(xgb_yes_rs),
-                    #                className = 'error_text')
-                    #     ], className = 'error_bg')
-                    # ], className = 'error_container3'),
 
                     html.Div([
                         html.Div([
@@ -708,36 +545,6 @@ def summary_value(n_intervals, select_trees, select_random_state):
                         ], className = 'error_bg')
                     ], className = 'error_container3'),
 
-                    # html.Div([
-                    #     html.Div([
-                    #         html.P('XGBoost Regression Model', className = 'error_text'),
-                    #     ], className = 'error_bg1'),
-                    #     html.Div([
-                    #         html.P('{0:,.2f} KWh'.format(xgb_data_24),
-                    #                className = 'error_text'),
-                    #     ], className = 'error_bg'),
-                    #     html.Div([
-                    #         html.P('{0:,.2f} KWh'.format(xgb_today_sum_24),
-                    #                className = 'error_text'),
-                    #     ], className = 'error_bg'),
-                    #     html.Div([
-                    #         html.P('{0:,.4f}'.format(xgb_mean_sq_error_24),
-                    #                className = 'error_text'),
-                    #     ], className = 'error_bg'),
-                    #     html.Div([
-                    #         html.P('{0:,.4f}'.format(xgb_root_mean_sq_error_24),
-                    #                className = 'error_text'),
-                    #     ], className = 'error_bg'),
-                    #     html.Div([
-                    #         html.P('{0:,.4f}'.format(xgb_mean_ab_error_24),
-                    #                className = 'error_text')
-                    #     ], className = 'error_bg'),
-                    #     html.Div([
-                    #         html.P('{0:,.4f}'.format(xgb_r_squared_24),
-                    #                className = 'error_text')
-                    #     ], className = 'error_bg')
-                    # ], className = 'error_container3'),
-
                     html.Div([
                         html.Div([
                             html.P('Random Forest Regression Model', className = 'error_text'),
@@ -825,36 +632,6 @@ def summary_value(n_intervals, select_trees, select_random_state):
                                    className = 'error_text')
                         ], className = 'error_bg')
                     ], className = 'error_container3'),
-
-                    # html.Div([
-                    #     html.Div([
-                    #         html.P('XGBoost Regression Model', className = 'error_text'),
-                    #     ], className = 'error_bg1'),
-                    #     html.Div([
-                    #         html.P('{0:,.2f} KWh'.format(xgb_yes_pe),
-                    #                className = 'error_text'),
-                    #     ], className = 'error_bg'),
-                    #     html.Div([
-                    #         html.P('{0:,.2f} KWh'.format(last_day_hourly_values_sum),
-                    #                className = 'error_text'),
-                    #     ], className = 'error_bg'),
-                    #     html.Div([
-                    #         html.P('{0:,.4f}'.format(xgb_yes_mse),
-                    #                className = 'error_text'),
-                    #     ], className = 'error_bg'),
-                    #     html.Div([
-                    #         html.P('{0:,.4f}'.format(xgb_yes_rmse),
-                    #                className = 'error_text'),
-                    #     ], className = 'error_bg'),
-                    #     html.Div([
-                    #         html.P('{0:,.4f}'.format(xgb_yes_mae),
-                    #                className = 'error_text')
-                    #     ], className = 'error_bg'),
-                    #     html.Div([
-                    #         html.P('{0:,.4f}'.format(xgb_yes_rs),
-                    #                className = 'error_text')
-                    #     ], className = 'error_bg')
-                    # ], className = 'error_container3'),
 
                     html.Div([
                         html.Div([

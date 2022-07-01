@@ -69,7 +69,6 @@ def random_forest_regression_card_value(n_intervals, select_trees, select_random
         df['Time'] = pd.to_datetime(df['Date Time']).dt.time
         df['Hour'] = pd.to_datetime(df['Date Time']).dt.hour
         df['Time'] = df['Time'].astype(str)
-        # df['Hour'] = df['Hour'].astype(str)
         rearrange_columns = ['Date Time', 'Date', 'Time', 'Hour', 'Voltage', 'Current', 'Power (W)', 'Power (KW)']
         df = df[rearrange_columns]
         unique_date = df['Date'].unique()
@@ -103,11 +102,11 @@ def random_forest_regression_card_value(n_intervals, select_trees, select_random
         weather_data['modified_weather_status'] = weather_data['weather status'].map(data_selection)
         weather_data.loc[
             weather_data['SolarIrradiance (W/m2)'] == 0, ['modified_weather_status', 'Temp (°C)', 'Hum (%)',
-                                                          'CloudCover (%)']] = 0
+                                                          ]] = 0
         weather_data.drop(
             ['SolarIrradiance (W/m2)', 'Date', 'Time', 'RealFeelTemp (°C)', 'DewPoint (°C)', 'Wind (km/h)', 'Direction',
              'Visibility (km)', 'UVIndex',
-             'UVIndexText', 'PreProbability (%)', 'RainProbability (%)', 'weather status'], axis = 1, inplace = True)
+             'UVIndexText', 'PreProbability (%)', 'RainProbability (%)', 'weather status', 'CloudCover (%)'], axis = 1, inplace = True)
 
         df1 = pd.concat([daily_hourly_values, weather_data], axis = 1)
         df1.drop(['Date', 'Hour'], axis = 1, inplace = True)
@@ -136,7 +135,6 @@ def random_forest_regression_card_value(n_intervals, select_trees, select_random
 
         energy_kwh = data_dataframe['Power (KW)'].sum()
         energy_wh = (data_dataframe['Power (KW)'].sum()) * 1000
-        # print(data_dataframe)
 
     elif time_name >= '12:00:00' and time_name <= '23:59:59':
         count_total_rows = len(df1) - 24

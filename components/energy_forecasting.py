@@ -40,7 +40,6 @@ def energy_forecasting_chart_value(n_intervals):
     df['Time'] = pd.to_datetime(df['Date Time']).dt.time
     df['Hour'] = pd.to_datetime(df['Date Time']).dt.hour
     df['Time'] = df['Time'].astype(str)
-    # df['Hour'] = df['Hour'].astype(str)
     rearrange_columns = ['Date Time', 'Date', 'Time', 'Hour', 'Voltage', 'Current', 'Power (W)', 'Power (KW)']
     df = df[rearrange_columns]
     unique_date = df['Date'].unique()
