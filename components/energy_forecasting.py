@@ -40,6 +40,7 @@ def energy_forecasting_chart_value(n_intervals):
     df['Time'] = pd.to_datetime(df['Date Time']).dt.time
     df['Hour'] = pd.to_datetime(df['Date Time']).dt.hour
     df['Time'] = df['Time'].astype(str)
+    # df['Hour'] = df['Hour'].astype(str)
     rearrange_columns = ['Date Time', 'Date', 'Time', 'Hour', 'Voltage', 'Current', 'Power (W)', 'Power (KW)']
     df = df[rearrange_columns]
     unique_date = df['Date'].unique()
@@ -47,49 +48,32 @@ def energy_forecasting_chart_value(n_intervals):
         ['Date', 'Hour', 'Power (KW)']]
     daily_hourly_values = filter_daily_values.groupby(['Date', 'Hour'])['Power (KW)'].sum().reset_index()
 
-    data_selection = {'Mostly sunny': 3,
-                      'Partly sunny': 2,
-                      'Partly cloudy': 2,
-                      'Intermittent clouds': 2,
-                      'Partly sunny w/ showers': 1.5,
-                      'Partly cloudy w/ showers': 1.5,
-                      'Mostly clear': 1,
-                      'Clear': 1,
-                      'Mostly cloudy w/ t-storms': 0.5,
-                      'Mostly cloudy': 0.5,
-                      'Showers': 0.5,
-                      'Cloudy': 0.5,
-                      'Thunderstorms': 0.5,
-                      'Mostly cloudy w/ showers': 0.5,
-                      'Rain': 0}
-
-    header_list = ['Date', 'Time', 'SolarIrradiance (W/m2)', 'weather status', 'Temp (°C)', 'RealFeelTemp (°C)',
-                   'DewPoint (°C)', 'Wind (km/h)',
+    header_list = ['Date', 'Time', 'SolarIrradiance (W/m2)', 'weather status', 'Temp (°C)', 'RealFeelTemp (°C)', 'DewPoint (°C)',
+                   'Wind (km/h)',
                    'Direction', 'Hum (%)', 'Visibility (km)', 'UVIndex', 'UVIndexText', 'PreProbability (%)',
                    'RainProbability (%)',
                    'CloudCover (%)']
-    weather_data = pd.read_csv('hourly_weather_forecasted_data.csv', names = header_list, encoding = 'unicode_escape')
-    weather_data['modified_weather_status'] = weather_data['weather status'].map(data_selection)
-    weather_data.loc[weather_data['SolarIrradiance (W/m2)'] == 0, ['modified_weather_status', 'Temp (°C)', 'Hum (%)',
-                                                                   'CloudCover (%)']] = 0
+    weather_data = pd.read_csv('hourly_weather_forecasted_data.csv', names = header_list,
+                               encoding = 'unicode_escape')
     weather_data.drop(
-        ['SolarIrradiance (W/m2)', 'Date', 'Time', 'RealFeelTemp (°C)', 'DewPoint (°C)', 'Wind (km/h)', 'Direction',
-         'Visibility (km)', 'UVIndex',
-         'UVIndexText', 'PreProbability (%)', 'RainProbability (%)', 'weather status'], axis = 1, inplace = True)
+        ['Date', 'Time', 'RealFeelTemp (°C)', 'DewPoint (°C)', 'Wind (km/h)', 'Direction', 'Visibility (km)', 'UVIndex',
+         'UVIndexText', 'PreProbability (%)', 'RainProbability (%)', 'weather status'], axis = 1,
+        inplace = True)
 
     df1 = pd.concat([daily_hourly_values, weather_data], axis = 1)
     df1.drop(['Date', 'Hour'], axis = 1, inplace = True)
+    df1.loc[df1['SolarIrradiance (W/m2)'] == 0, ['Temp (°C)', 'Hum (%)', 'CloudCover (%)']] = 0
 
     if time_name >= '00:00:00' and time_name <= '11:59:59':
         count_total_rows = len(df1) - 12
-        independent_columns = df1[['Temp (°C)', 'Hum (%)', 'CloudCover (%)', 'modified_weather_status']][
+        independent_columns = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'Hum (%)', 'CloudCover (%)']][
                               0:count_total_rows]
         dependent_column = df1['Power (KW)'][0:count_total_rows]
 
         reg = linear_model.LinearRegression(fit_intercept = False)
         reg.fit(independent_columns, dependent_column)
 
-        forcasted_data = df1[['Temp (°C)', 'Hum (%)', 'CloudCover (%)', 'modified_weather_status']].tail(12)
+        forcasted_data = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'Hum (%)', 'CloudCover (%)']].tail(12)
 
         return_array = list(reg.predict(forcasted_data))
 
@@ -104,14 +88,14 @@ def energy_forecasting_chart_value(n_intervals):
 
     elif time_name >= '12:00:00' and time_name <= '23:59:59':
         count_total_rows = len(df1) - 24
-        independent_columns = df1[['Temp (°C)', 'Hum (%)', 'CloudCover (%)', 'modified_weather_status']][
+        independent_columns = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'Hum (%)', 'CloudCover (%)']][
                               0:count_total_rows]
         dependent_column = df1['Power (KW)'][0:count_total_rows]
 
         reg = linear_model.LinearRegression(fit_intercept = False)
         reg.fit(independent_columns, dependent_column)
 
-        forcasted_data = df1[['Temp (°C)', 'Hum (%)', 'CloudCover (%)', 'modified_weather_status']].tail(24)
+        forcasted_data = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'Hum (%)', 'CloudCover (%)']].tail(24)
 
         return_array = list(reg.predict(forcasted_data))
 
