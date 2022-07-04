@@ -62,7 +62,7 @@ def current_weather_value(n_intervals):
     vs = api_data[0]['Visibility']['Metric']['Value']
     pr = api_data[0]['Pressure']['Metric']['Value']
     n = 1
-    now = datetime.now() + timedelta(hours = n)
+    now = datetime.now() + timedelta(hours=n)
     time_name = now.strftime('%H:%M:%S')
     sun_time1 = '21:34:00'
     sun_time2 = '23:59:59'
