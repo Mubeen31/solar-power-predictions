@@ -28,7 +28,7 @@ html.Div([
 
 def header_value(n_intervals):
     n = 1
-    now = datetime.now() + timedelta(hours=n)
+    now = datetime.now() + timedelta(hours = n)
     dt_string = now.strftime("%b %d, %H:%M%p")
 
     return [
