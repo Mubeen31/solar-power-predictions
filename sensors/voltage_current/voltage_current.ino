@@ -46,7 +46,7 @@ void loop(){
 ///////solar current//////
   // Vout is read 1000 Times for precision
   for(int i = 0; i < 1000; i++) {
-    Vout = (Vout + (resADC * analogRead(A1)));   
+    Vout = (Vout + (resADC * analogRead(A3)));   
 //    delay(1);
   }
   
