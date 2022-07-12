@@ -29,7 +29,7 @@ html.Div([
 
 def solar_yesterday_power_chart_value(n_intervals):
     header_list = ['Date Time', 'Voltage', 'Current']
-    df = pd.read_csv('sensors_data.csv', names = header_list)
+    df = pd.read_csv('https://raw.githubusercontent.com/Mubeen31/solar-power-and-weather-data/main/sensors_data.csv', names = header_list)
     df['Power (W)'] = df['Voltage'] * df['Current']
     df['Power (KW)'] = df['Power (W)'] / 1000
     df['Date Time'] = pd.to_datetime(df['Date Time'])
@@ -141,7 +141,7 @@ def solar_yesterday_power_chart_value(n_intervals):
                    'Direction', 'Hum (%)', 'Visibility (km)', 'UVIndex', 'UVIndexText', 'PreProbability (%)',
                    'RainProbability (%)',
                    'CloudCover (%)']
-    weather_data = pd.read_csv('hourly_weather_forecasted_data.csv', names = header_list,
+    weather_data = pd.read_csv('https://raw.githubusercontent.com/Mubeen31/solar-power-and-weather-data/main/hourly_weather_forecasted_data.csv', names = header_list,
                                encoding = 'unicode_escape')
     weather_data.drop(['Date', 'Time', 'DewPoint (°C)', 'Direction', 'Visibility (km)',
                        'UVIndexText', 'PreProbability (%)', 'RainProbability (%)', 'weather status', 'Hum (%)',
@@ -163,7 +163,7 @@ def solar_yesterday_power_chart_value(n_intervals):
                    'Direction', 'Hum (%)', 'Visibility (km)', 'UVIndex', 'UVIndexText', 'PreProbability (%)',
                    'RainProbability (%)',
                    'CloudCover (%)']
-    weather_data1 = pd.read_csv('hourly_weather_forecasted_data.csv', names = header_list, encoding = 'unicode_escape')
+    weather_data1 = pd.read_csv('https://raw.githubusercontent.com/Mubeen31/solar-power-and-weather-data/main/hourly_weather_forecasted_data.csv', names = header_list, encoding = 'unicode_escape')
     weather_data1.loc[weather_data1['SolarIrradiance (W/m2)'] == 0, ['RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex']] = 0
     weather_unique_date = weather_data1['Date'].unique()
     filter_weather_yes_values = weather_data1[

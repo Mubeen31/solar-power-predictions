@@ -27,7 +27,7 @@ html.Div([
 
 def solar_first_card_value(n_intervals):
     header_list = ['Date Time', 'Voltage', 'Current']
-    df = pd.read_csv('sensors_data.csv', names = header_list)
+    df = pd.read_csv('https://raw.githubusercontent.com/Mubeen31/solar-power-and-weather-data/main/sensors_data.csv', names = header_list)
     get_voltage = df['Voltage'].tail(1).iloc[0]
     get_current = df['Current'].tail(1).iloc[0]
     power_watt = get_voltage * get_current

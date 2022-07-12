@@ -31,7 +31,7 @@ def energy_forecasting_chart_value(n_intervals):
     now = datetime.now() + timedelta(hours = n)
     time_name = now.strftime('%H:%M:%S')
     header_list = ['Date Time', 'Voltage', 'Current']
-    df = pd.read_csv('sensors_data.csv', names = header_list)
+    df = pd.read_csv('https://raw.githubusercontent.com/Mubeen31/solar-power-and-weather-data/main/sensors_data.csv', names = header_list)
     df['Power (W)'] = df['Voltage'] * df['Current']
     df['Power (KW)'] = df['Power (W)'] / 1000
     df['Date Time'] = pd.to_datetime(df['Date Time'])
@@ -53,7 +53,7 @@ def energy_forecasting_chart_value(n_intervals):
                    'Direction', 'Hum (%)', 'Visibility (km)', 'UVIndex', 'UVIndexText', 'PreProbability (%)',
                    'RainProbability (%)',
                    'CloudCover (%)']
-    weather_data = pd.read_csv('hourly_weather_forecasted_data.csv', names = header_list,
+    weather_data = pd.read_csv('https://raw.githubusercontent.com/Mubeen31/solar-power-and-weather-data/main/hourly_weather_forecasted_data.csv', names = header_list,
                                encoding = 'unicode_escape')
     weather_data.drop(['Date', 'Time', 'DewPoint (°C)', 'Direction', 'Visibility (km)',
                        'UVIndexText', 'PreProbability (%)', 'RainProbability (%)', 'weather status', 'Hum (%)',

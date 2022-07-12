@@ -27,7 +27,7 @@ html.Div([
 
 def last_data_update_time_value(n_intervals):
     header_list = ['Date Time', 'Voltage', 'Current']
-    df = pd.read_csv('sensors_data.csv', names = header_list)
+    df = pd.read_csv('https://raw.githubusercontent.com/Mubeen31/solar-power-and-weather-data/main/sensors_data.csv', names = header_list)
     df['Date Time'] = pd.to_datetime(df['Date Time'])
     get_date_time = str(df['Date Time'].tail(1).iloc[0].strftime("%d-%m-%Y %H:%M:%S"))
 
