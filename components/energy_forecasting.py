@@ -57,22 +57,22 @@ def energy_forecasting_chart_value(n_intervals):
                                encoding = 'unicode_escape')
     weather_data.drop(['Date', 'Time', 'DewPoint (°C)', 'Direction', 'Visibility (km)',
                        'UVIndexText', 'PreProbability (%)', 'RainProbability (%)', 'weather status', 'Hum (%)',
-                       'Temp (°C)', 'RealFeelTemp (°C)'], axis = 1, inplace = True)
+                       'CloudCover (%)', 'Temp (°C)'], axis = 1, inplace = True)
 
     df1 = pd.concat([daily_hourly_values, weather_data], axis = 1)
     df1.drop(['Date', 'Hour'], axis = 1, inplace = True)
-    df1.loc[df1['SolarIrradiance (W/m2)'] == 0, ['Wind (km/h)', 'UVIndex', 'CloudCover (%)']] = 0
+    df1.loc[df1['SolarIrradiance (W/m2)'] == 0, ['RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex']] = 0
 
     if time_name >= '00:00:00' and time_name <= '11:59:59':
         count_total_rows = len(df1) - 12
-        independent_columns = df1[['SolarIrradiance (W/m2)', 'Wind (km/h)', 'UVIndex', 'CloudCover (%)']][
+        independent_columns = df1[['SolarIrradiance (W/m2)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex']][
                               0:count_total_rows]
         dependent_column = df1['Power (KW)'][0:count_total_rows]
 
         reg = linear_model.LinearRegression(fit_intercept = False)
         reg.fit(independent_columns, dependent_column)
 
-        forcasted_data = df1[['SolarIrradiance (W/m2)', 'Wind (km/h)', 'UVIndex', 'CloudCover (%)']].tail(12)
+        forcasted_data = df1[['SolarIrradiance (W/m2)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex']].tail(12)
 
         return_array = list(reg.predict(forcasted_data))
 
@@ -87,14 +87,14 @@ def energy_forecasting_chart_value(n_intervals):
 
     elif time_name >= '12:00:00' and time_name <= '23:59:59':
         count_total_rows = len(df1) - 24
-        independent_columns = df1[['SolarIrradiance (W/m2)', 'Wind (km/h)', 'UVIndex', 'CloudCover (%)']][
+        independent_columns = df1[['SolarIrradiance (W/m2)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex']][
                               0:count_total_rows]
         dependent_column = df1['Power (KW)'][0:count_total_rows]
 
         reg = linear_model.LinearRegression(fit_intercept = False)
         reg.fit(independent_columns, dependent_column)
 
-        forcasted_data = df1[['SolarIrradiance (W/m2)', 'Wind (km/h)', 'UVIndex', 'CloudCover (%)']].tail(24)
+        forcasted_data = df1[['SolarIrradiance (W/m2)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex']].tail(24)
 
         return_array = list(reg.predict(forcasted_data))
 
