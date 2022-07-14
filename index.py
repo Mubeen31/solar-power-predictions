@@ -208,7 +208,7 @@ app.layout = html.Div([
                         selected_style = tab_selected_style,
                         ),
                 dcc.Tab(energy_forcasting_chart,
-                        label = 'MVLR Model',
+                        label = 'XGBR Model',
                         value = 'energy_forcasting_chart',
                         style = tab_style,
                         selected_style = tab_selected_style,
