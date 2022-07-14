@@ -143,7 +143,7 @@ def energy_forecasting_chart_value(n_intervals):
             plot_bgcolor = 'rgba(255, 255, 255, 0)',
             paper_bgcolor = 'rgba(255, 255, 255, 0)',
             title = {
-                'text': 'Multivariable Linear Regression Model',
+                'text': 'XGBoost Regression Model',
                 'y': 0.88,
                 'x': 0.28,
                 'xanchor': 'center',

@@ -10,6 +10,7 @@ from datetime import datetime, date, time
 from datetime import timedelta
 from sklearn import linear_model
 from sklearn.ensemble import RandomForestRegressor
+from xgboost import XGBRegressor
 import sqlalchemy
 from dash import dash_table as dt
 import time
@@ -178,7 +179,7 @@ def solar_yesterday_power_chart_value(n_intervals):
     yes_independent_columns1 = yes_df1[['SolarIrradiance (W/m2)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex']][
                                0:yes_count_total_rows]
     yes_dependent_column = yes_df1['Power (KW)'][0:yes_count_total_rows]
-    yes_reg = linear_model.LinearRegression(fit_intercept = False)
+    yes_reg = XGBRegressor(n_estimators=69, predictor = 'cpu_predictor')
     yes_reg.fit(yes_independent_columns, yes_dependent_column)
     forcasted_yes_values = weather_data1[(weather_data1['Date'] == weather_unique_date[-2])][
         ['SolarIrradiance (W/m2)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex']]
