@@ -115,7 +115,7 @@ def summary_value(n_intervals, select_trees, select_random_state):
     yes_independent_columns = yes_df1[['SolarIrradiance (W/m2)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex']][
                               0:yes_count_total_rows]
     yes_dependent_column = yes_df1['Power (KW)'][0:yes_count_total_rows]
-    yes_reg = linear_model.LinearRegression(fit_intercept = False)
+    yes_reg = XGBRegressor(n_estimators=69)
     yes_reg.fit(yes_independent_columns, yes_dependent_column)
     forcasted_yes_values = weather_data1[(weather_data1['Date'] == weather_unique_date[-2])][
         ['SolarIrradiance (W/m2)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex']]
