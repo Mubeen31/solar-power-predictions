@@ -11,7 +11,7 @@ from datetime import timedelta
 from sklearn import linear_model
 from sklearn.ensemble import RandomForestRegressor
 from sklearn import metrics
-from xgboost import XGBRegressor
+# from xgboost import XGBRegressor
 import sqlalchemy
 from dash import dash_table as dt
 import time
