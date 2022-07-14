@@ -10,7 +10,7 @@ from datetime import datetime, date, time
 from datetime import timedelta
 from sklearn import linear_model
 from sklearn.ensemble import RandomForestRegressor
-from xgboost import XGBRegressor
+# from xgboost import XGBRegressor
 import sqlalchemy
 from dash import dash_table as dt
 import time
@@ -179,14 +179,14 @@ def solar_yesterday_power_chart_value(n_intervals):
     yes_independent_columns1 = yes_df1[['SolarIrradiance (W/m2)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex']][
                                0:yes_count_total_rows]
     yes_dependent_column = yes_df1['Power (KW)'][0:yes_count_total_rows]
-    yes_reg = RandomForestRegressor(n_estimators = 100, random_state = 0)
-    yes_reg.fit(yes_independent_columns, yes_dependent_column)
+    # yes_reg = XGBRegressor(n_estimators=69, predictor = 'cpu_predictor')
+    # yes_reg.fit(yes_independent_columns, yes_dependent_column)
     forcasted_yes_values = weather_data1[(weather_data1['Date'] == weather_unique_date[-2])][
         ['SolarIrradiance (W/m2)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex']]
     forcasted_yes_values1 = weather_data1[(weather_data1['Date'] == weather_unique_date[-2])][
         ['SolarIrradiance (W/m2)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex']]
-    return_array = yes_reg.predict(forcasted_yes_values)
-    predicted_data = pd.DataFrame(return_array, columns = ['Power (KW)'])
+    # return_array = yes_reg.predict(forcasted_yes_values)
+    # predicted_data = pd.DataFrame(return_array, columns = ['Power (KW)'])
 
     rfr_yes = RandomForestRegressor(n_estimators = 100, random_state = 0)
     rfr_yes.fit(yes_independent_columns1, yes_dependent_column)
@@ -206,18 +206,18 @@ def solar_yesterday_power_chart_value(n_intervals):
             '<b>Yesterday Solar Energy</b>: ' + [f'{x:,.5f} KWh' for x in
                                                  hourly_data_and_hours_df['Hourly Data']] + '<br>'
         ),
-            go.Scatter(
-                x = hourly_data_and_hours_df['Hours'],
-                y = predicted_data['Power (KW)'],
-                name = 'Yesterday Predicted Solar Energy (XGBR Model)',
-                mode = 'lines',
-                line = dict(color = 'firebrick', dash = 'dash'),
-                hoverinfo = 'text',
-                hovertext =
-                '<b>Hour</b>: ' + hourly_data_and_hours_df['Hours'].astype(str) + '<br>' +
-                '<b>Yesterday Predicted Solar Energy (XGBR Model)</b>: ' + [f'{x:,.5f} KWh' for x in
-                                                                            predicted_data['Power (KW)']] + '<br>'
-            ),
+            # go.Scatter(
+            #     x = hourly_data_and_hours_df['Hours'],
+            #     y = predicted_data['Power (KW)'],
+            #     name = 'Yesterday Predicted Solar Energy (XGBR Model)',
+            #     mode = 'lines',
+            #     line = dict(color = 'firebrick', dash = 'dash'),
+            #     hoverinfo = 'text',
+            #     hovertext =
+            #     '<b>Hour</b>: ' + hourly_data_and_hours_df['Hours'].astype(str) + '<br>' +
+            #     '<b>Yesterday Predicted Solar Energy (XGBR Model)</b>: ' + [f'{x:,.5f} KWh' for x in
+            #                                                                 predicted_data['Power (KW)']] + '<br>'
+            # ),
             go.Scatter(
                 x = hourly_data_and_hours_df['Hours'],
                 y = rfr_yes_predicted_data['Power (KW)'],

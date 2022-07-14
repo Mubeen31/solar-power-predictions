@@ -17,7 +17,7 @@ from components.solar_fifth_card import solar_fifth_card_value
 from components.solar_current_power_chart import solar_current_power_chart_value
 from components.solar_today_power_chart import solar_today_power_chart_value
 from components.solar_yesterday_power_chart import solar_yesterday_power_chart_value
-from components.energy_forecasting import energy_forecasting_chart_value
+# from components.energy_forecasting import energy_forecasting_chart_value
 from components.random_forest_regression import random_forest_regression_chart_value, n_estimator_list, \
     random_state_list
 from components.summary import summary_value
@@ -337,12 +337,12 @@ def solar_yesterday_power_chart_value_callback(n_intervals):
     return solar_yesterday_power_chart_value_data
 
 
-@app.callback(Output('energy_forcasting_chart', 'figure'),
-              [Input('update_date_time_value', 'n_intervals')])
-def energy_forecasting_chart_value_callback(n_intervals):
-    energy_forecasting_chart_value_data = energy_forecasting_chart_value(n_intervals)
-
-    return energy_forecasting_chart_value_data
+# @app.callback(Output('energy_forcasting_chart', 'figure'),
+#               [Input('update_date_time_value', 'n_intervals')])
+# def energy_forecasting_chart_value_callback(n_intervals):
+#     energy_forecasting_chart_value_data = energy_forecasting_chart_value(n_intervals)
+#
+#     return energy_forecasting_chart_value_data
 
 
 @app.callback(Output('random_forest_regression_chart', 'figure'),
