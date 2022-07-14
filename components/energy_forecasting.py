@@ -9,6 +9,7 @@ import numpy as np
 from datetime import datetime, date, time
 from datetime import timedelta
 from sklearn import linear_model
+from xgboost import XGBRegressor
 import sqlalchemy
 from dash import dash_table as dt
 import time
@@ -69,7 +70,7 @@ def energy_forecasting_chart_value(n_intervals):
                               0:count_total_rows]
         dependent_column = df1['Power (KW)'][0:count_total_rows]
 
-        reg = linear_model.LinearRegression(fit_intercept = False)
+        reg = XGBRegressor(n_estimators=69, predictor = 'cpu_predictor')
         reg.fit(independent_columns, dependent_column)
 
         forcasted_data = df1[['SolarIrradiance (W/m2)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex']].tail(12)
@@ -91,7 +92,7 @@ def energy_forecasting_chart_value(n_intervals):
                               0:count_total_rows]
         dependent_column = df1['Power (KW)'][0:count_total_rows]
 
-        reg = linear_model.LinearRegression(fit_intercept = False)
+        reg = XGBRegressor(n_estimators=69, predictor = 'cpu_predictor')
         reg.fit(independent_columns, dependent_column)
 
         forcasted_data = df1[['SolarIrradiance (W/m2)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex']].tail(24)
