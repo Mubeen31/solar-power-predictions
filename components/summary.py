@@ -146,7 +146,7 @@ def summary_value(n_intervals, select_trees, select_random_state):
                               0:count_total_rows]
         dependent_column = df1['Power (KW)'][0:count_total_rows]
 
-        reg = XGBRegressor(n_estimators=69, predictor = 'gpu_predictor')
+        reg = XGBRegressor(n_estimators=69)
         reg.fit(independent_columns, dependent_column)
 
         forcasted_data = df1[['SolarIrradiance (W/m2)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex']].tail(12)
@@ -183,7 +183,7 @@ def summary_value(n_intervals, select_trees, select_random_state):
                               0:count_total_rows]
         dependent_column = df1['Power (KW)'][0:count_total_rows]
 
-        reg = XGBRegressor(n_estimators=69, predictor = 'gpu_predictor')
+        reg = XGBRegressor(n_estimators=69)
         reg.fit(independent_columns, dependent_column)
 
         forcasted_data = df1[['SolarIrradiance (W/m2)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex']].tail(24)
