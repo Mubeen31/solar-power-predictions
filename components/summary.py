@@ -11,7 +11,7 @@ from datetime import timedelta
 from sklearn import linear_model
 from sklearn.ensemble import RandomForestRegressor
 from sklearn import metrics
-from xgboost import XGBRegressor
+# from xgboost import XGBRegressor
 import sqlalchemy
 from dash import dash_table as dt
 import time
@@ -115,19 +115,19 @@ def summary_value(n_intervals, select_trees, select_random_state):
     yes_independent_columns = yes_df1[['SolarIrradiance (W/m2)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex']][
                               0:yes_count_total_rows]
     yes_dependent_column = yes_df1['Power (KW)'][0:yes_count_total_rows]
-    yes_reg = XGBRegressor(n_estimators=69)
-    yes_reg.fit(yes_independent_columns, yes_dependent_column)
+    # yes_reg = XGBRegressor(n_estimators=69)
+    # yes_reg.fit(yes_independent_columns, yes_dependent_column)
     forcasted_yes_values = weather_data1[(weather_data1['Date'] == weather_unique_date[-2])][
         ['SolarIrradiance (W/m2)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex']]
     forcasted_yes_values.loc[
         forcasted_yes_values['SolarIrradiance (W/m2)'] == 0, ['RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex']] = 0
-    return_array = yes_reg.predict(forcasted_yes_values)
-    predicted_data = pd.DataFrame(return_array, columns = ['Power (KW)'])
-    mv_pe = predicted_data['Power (KW)'].sum()
-    mv_mse = metrics.mean_squared_error(last_day_hourly_values['Power (KW)'], predicted_data['Power (KW)'])
-    mv_rmse = np.sqrt(mv_mse)
-    mv_mae = metrics.mean_absolute_error(last_day_hourly_values['Power (KW)'], predicted_data['Power (KW)'])
-    mv_rs = metrics.r2_score(last_day_hourly_values['Power (KW)'], predicted_data['Power (KW)'])
+    # return_array = yes_reg.predict(forcasted_yes_values)
+    # predicted_data = pd.DataFrame(return_array, columns = ['Power (KW)'])
+    # mv_pe = predicted_data['Power (KW)'].sum()
+    # mv_mse = metrics.mean_squared_error(last_day_hourly_values['Power (KW)'], predicted_data['Power (KW)'])
+    # mv_rmse = np.sqrt(mv_mse)
+    # mv_mae = metrics.mean_absolute_error(last_day_hourly_values['Power (KW)'], predicted_data['Power (KW)'])
+    # mv_rs = metrics.r2_score(last_day_hourly_values['Power (KW)'], predicted_data['Power (KW)'])
 
     rfr_yes = RandomForestRegressor(n_estimators = 100, random_state = 0)
     rfr_yes.fit(yes_independent_columns, yes_dependent_column)
@@ -409,28 +409,28 @@ def summary_value(n_intervals, select_trees, select_random_state):
                             html.P('XGBoost Regression Model', className = 'error_text'),
                         ], className = 'error_bg1'),
                         html.Div([
-                            html.P('{0:,.2f} KWh'.format(mv_pe),
-                                   className = 'error_text'),
+                            # html.P('{0:,.2f} KWh'.format(mv_pe),
+                            #        className = 'error_text'),
                         ], className = 'error_bg'),
                         html.Div([
-                            html.P('{0:,.2f} KWh'.format(last_day_hourly_values_sum),
-                                   className = 'error_text'),
+                            # html.P('{0:,.2f} KWh'.format(last_day_hourly_values_sum),
+                            #        className = 'error_text'),
                         ], className = 'error_bg'),
                         html.Div([
-                            html.P('{0:,.4f}'.format(mv_mse),
-                                   className = 'error_text'),
+                            # html.P('{0:,.4f}'.format(mv_mse),
+                            #        className = 'error_text'),
                         ], className = 'error_bg'),
                         html.Div([
-                            html.P('{0:,.4f}'.format(mv_rmse),
-                                   className = 'error_text'),
+                            # html.P('{0:,.4f}'.format(mv_rmse),
+                            #        className = 'error_text'),
                         ], className = 'error_bg'),
                         html.Div([
-                            html.P('{0:,.4f}'.format(mv_mae),
-                                   className = 'error_text')
+                            # html.P('{0:,.4f}'.format(mv_mae),
+                            #        className = 'error_text')
                         ], className = 'error_bg'),
                         html.Div([
-                            html.P('{0:,.4f}'.format(mv_rs),
-                                   className = 'error_text')
+                            # html.P('{0:,.4f}'.format(mv_rs),
+                            #        className = 'error_text')
                         ], className = 'error_bg')
                     ], className = 'error_container3'),
 
@@ -589,28 +589,28 @@ def summary_value(n_intervals, select_trees, select_random_state):
                             html.P('XGBoost Regression Model', className = 'error_text'),
                         ], className = 'error_bg1'),
                         html.Div([
-                            html.P('{0:,.2f} KWh'.format(mv_pe),
-                                   className = 'error_text'),
+                            # html.P('{0:,.2f} KWh'.format(mv_pe),
+                            #        className = 'error_text'),
                         ], className = 'error_bg'),
                         html.Div([
-                            html.P('{0:,.2f} KWh'.format(last_day_hourly_values_sum),
-                                   className = 'error_text'),
+                            # html.P('{0:,.2f} KWh'.format(last_day_hourly_values_sum),
+                            #        className = 'error_text'),
                         ], className = 'error_bg'),
                         html.Div([
-                            html.P('{0:,.4f}'.format(mv_mse),
-                                   className = 'error_text'),
+                            # html.P('{0:,.4f}'.format(mv_mse),
+                            #        className = 'error_text'),
                         ], className = 'error_bg'),
                         html.Div([
-                            html.P('{0:,.4f}'.format(mv_rmse),
-                                   className = 'error_text'),
+                            # html.P('{0:,.4f}'.format(mv_rmse),
+                            #        className = 'error_text'),
                         ], className = 'error_bg'),
                         html.Div([
-                            html.P('{0:,.4f}'.format(mv_mae),
-                                   className = 'error_text')
+                            # html.P('{0:,.4f}'.format(mv_mae),
+                            #        className = 'error_text')
                         ], className = 'error_bg'),
                         html.Div([
-                            html.P('{0:,.4f}'.format(mv_rs),
-                                   className = 'error_text')
+                            # html.P('{0:,.4f}'.format(mv_rs),
+                            #        className = 'error_text')
                         ], className = 'error_bg')
                     ], className = 'error_container3'),
 
