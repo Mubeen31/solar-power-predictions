@@ -30,7 +30,8 @@ html.Div([
 
 def solar_yesterday_power_chart_value(n_intervals):
     header_list = ['Date Time', 'Voltage', 'Current']
-    df = pd.read_csv('https://raw.githubusercontent.com/Mubeen31/solar-power-and-weather-data/main/sensors_data.csv', names = header_list)
+    df = pd.read_csv('https://raw.githubusercontent.com/Mubeen31/solar-power-and-weather-data/main/sensors_data.csv',
+                     names = header_list)
     df['Power (W)'] = df['Voltage'] * df['Current']
     df['Power (KW)'] = df['Power (W)'] / 1000
     df['Date Time'] = pd.to_datetime(df['Date Time'])
@@ -142,8 +143,10 @@ def solar_yesterday_power_chart_value(n_intervals):
                    'Direction', 'Hum (%)', 'Visibility (km)', 'UVIndex', 'UVIndexText', 'PreProbability (%)',
                    'RainProbability (%)',
                    'CloudCover (%)']
-    weather_data = pd.read_csv('https://raw.githubusercontent.com/Mubeen31/solar-power-and-weather-data/main/hourly_weather_forecasted_data.csv', names = header_list,
-                               encoding = 'unicode_escape')
+    weather_data = pd.read_csv(
+        'https://raw.githubusercontent.com/Mubeen31/solar-power-and-weather-data/main/hourly_weather_forecasted_data.csv',
+        names = header_list,
+        encoding = 'unicode_escape')
     weather_data.drop(['Date', 'Time', 'DewPoint (°C)', 'Direction', 'Visibility (km)',
                        'UVIndexText', 'PreProbability (%)', 'RainProbability (%)', 'weather status', 'Hum (%)',
                        'CloudCover (%)', 'Temp (°C)'], axis = 1, inplace = True)
@@ -164,7 +167,9 @@ def solar_yesterday_power_chart_value(n_intervals):
                    'Direction', 'Hum (%)', 'Visibility (km)', 'UVIndex', 'UVIndexText', 'PreProbability (%)',
                    'RainProbability (%)',
                    'CloudCover (%)']
-    weather_data1 = pd.read_csv('https://raw.githubusercontent.com/Mubeen31/solar-power-and-weather-data/main/hourly_weather_forecasted_data.csv', names = header_list, encoding = 'unicode_escape')
+    weather_data1 = pd.read_csv(
+        'https://raw.githubusercontent.com/Mubeen31/solar-power-and-weather-data/main/hourly_weather_forecasted_data.csv',
+        names = header_list, encoding = 'unicode_escape')
     weather_data1.loc[weather_data1['SolarIrradiance (W/m2)'] == 0, ['RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex']] = 0
     weather_unique_date = weather_data1['Date'].unique()
     filter_weather_yes_values = weather_data1[
@@ -193,6 +198,8 @@ def solar_yesterday_power_chart_value(n_intervals):
     rfr_yes_return_array = rfr_yes.predict(forcasted_yes_values1)
     rfr_yes_predicted_data = pd.DataFrame(rfr_yes_return_array, columns = ['Power (KW)'])
 
+    df3 = pd.read_csv('xgboost model/yesterday_predicted_chart_data.csv')
+
     return {
         'data': [go.Scatter(
             x = hourly_data_and_hours_df['Hours'],
@@ -206,18 +213,18 @@ def solar_yesterday_power_chart_value(n_intervals):
             '<b>Yesterday Solar Energy</b>: ' + [f'{x:,.5f} KWh' for x in
                                                  hourly_data_and_hours_df['Hourly Data']] + '<br>'
         ),
-            # go.Scatter(
-            #     x = hourly_data_and_hours_df['Hours'],
-            #     y = predicted_data['Power (KW)'],
-            #     name = 'Yesterday Predicted Solar Energy (XGBR Model)',
-            #     mode = 'lines',
-            #     line = dict(color = 'firebrick', dash = 'dash'),
-            #     hoverinfo = 'text',
-            #     hovertext =
-            #     '<b>Hour</b>: ' + hourly_data_and_hours_df['Hours'].astype(str) + '<br>' +
-            #     '<b>Yesterday Predicted Solar Energy (XGBR Model)</b>: ' + [f'{x:,.5f} KWh' for x in
-            #                                                                 predicted_data['Power (KW)']] + '<br>'
-            # ),
+            go.Scatter(
+                x = hourly_data_and_hours_df['Hours'],
+                y = df3['Power (KW)'],
+                name = 'Yesterday Predicted Solar Energy (XGBR Model)',
+                mode = 'lines',
+                line = dict(color = 'firebrick', dash = 'dash'),
+                hoverinfo = 'text',
+                hovertext =
+                '<b>Hour</b>: ' + hourly_data_and_hours_df['Hours'].astype(str) + '<br>' +
+                '<b>Yesterday Predicted Solar Energy (XGBR Model)</b>: ' + [f'{x:,.5f} KWh' for x in
+                                                                            df3['Power (KW)']] + '<br>'
+            ),
             go.Scatter(
                 x = hourly_data_and_hours_df['Hours'],
                 y = rfr_yes_predicted_data['Power (KW)'],
