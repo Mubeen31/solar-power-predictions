@@ -69,19 +69,19 @@ tab_selected_style = {
 
 solar_current_power_chart = dcc.Graph(id = 'solar_current_power_chart',
                                       animate = True,
-                                      config = {'displayModeBar': False},
+                                      config = {'displayModeBar': 'hover'},
                                       className = 'background2')
 solar_today_power_chart = dcc.Graph(id = 'solar_today_power_chart',
                                     animate = True,
-                                    config = {'displayModeBar': False},
+                                    config = {'displayModeBar': 'hover'},
                                     className = 'background2')
 solar_yesterday_power_chart = dcc.Graph(id = 'solar_yesterday_power_chart',
                                         animate = True,
-                                        config = {'displayModeBar': False},
+                                        config = {'displayModeBar': 'hover'},
                                         className = 'background2')
 energy_forcasting_chart = dcc.Graph(id = 'energy_forcasting_chart',
                                     animate = True,
-                                    config = {'displayModeBar': False},
+                                    config = {'displayModeBar': 'hover'},
                                     className = 'background2')
 random_forest_regression_chart = html.Div([
     html.Div([
