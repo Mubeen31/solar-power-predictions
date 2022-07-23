@@ -88,7 +88,7 @@ random_forest_regression_chart = html.Div([
         html.Div([
             dcc.Graph(id = 'random_forest_regression_chart',
                       animate = True,
-                      config = {'displayModeBar': False},
+                      config = {'displayModeBar': 'hover'},
                       className = 'background2')
         ], className = 'random_forest_regression_chart'),
         html.Div([
