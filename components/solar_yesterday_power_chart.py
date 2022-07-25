@@ -170,26 +170,26 @@ def solar_yesterday_power_chart_value(n_intervals):
     weather_data1 = pd.read_csv(
         'https://raw.githubusercontent.com/Mubeen31/solar-power-and-weather-data/main/hourly_weather_forecasted_data.csv',
         names = header_list, encoding = 'unicode_escape')
-    weather_data1.loc[weather_data1['SolarIrradiance (W/m2)'] == 0, ['RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex']] = 0
+    weather_data1.loc[weather_data1['SolarIrradiance (W/m2)'] == 0, ['DewPoint (°C)', 'Hum (%)', 'UVIndex', 'CloudCover (%)']] = 0
     weather_unique_date = weather_data1['Date'].unique()
     filter_weather_yes_values = weather_data1[
         (weather_data1['Date'] >= '2022-06-25') &
         (weather_data1['Date'] <= weather_unique_date[-3])][
-        ['SolarIrradiance (W/m2)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex']]
+        ['SolarIrradiance (W/m2)', 'DewPoint (°C)', 'Hum (%)', 'UVIndex', 'CloudCover (%)']]
     yes_df1 = pd.concat([yes_hourly_values, filter_weather_yes_values], axis = 1)
     yes_df1.drop(['Date', 'Hour'], axis = 1, inplace = True)
     yes_count_total_rows = len(yes_df1)
-    yes_independent_columns = yes_df1[['SolarIrradiance (W/m2)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex']][
+    yes_independent_columns = yes_df1[['SolarIrradiance (W/m2)', 'DewPoint (°C)', 'Hum (%)', 'UVIndex', 'CloudCover (%)']][
                               0:yes_count_total_rows]
-    yes_independent_columns1 = yes_df1[['SolarIrradiance (W/m2)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex']][
+    yes_independent_columns1 = yes_df1[['SolarIrradiance (W/m2)', 'DewPoint (°C)', 'Hum (%)', 'UVIndex', 'CloudCover (%)']][
                                0:yes_count_total_rows]
     yes_dependent_column = yes_df1['Power (KW)'][0:yes_count_total_rows]
     # yes_reg = XGBRegressor(n_estimators=69, predictor = 'cpu_predictor')
     # yes_reg.fit(yes_independent_columns, yes_dependent_column)
     forcasted_yes_values = weather_data1[(weather_data1['Date'] == weather_unique_date[-2])][
-        ['SolarIrradiance (W/m2)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex']]
+        ['SolarIrradiance (W/m2)', 'DewPoint (°C)', 'Hum (%)', 'UVIndex', 'CloudCover (%)']]
     forcasted_yes_values1 = weather_data1[(weather_data1['Date'] == weather_unique_date[-2])][
-        ['SolarIrradiance (W/m2)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex']]
+        ['SolarIrradiance (W/m2)', 'DewPoint (°C)', 'Hum (%)', 'UVIndex', 'CloudCover (%)']]
     # return_array = yes_reg.predict(forcasted_yes_values)
     # predicted_data = pd.DataFrame(return_array, columns = ['Power (KW)'])
 
