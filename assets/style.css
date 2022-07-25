@@ -104,7 +104,7 @@ body {
 .drop_down_list {
    display: flex;
    flex-direction: row;
-   width: 180px;
+   width: 140px;
    margin-top: 10px;
 }
 
@@ -132,7 +132,7 @@ body {
    display: flex;
    flex-direction: row;
    gap: 15px;
-   justify-content: center;
+   margin-left: 80px;
 }
 
 .three_elements_column {
