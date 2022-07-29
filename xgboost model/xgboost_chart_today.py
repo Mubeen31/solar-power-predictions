@@ -48,8 +48,8 @@ weather_data = pd.read_csv(
     encoding = 'unicode_escape')
 weather_data['UV Index Text'] = pd.factorize(weather_data['UVIndexText'])[0]
 weather_data.drop(['Date', 'Time', 'Direction', 'Visibility (km)',
-                   'UVIndexText', 'PreProbability (%)', 'RainProbability (%)', 'weather status', 'Hum (%)',
-                   'Wind (km/h)', 'UVIndex', 'UV Index Text'], axis = 1, inplace = True)
+                   'UVIndexText', 'PreProbability (%)', 'RainProbability (%)', 'weather status',
+                   'Wind (km/h)', 'CloudCover (%)', 'Hum (%)', 'Temp (°C)', 'DewPoint (°C)'], axis = 1, inplace = True)
 
 df1 = pd.concat([daily_hourly_values, weather_data], axis = 1)
 df1.drop(['Date', 'Hour'], axis = 1, inplace = True)
