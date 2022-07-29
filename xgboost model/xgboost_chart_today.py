@@ -53,18 +53,18 @@ weather_data.drop(['Date', 'Time', 'Direction', 'Visibility (km)',
 
 df1 = pd.concat([daily_hourly_values, weather_data], axis = 1)
 df1.drop(['Date', 'Hour'], axis = 1, inplace = True)
-df1.loc[df1['SolarIrradiance (W/m2)'] == 0, ['Temp (°C)', 'RealFeelTemp (°C)', 'DewPoint (°C)', 'Hum (%)']] = 0
+df1.loc[df1['SolarIrradiance (W/m2)'] == 0, ['RealFeelTemp (°C)', 'UVIndex', 'UV Index Text']] = 0
 
 if time_name >= '00:00:00' and time_name <= '11:59:59':
     count_total_rows = len(df1) - 12
-    independent_columns = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'DewPoint (°C)', 'Hum (%)']][
+    independent_columns = df1[['SolarIrradiance (W/m2)', 'RealFeelTemp (°C)', 'UVIndex', 'UV Index Text']][
                           0:count_total_rows]
     dependent_column = df1['Power (KW)'][0:count_total_rows]
 
     reg = XGBRegressor()
     reg.fit(independent_columns, dependent_column)
 
-    forcasted_data = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'DewPoint (°C)', 'Hum (%)']].tail(12)
+    forcasted_data = df1[['SolarIrradiance (W/m2)', 'RealFeelTemp (°C)', 'UVIndex', 'UV Index Text']].tail(12)
 
     return_array = list(reg.predict(forcasted_data))
 
@@ -80,14 +80,14 @@ if time_name >= '00:00:00' and time_name <= '11:59:59':
 
 elif time_name >= '12:00:00' and time_name <= '23:59:59':
     count_total_rows = len(df1) - 24
-    independent_columns = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'DewPoint (°C)', 'Hum (%)']][
+    independent_columns = df1[['SolarIrradiance (W/m2)', 'RealFeelTemp (°C)', 'UVIndex', 'UV Index Text']][
                           0:count_total_rows]
     dependent_column = df1['Power (KW)'][0:count_total_rows]
 
     reg = XGBRegressor()
     reg.fit(independent_columns, dependent_column)
 
-    forcasted_data = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'DewPoint (°C)', 'Hum (%)']].tail(24)
+    forcasted_data = df1[['SolarIrradiance (W/m2)', 'RealFeelTemp (°C)', 'UVIndex', 'UV Index Text']].tail(24)
 
     return_array = list(reg.predict(forcasted_data))
 
