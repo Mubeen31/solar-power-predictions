@@ -64,7 +64,7 @@ def current_weather_value(n_intervals):
     n = 1
     now = datetime.now() + timedelta(hours=n)
     time_name = now.strftime('%H:%M:%S')
-    sun_time1 = '21:06:00'
+    sun_time1 = '20:42:00'
     sun_time2 = '23:59:59'
     sun_time3 = '00:00:00'
     sun_time4 = '05:45:00'
