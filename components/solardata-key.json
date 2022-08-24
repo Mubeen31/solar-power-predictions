@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "solardata-360222",
+  "private_key_id": "151e33cb96626866f0ef9efefbf4866ab7787318",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDV4ko26v31q05x\n0ufSqk9M8IZAiUDnKgPq6ST6oT/6gkYAiENjI4TLIS84iJeOKTRRkMHmjuW1iI9U\nBLQeq0/e5OqSiTpv2se0ESzSQP2Pnjg7dJviLjSe4VLLUfTWE5G92QcCfXXkh3fW\nlDgVEFaF3mOwx5Et3EWgvfwkGkPNyt+6ceEPoUvztV6rX0xtk+AbB/3/q9ojnuL6\n1z5KyhF2eNCY3qMfr5vc3bEq8yyCc6x7GxV/cy9lrrNIh7yK1LFyCoe5vzNhUleG\n3J5k3lCh3vIEDcr/uo7v8y0tWJtzAd2z6Fjf6FKp1iK20hUByTsDonVJ9UsiRBGn\nVi1M4SRlAgMBAAECggEAApGzoBHrN7IgFhlD5g4Gxg1EP5H71GBafbGL6ZyS6Zwz\nqJ3BhCHmUB5UCahdCpI6IsSvX5OAgxh/K84xUz81G5/BbK+hhmao7BywQiQRfPy0\njVMq7KHSkKg6O183pqzf8ksS+UJZp2b7ZWtz7B29WMUzNSKEG13q/RUyP5qMRi1P\nuPNLhnSyPXZHStGO15zFXPU5Vsf52/Rou+hw/y1gCmBH22q+62TO1I4wr1JP6PFF\nLrPw9tqCUaHKIKTUgVVeh6n7zThoXjS45a7V1D8FVghuzWfu2NLkOS4aA2U1pEz1\nFoxgk2ULqAVw0eKElLuFtdB7GYmGTHC9e6ndNSOO3QKBgQDtgcJmEqq/B2LA7zdr\nt411YjqzPisIflG65bmTQPfSa2hF0+8NcQpN1jXXxUDRjj6Cr7ab/sepU03YRlcJ\nrJXN/3FgF1w5Y2sungV/IWht4q3rNTtjVUYmriDGEMXrqd7+oDad4A1wUjhmXYfe\n5uEp7jl0So9e2aI+iUK1xyD6RwKBgQDmiacyJ0ZSaLQS2HXRXxt0PZ2JVgOzNVjt\nu8ZnDWLHRaO+Nk4I0+o1je4DU05fiEHE4noncJTifUu5TOPniFOsTGIwrGZKQn1U\nbRCD1JT8vrBEZO5KFHsTkzIE7AvvkxqK+ezEXBSSSWJr4kR1lL+ZRD+NL8Hl3Q1z\n4o+f4bZV8wKBgDFBAqaWYnCBQJqQQWcGRsC8IT5Auz3krGBc+bIu+/XYLmSkweOA\nuMlRjhL0JjAPFqmVdQI+wPs9elxKogwwjVSOD94EmiyQkI63WJ53uCdppfWsMWe1\nLHojDErm+ZSYwtT9NrZg24ialHWuGdpA+Rrv+1xBhh/+dCYR4xK9e/pLAoGAMxZQ\nCcowSDTRqtdzDGmyEMlSrstz2HO6+DvDVLTfrd8d0RoBou0rGqEQHIaKeJseT/4M\nKc9F/wbbD/4dBwLr3+OxYq3hoRUo5tugbEZgmb28G/vt3la5i3X0AKk6X+XOXPvT\nXxQ0rtI6UEP8/b1v1AwOtT/fDQw2XfbX8ws2t8cCgYAJXdDG54XGHUXgNVywhPIr\nH/kp2SLsXXllGZsMJpx4sFtrNc/pQ7OgOAA+IrrXwvnXYzL5ZHJqdw2y/ifA0g2a\nZaHfOo43kMjoFQ5NWxty2ffDmDveY6GO0nPuHQAxI4Jcc5gwAAyWZyUrxIUJ+b0m\nounk1kLobDqxI0GGU11f9Q==\n-----END PRIVATE KEY-----\n",
+  "client_email": "sensor-data-bquery@solardata-360222.iam.gserviceaccount.com",
+  "client_id": "109083938629740418833",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/sensor-data-bquery%40solardata-360222.iam.gserviceaccount.com"
+}
