@@ -92,6 +92,7 @@ def random_forest_regression_chart_value(n_intervals, select_trees, select_rando
                           inplace = True)
 
         df1 = pd.concat([daily_hourly_values, weather_data], axis = 1)
+        df1 = df1[df1['Date'] >= '2022-08-11']
         df1.drop(['Date', 'Hour'], axis = 1, inplace = True)
         df1.loc[df1['SolarIrradiance (W/m2)'] == 0, ['RealFeelTemp (°C)', 'UVIndex', 'UV Index Text']] = 0
 
