@@ -92,12 +92,11 @@ def random_forest_regression_chart_value(n_intervals, select_trees, select_rando
                           inplace = True)
 
         df1 = pd.concat([daily_hourly_values, weather_data], axis = 1)
-        df2 = df1[df1['Date'] >= '2022-08-11']
         df1.drop(['Date', 'Hour'], axis = 1, inplace = True)
         df1.loc[df1['SolarIrradiance (W/m2)'] == 0, ['RealFeelTemp (°C)', 'UVIndex', 'UV Index Text']] = 0
 
     if time_name >= '00:00:00' and time_name <= '11:59:59':
-        count_total_rows = len(df2) - 12
+        count_total_rows = len(df1) - 12
         independent_columns = df1[['SolarIrradiance (W/m2)', 'RealFeelTemp (°C)', 'UVIndex', 'UV Index Text']][
                               0:count_total_rows]
         dependent_column = df1['Power (KW)'][0:count_total_rows]
@@ -119,7 +118,7 @@ def random_forest_regression_chart_value(n_intervals, select_trees, select_rando
         data_dataframe = pd.DataFrame(data_dict)
 
     elif time_name >= '12:00:00' and time_name <= '23:59:59':
-        count_total_rows = len(df2) - 24
+        count_total_rows = len(df1) - 24
         independent_columns = df1[['SolarIrradiance (W/m2)', 'RealFeelTemp (°C)', 'UVIndex', 'UV Index Text']][
                               0:count_total_rows]
         dependent_column = df1['Power (KW)'][0:count_total_rows]
