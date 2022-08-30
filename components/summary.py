@@ -85,12 +85,12 @@ def summary_value(n_intervals, select_trees, select_random_state):
     weather_data['UV Index Text'] = pd.factorize(weather_data['UVIndexText'])[0]
     weather_data.drop(['Date', 'Time', 'Direction', 'Visibility (km)',
                        'UVIndexText', 'PreProbability (%)', 'RainProbability (%)', 'weather status',
-                       'Wind (km/h)', 'CloudCover (%)', 'Hum (%)', 'Temp (°C)', 'DewPoint (°C)'], axis = 1,
+                       'CloudCover (%)', 'Hum (%)', 'DewPoint (°C)'], axis = 1,
                       inplace = True)
 
     df1 = pd.concat([daily_hourly_values, weather_data], axis = 1)
     df1.drop(['Date', 'Hour'], axis = 1, inplace = True)
-    df1.loc[df1['SolarIrradiance (W/m2)'] == 0, ['RealFeelTemp (°C)', 'UVIndex', 'UV Index Text']] = 0
+    df1.loc[df1['SolarIrradiance (W/m2)'] == 0, ['Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex', 'UV Index Text']] = 0
 
     filter_last_day_values = df[df['Date'] == unique_date[-2]][['Date', 'Hour', 'Power (KW)']]
     last_day_hourly_values = filter_last_day_values.groupby(['Date', 'Hour'])['Power (KW)'].sum().reset_index()
@@ -110,20 +110,20 @@ def summary_value(n_intervals, select_trees, select_random_state):
     filter_weather_yes_values = weather_data1[
         (weather_data1['Date'] >= '2022-06-25') &
         (weather_data1['Date'] <= weather_unique_date[-3])][
-        ['SolarIrradiance (W/m2)', 'RealFeelTemp (°C)', 'UVIndex', 'UV Index Text']]
+        ['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex', 'UV Index Text']]
     yes_df1 = pd.concat([yes_hourly_values, filter_weather_yes_values], axis = 1)
     yes_df1.drop(['Date', 'Hour'], axis = 1, inplace = True)
-    yes_df1.loc[yes_df1['SolarIrradiance (W/m2)'] == 0, ['RealFeelTemp (°C)', 'UVIndex', 'UV Index Text']] = 0
+    yes_df1.loc[yes_df1['SolarIrradiance (W/m2)'] == 0, ['Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex', 'UV Index Text']] = 0
     yes_count_total_rows = len(yes_df1)
-    yes_independent_columns = yes_df1[['SolarIrradiance (W/m2)', 'RealFeelTemp (°C)', 'UVIndex', 'UV Index Text']][
+    yes_independent_columns = yes_df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex', 'UV Index Text']][
                               0:yes_count_total_rows]
     yes_dependent_column = yes_df1['Power (KW)'][0:yes_count_total_rows]
     # yes_reg = XGBRegressor(n_estimators=69)
     # yes_reg.fit(yes_independent_columns, yes_dependent_column)
     forcasted_yes_values = weather_data1[(weather_data1['Date'] == weather_unique_date[-2])][
-        ['SolarIrradiance (W/m2)', 'RealFeelTemp (°C)', 'UVIndex', 'UV Index Text']]
+        ['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex', 'UV Index Text']]
     forcasted_yes_values.loc[
-        forcasted_yes_values['SolarIrradiance (W/m2)'] == 0, ['RealFeelTemp (°C)', 'UVIndex', 'UV Index Text']] = 0
+        forcasted_yes_values['SolarIrradiance (W/m2)'] == 0, ['Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex', 'UV Index Text']] = 0
     # return_array = yes_reg.predict(forcasted_yes_values)
     # predicted_data = pd.DataFrame(return_array, columns = ['Power (KW)'])
     df3 = pd.read_csv('xgboost model/yesterday_predicted_chart_data.csv')
@@ -146,14 +146,14 @@ def summary_value(n_intervals, select_trees, select_random_state):
 
     if time_name >= '00:00:00' and time_name <= '11:59:59':
         count_total_rows = len(df1) - 12
-        independent_columns = df1[['SolarIrradiance (W/m2)', 'RealFeelTemp (°C)', 'UVIndex', 'UV Index Text']][
+        independent_columns = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex', 'UV Index Text']][
                               0:count_total_rows]
         dependent_column = df1['Power (KW)'][0:count_total_rows]
 
         # reg = XGBRegressor(n_estimators=69)
         # reg.fit(independent_columns, dependent_column)
 
-        forcasted_data = df1[['SolarIrradiance (W/m2)', 'RealFeelTemp (°C)', 'UVIndex', 'UV Index Text']].tail(12)
+        forcasted_data = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex', 'UV Index Text']].tail(12)
 
         # return_array = list(reg.predict(forcasted_data))
 
@@ -183,14 +183,14 @@ def summary_value(n_intervals, select_trees, select_random_state):
 
     elif time_name >= '12:00:00' and time_name <= '23:59:59':
         count_total_rows = len(df1) - 24
-        independent_columns = df1[['SolarIrradiance (W/m2)', 'RealFeelTemp (°C)', 'UVIndex', 'UV Index Text']][
+        independent_columns = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex', 'UV Index Text']][
                               0:count_total_rows]
         dependent_column = df1['Power (KW)'][0:count_total_rows]
 
         # reg = XGBRegressor(n_estimators=69)
         # reg.fit(independent_columns, dependent_column)
 
-        forcasted_data = df1[['SolarIrradiance (W/m2)', 'RealFeelTemp (°C)', 'UVIndex', 'UV Index Text']].tail(24)
+        forcasted_data = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex', 'UV Index Text']].tail(24)
 
         # return_array = list(reg.predict(forcasted_data))
 
@@ -220,14 +220,14 @@ def summary_value(n_intervals, select_trees, select_random_state):
                                         df4['Power (KW)'].head(length_today_hourly_values))
     if time_name >= '00:00:00' and time_name <= '11:59:59':
         count_total_rows = len(df1) - 12
-        independent_columns = df1[['SolarIrradiance (W/m2)', 'RealFeelTemp (°C)', 'UVIndex', 'UV Index Text']][
+        independent_columns = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex', 'UV Index Text']][
                               0:count_total_rows]
         dependent_column = df1['Power (KW)'][0:count_total_rows]
 
         rfr = RandomForestRegressor(n_estimators = select_trees, random_state = select_random_state)
         rfr.fit(independent_columns, dependent_column)
 
-        forcasted_data = df1[['SolarIrradiance (W/m2)', 'RealFeelTemp (°C)', 'UVIndex', 'UV Index Text']].tail(12)
+        forcasted_data = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex', 'UV Index Text']].tail(12)
 
         return_array = list(rfr.predict(forcasted_data))
 
@@ -256,14 +256,14 @@ def summary_value(n_intervals, select_trees, select_random_state):
 
     elif time_name >= '12:00:00' and time_name <= '23:59:59':
         count_total_rows = len(df1) - 24
-        independent_columns = df1[['SolarIrradiance (W/m2)', 'RealFeelTemp (°C)', 'UVIndex', 'UV Index Text']][
+        independent_columns = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex', 'UV Index Text']][
                               0:count_total_rows]
         dependent_column = df1['Power (KW)'][0:count_total_rows]
 
         rfr = RandomForestRegressor(n_estimators = select_trees, random_state = select_random_state)
         rfr.fit(independent_columns, dependent_column)
 
-        forcasted_data = df1[['SolarIrradiance (W/m2)', 'RealFeelTemp (°C)', 'UVIndex', 'UV Index Text']].tail(24)
+        forcasted_data = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex', 'UV Index Text']].tail(24)
 
         return_array = list(rfr.predict(forcasted_data))
 
