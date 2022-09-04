@@ -51,10 +51,10 @@ def third_hour_forecast_weather_value(n_intervals):
     pr = api_data[2]['PrecipitationProbability']
     now = datetime.now()
     time_name = now.strftime('%H:%M:%S')
-    sun_time1 = '20:42:00'
+    sun_time1 = '19:50:00'
     sun_time2 = '23:59:59'
     sun_time3 = '00:00:00'
-    sun_time4 = '05:45:00'
+    sun_time4 = '06:25:00'
 
     if tme1 >= sun_time1 and tme1 <= sun_time2 and weather_status == 'Clear':
         return [
