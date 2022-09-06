@@ -14,6 +14,7 @@ import sqlalchemy
 from dash import dash_table as dt
 import time
 import csv
+from components.select_date import training_dataset_date
 
 now = datetime.now()
 time_name = now.strftime('%H:%M:%S')
@@ -32,7 +33,7 @@ df['Time'] = df['Time'].astype(str)
 rearrange_columns = ['Date Time', 'Date', 'Time', 'Hour', 'Voltage', 'Current', 'Power (W)', 'Power (KW)']
 df = df[rearrange_columns]
 unique_date = df['Date'].unique()
-filter_daily_values = df[(df['Date'] > '2022-08-11') & (df['Date'] <= unique_date[-2])][
+filter_daily_values = df[(df['Date'] >= training_dataset_date) & (df['Date'] <= unique_date[-2])][
     ['Date', 'Hour', 'Power (KW)']]
 daily_hourly_values = filter_daily_values.groupby(['Date', 'Hour'])['Power (KW)'].sum().reset_index()
 
@@ -55,7 +56,7 @@ weather_data.loc[
                                                   'CloudCover (%)', 'UV Index Text']] = 0
 unique_weather_date = weather_data['Date'].unique()
 hourly_weather = \
-    weather_data[(weather_data['Date'] >= '2022-08-11') & (weather_data['Date'] <= unique_weather_date[-2])][
+    weather_data[(weather_data['Date'] >= training_dataset_date) & (weather_data['Date'] <= unique_weather_date[-2])][
         ['Date', 'Time', 'SolarIrradiance (W/m2)', 'weather status', 'Temp (°C)', 'RealFeelTemp (°C)',
          'DewPoint (°C)', 'Wind (km/h)',
          'Direction', 'Hum (%)', 'Visibility (km)', 'UVIndex', 'UVIndexText', 'PreProbability (%)',

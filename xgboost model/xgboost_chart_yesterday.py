@@ -14,6 +14,7 @@ from xgboost import XGBRegressor
 import sqlalchemy
 from dash import dash_table as dt
 import time
+from components.select_date import training_dataset_date
 
 header_list = ['Date Time', 'Voltage', 'Current']
 df = pd.read_csv('https://raw.githubusercontent.com/Mubeen31/solar-power-and-weather-data/main/sensors_data.csv',
@@ -63,7 +64,7 @@ filter_last_day_values = df[df['Date'] == unique_date[-2]][['Date', 'Hour', 'Pow
 last_day_hourly_values = filter_last_day_values.groupby(['Date', 'Hour'])['Power (KW)'].sum().reset_index()
 last_day_hourly_values_sum = last_day_hourly_values['Power (KW)'].sum()
 
-filter_yes_values = df[(df['Date'] >= '2022-08-11') & (df['Date'] <= unique_date[-3])][
+filter_yes_values = df[(df['Date'] >= training_dataset_date) & (df['Date'] <= unique_date[-3])][
     ['Date', 'Hour', 'Power (KW)']]
 yes_hourly_values = filter_yes_values.groupby(['Date', 'Hour'])['Power (KW)'].sum().reset_index()
 header_list = ['Date', 'Time', 'SolarIrradiance (W/m2)', 'weather status', 'Temp (°C)', 'RealFeelTemp (°C)',
@@ -80,7 +81,7 @@ weather_data1.loc[
                                                    'UV Index Text']] = 0
 weather_unique_date = weather_data1['Date'].unique()
 filter_weather_yes_values = \
-    weather_data1[(weather_data1['Date'] >= '2022-08-11') & (weather_data1['Date'] <= weather_unique_date[-3])][
+    weather_data1[(weather_data1['Date'] >= training_dataset_date) & (weather_data1['Date'] <= weather_unique_date[-3])][
         ['Date', 'SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex',
          'UV Index Text']].reset_index()
 filter_weather_yes_values.drop(['index'], axis = 1, inplace = True)

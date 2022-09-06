@@ -15,6 +15,7 @@ from sklearn import metrics
 import sqlalchemy
 from dash import dash_table as dt
 import time
+from components.select_date import training_dataset_date
 
 font_awesome = "https://use.fontawesome.com/releases/v5.10.2/css/all.css"
 meta_tags = [{"name": "viewport", "content": "width=device-width"}]
@@ -71,7 +72,7 @@ def summary_value(n_intervals, select_trees, select_random_state):
     rearrange_columns = ['Date Time', 'Date', 'Time', 'Hour', 'Voltage', 'Current', 'Power (W)', 'Power (KW)']
     df = df[rearrange_columns]
     unique_date = df['Date'].unique()
-    filter_daily_values = df[(df['Date'] > '2022-08-11') & (df['Date'] <= unique_date[-2])][
+    filter_daily_values = df[(df['Date'] >= training_dataset_date) & (df['Date'] <= unique_date[-2])][
         ['Date', 'Hour', 'Power (KW)']]
     daily_hourly_values = filter_daily_values.groupby(['Date', 'Hour'])['Power (KW)'].sum().reset_index()
 
@@ -92,7 +93,7 @@ def summary_value(n_intervals, select_trees, select_random_state):
                                                                    'CloudCover (%)', 'UV Index Text']] = 0
     unique_weather_date = weather_data['Date'].unique()
     hourly_weather = \
-        weather_data[(weather_data['Date'] >= '2022-08-11') & (weather_data['Date'] <= unique_weather_date[-2])][
+        weather_data[(weather_data['Date'] >= training_dataset_date) & (weather_data['Date'] <= unique_weather_date[-2])][
             ['Date', 'Time', 'SolarIrradiance (W/m2)', 'weather status', 'Temp (°C)', 'RealFeelTemp (°C)',
              'DewPoint (°C)',
              'Wind (km/h)',
@@ -112,7 +113,7 @@ def summary_value(n_intervals, select_trees, select_random_state):
     last_day_hourly_values = filter_last_day_values.groupby(['Date', 'Hour'])['Power (KW)'].sum().reset_index()
     last_day_hourly_values_sum = last_day_hourly_values['Power (KW)'].sum()
 
-    filter_yes_values = df[(df['Date'] >= '2022-08-11') & (df['Date'] <= unique_date[-3])][
+    filter_yes_values = df[(df['Date'] >= training_dataset_date) & (df['Date'] <= unique_date[-3])][
         ['Date', 'Hour', 'Power (KW)']]
     yes_hourly_values = filter_yes_values.groupby(['Date', 'Hour'])['Power (KW)'].sum().reset_index()
     header_list = ['Date', 'Time', 'SolarIrradiance (W/m2)', 'weather status', 'Temp (°C)', 'RealFeelTemp (°C)',
@@ -129,7 +130,7 @@ def summary_value(n_intervals, select_trees, select_random_state):
                                                        'UV Index Text']] = 0
     weather_unique_date = weather_data1['Date'].unique()
     filter_weather_yes_values = \
-    weather_data1[(weather_data1['Date'] >= '2022-08-11') & (weather_data1['Date'] <= unique_weather_date[-3])][
+    weather_data1[(weather_data1['Date'] >= training_dataset_date) & (weather_data1['Date'] <= unique_weather_date[-3])][
         ['Date', 'SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex',
          'UV Index Text']].reset_index()
     filter_weather_yes_values.drop(['index'], axis = 1, inplace = True)
