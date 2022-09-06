@@ -82,8 +82,9 @@ def random_forest_regression_chart_value(n_intervals, select_trees, select_rando
                        'Direction', 'Hum (%)', 'Visibility (km)', 'UVIndex', 'UVIndexText', 'PreProbability (%)',
                        'RainProbability (%)',
                        'CloudCover (%)']
-        weather_data = pd.read_csv('hourly_weather_forecasted_data.csv', names = header_list,
-                                   encoding = 'unicode_escape')
+        weather_data = pd.read_csv(
+        'https://raw.githubusercontent.com/Mubeen31/solar-power-and-weather-data/main/hourly_weather_forecasted_data.csv',
+        names = header_list, encoding = 'unicode_escape')
         weather_data['UV Index Text'] = pd.factorize(weather_data['UVIndexText'])[0]
         weather_data.loc[
             weather_data['SolarIrradiance (W/m2)'] == 0, ['weather status', 'Temp (°C)', 'RealFeelTemp (°C)',
