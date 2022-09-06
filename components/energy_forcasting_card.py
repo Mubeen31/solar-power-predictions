@@ -58,8 +58,7 @@ def random_forest_regression_card_value(n_intervals, select_trees, select_random
         raise PreventUpdate
     else:
         n = 1
-        # now = datetime.now() + timedelta(hours = n)
-        now = datetime.now()
+        now = datetime.now() + timedelta(hours = n)
         time_name = now.strftime('%H:%M:%S')
         header_list = ['Date Time', 'Voltage', 'Current']
         df = pd.read_csv(
