@@ -58,7 +58,8 @@ def random_forest_regression_card_value(n_intervals, select_trees, select_random
         raise PreventUpdate
     else:
         n = 1
-        now = datetime.now() + timedelta(hours = n)
+        # now = datetime.now() + timedelta(hours = n)
+        now = datetime.now()
         time_name = now.strftime('%H:%M:%S')
         header_list = ['Date Time', 'Voltage', 'Current']
         df = pd.read_csv(
@@ -114,7 +115,7 @@ def random_forest_regression_card_value(n_intervals, select_trees, select_random
                                                      'UV Index Text']] = 0
 
     if time_name >= '00:00:00' and time_name <= '11:59:59':
-        count_total_rows = len(df1) - 12
+        count_total_rows = len(df1)
         independent_columns = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex',
                                    'UV Index Text']][
                               0:count_total_rows]
@@ -142,7 +143,7 @@ def random_forest_regression_card_value(n_intervals, select_trees, select_random
         energy_wh = (data_dataframe['Power (KW)'].sum()) * 1000
 
     elif time_name >= '12:00:00' and time_name <= '23:59:59':
-        count_total_rows = len(df1) - 24
+        count_total_rows = len(df1)
         independent_columns = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex',
                                    'UV Index Text']][
                               0:count_total_rows]
@@ -168,6 +169,7 @@ def random_forest_regression_card_value(n_intervals, select_trees, select_random
         data_dataframe = pd.DataFrame(data_dict)
 
         energy_kwh = data_dataframe['Power (KW)'].sum()
+        print(energy_kwh)
         energy_wh = (data_dataframe['Power (KW)'].sum()) * 1000
 
     return [
