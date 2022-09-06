@@ -173,7 +173,7 @@ def summary_value(n_intervals, select_trees, select_random_state):
     rfr_yes_rs = metrics.r2_score(last_day_hourly_values['Power (KW)'], rfr_yes_predicted_data['Power (KW)'])
 
     if time_name >= '00:00:00' and time_name <= '11:59:59':
-        count_total_rows = len(df1) - 12
+        count_total_rows = len(df1)
         independent_columns = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex',
                                    'UV Index Text']][
                               0:count_total_rows]
@@ -212,7 +212,7 @@ def summary_value(n_intervals, select_trees, select_random_state):
 
 
     elif time_name >= '12:00:00' and time_name <= '23:59:59':
-        count_total_rows = len(df1) - 24
+        count_total_rows = len(df1)
         independent_columns = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex',
                                    'UV Index Text']][
                               0:count_total_rows]
@@ -251,7 +251,7 @@ def summary_value(n_intervals, select_trees, select_random_state):
         r_squared_24 = metrics.r2_score(today_hourly_values['Power (KW)'],
                                         df4['Power (KW)'].head(length_today_hourly_values))
     if time_name >= '00:00:00' and time_name <= '11:59:59':
-        count_total_rows = len(df1) - 12
+        count_total_rows = len(df1)
         independent_columns = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex',
                                    'UV Index Text']][
                               0:count_total_rows]
@@ -289,7 +289,7 @@ def summary_value(n_intervals, select_trees, select_random_state):
                                            data_dataframe['Power (KW)'].head(length_today_hourly_values))
 
     elif time_name >= '12:00:00' and time_name <= '23:59:59':
-        count_total_rows = len(df1) - 24
+        count_total_rows = len(df1)
         independent_columns = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex',
                                    'UV Index Text']][
                               0:count_total_rows]

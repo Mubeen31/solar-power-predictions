@@ -72,7 +72,7 @@ df1.loc[df1['SolarIrradiance (W/m2)'] == 0, ['Temp (°C)', 'RealFeelTemp (°C)',
                                              'UV Index Text']] = 0
 
 if time_name >= '00:00:00' and time_name <= '11:59:59':
-    count_total_rows = len(df1) - 12
+    count_total_rows = len(df1)
     independent_columns = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex',
                                'UV Index Text']][
                           0:count_total_rows]
@@ -98,7 +98,7 @@ if time_name >= '00:00:00' and time_name <= '11:59:59':
     data_dataframe.to_csv('today_predicted_chart_data.csv', index = False)
 
 elif time_name >= '12:00:00' and time_name <= '23:59:59':
-    count_total_rows = len(df1) - 24
+    count_total_rows = len(df1)
     independent_columns = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex',
                                'UV Index Text']][
                           0:count_total_rows]
