@@ -36,34 +36,34 @@ today_date = df['Date'].unique()
 rearrange_columns = ['Date Time', 'Date', 'Time', 'Hour', 'Voltage', 'Current', 'Power (W)', 'Power (KW)']
 df = df[rearrange_columns]
 unique_date = df['Date'].unique()
-filter_daily_values = df[(df['Date'] > '2022-06-24') & (df['Date'] <= unique_date[-2])][
-    ['Date', 'Hour', 'Power (KW)']]
-daily_hourly_values = filter_daily_values.groupby(['Date', 'Hour'])['Power (KW)'].sum().reset_index()
-
-header_list = ['Date', 'Time', 'SolarIrradiance (W/m2)', 'weather status', 'Temp (°C)', 'RealFeelTemp (°C)',
-               'DewPoint (°C)',
-               'Wind (km/h)',
-               'Direction', 'Hum (%)', 'Visibility (km)', 'UVIndex', 'UVIndexText', 'PreProbability (%)',
-               'RainProbability (%)',
-               'CloudCover (%)']
-weather_data = pd.read_csv(
-    'https://raw.githubusercontent.com/Mubeen31/solar-power-and-weather-data/main/hourly_weather_forecasted_data.csv',
-    names = header_list,
-    encoding = 'unicode_escape')
-weather_data['UV Index Text'] = pd.factorize(weather_data['UVIndexText'])[0]
-weather_data.drop(['Date', 'Time', 'DewPoint (°C)', 'Direction', 'Visibility (km)',
-                   'UVIndexText', 'PreProbability (%)', 'RainProbability (%)', 'weather status', 'Hum (%)',
-                   'CloudCover (%)'], axis = 1, inplace = True)
-
-df1 = pd.concat([daily_hourly_values, weather_data], axis = 1)
-df1.drop(['Date', 'Hour'], axis = 1, inplace = True)
-df1.loc[df1['SolarIrradiance (W/m2)'] == 0, ['Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex', 'UV Index Text']] = 0
+# filter_daily_values = df[(df['Date'] > '2022-08-11') & (df['Date'] <= unique_date[-2])][
+#     ['Date', 'Hour', 'Power (KW)']]
+# daily_hourly_values = filter_daily_values.groupby(['Date', 'Hour'])['Power (KW)'].sum().reset_index()
+#
+# header_list = ['Date', 'Time', 'SolarIrradiance (W/m2)', 'weather status', 'Temp (°C)', 'RealFeelTemp (°C)',
+#                'DewPoint (°C)',
+#                'Wind (km/h)',
+#                'Direction', 'Hum (%)', 'Visibility (km)', 'UVIndex', 'UVIndexText', 'PreProbability (%)',
+#                'RainProbability (%)',
+#                'CloudCover (%)']
+# weather_data = pd.read_csv(
+#     'https://raw.githubusercontent.com/Mubeen31/solar-power-and-weather-data/main/hourly_weather_forecasted_data.csv',
+#     names = header_list,
+#     encoding = 'unicode_escape')
+# weather_data['UV Index Text'] = pd.factorize(weather_data['UVIndexText'])[0]
+# weather_data.drop(['Date', 'Time', 'DewPoint (°C)', 'Direction', 'Visibility (km)',
+#                    'UVIndexText', 'PreProbability (%)', 'RainProbability (%)', 'weather status', 'Hum (%)',
+#                    'CloudCover (%)'], axis = 1, inplace = True)
+#
+# df1 = pd.concat([daily_hourly_values, weather_data], axis = 1)
+# df1.drop(['Date', 'Hour'], axis = 1, inplace = True)
+# df1.loc[df1['SolarIrradiance (W/m2)'] == 0, ['Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex', 'UV Index Text']] = 0
 
 filter_last_day_values = df[df['Date'] == unique_date[-2]][['Date', 'Hour', 'Power (KW)']]
 last_day_hourly_values = filter_last_day_values.groupby(['Date', 'Hour'])['Power (KW)'].sum().reset_index()
 last_day_hourly_values_sum = last_day_hourly_values['Power (KW)'].sum()
 
-filter_yes_values = df[(df['Date'] >= '2022-06-25') & (df['Date'] <= unique_date[-3])][
+filter_yes_values = df[(df['Date'] >= '2022-08-11') & (df['Date'] <= unique_date[-3])][
     ['Date', 'Hour', 'Power (KW)']]
 yes_hourly_values = filter_yes_values.groupby(['Date', 'Hour'])['Power (KW)'].sum().reset_index()
 header_list = ['Date', 'Time', 'SolarIrradiance (W/m2)', 'weather status', 'Temp (°C)', 'RealFeelTemp (°C)',
@@ -75,18 +75,25 @@ weather_data1 = pd.read_csv(
     'https://raw.githubusercontent.com/Mubeen31/solar-power-and-weather-data/main/hourly_weather_forecasted_data.csv',
     names = header_list, encoding = 'unicode_escape')
 weather_data1['UV Index Text'] = pd.factorize(weather_data1['UVIndexText'])[0]
-weather_data1.loc[weather_data1['SolarIrradiance (W/m2)'] == 0, ['Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex', 'UV Index Text']] = 0
+weather_data1.loc[
+    weather_data1['SolarIrradiance (W/m2)'] == 0, ['Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex',
+                                                   'UV Index Text']] = 0
 weather_unique_date = weather_data1['Date'].unique()
-filter_weather_yes_values = weather_data1[
-    (weather_data1['Date'] >= '2022-06-25') &
-    (weather_data1['Date'] <= weather_unique_date[-3])][
-    ['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex', 'UV Index Text']]
+filter_weather_yes_values = \
+    weather_data1[(weather_data1['Date'] >= '2022-08-11') & (weather_data1['Date'] <= weather_unique_date[-3])][
+        ['Date', 'SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex',
+         'UV Index Text']].reset_index()
+filter_weather_yes_values.drop(['index'], axis = 1, inplace = True)
+
 yes_df1 = pd.concat([yes_hourly_values, filter_weather_yes_values], axis = 1)
 yes_df1.drop(['Date', 'Hour'], axis = 1, inplace = True)
 yes_count_total_rows = len(yes_df1)
-yes_independent_columns = yes_df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex', 'UV Index Text']][
+yes_independent_columns = yes_df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex',
+                                   'UV Index Text']][
                           0:yes_count_total_rows]
-yes_independent_columns1 = yes_df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex', 'UV Index Text']][
+yes_independent_columns1 = yes_df1[
+                               ['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex',
+                                'UV Index Text']][
                            0:yes_count_total_rows]
 yes_dependent_column = yes_df1['Power (KW)'][0:yes_count_total_rows]
 yes_reg = XGBRegressor()

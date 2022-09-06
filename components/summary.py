@@ -124,11 +124,16 @@ def summary_value(n_intervals, select_trees, select_random_state):
         'https://raw.githubusercontent.com/Mubeen31/solar-power-and-weather-data/main/hourly_weather_forecasted_data.csv',
         names = header_list, encoding = 'unicode_escape')
     weather_data1['UV Index Text'] = pd.factorize(weather_data1['UVIndexText'])[0]
+    weather_data1.loc[
+        weather_data1['SolarIrradiance (W/m2)'] == 0, ['Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex',
+                                                       'UV Index Text']] = 0
     weather_unique_date = weather_data1['Date'].unique()
-    filter_weather_yes_values = weather_data1[
-        (weather_data1['Date'] >= '2022-08-11') &
-        (weather_data1['Date'] <= weather_unique_date[-3])][
-        ['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex', 'UV Index Text']]
+    filter_weather_yes_values = \
+    weather_data1[(weather_data1['Date'] >= '2022-08-11') & (weather_data1['Date'] <= unique_weather_date[-3])][
+        ['Date', 'SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex',
+         'UV Index Text']].reset_index()
+    filter_weather_yes_values.drop(['index'], axis = 1, inplace = True)
+
     yes_df1 = pd.concat([yes_hourly_values, filter_weather_yes_values], axis = 1)
     yes_df1.drop(['Date', 'Hour'], axis = 1, inplace = True)
     yes_df1.loc[yes_df1['SolarIrradiance (W/m2)'] == 0, ['Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex',
