@@ -76,7 +76,7 @@ def random_forest_regression_card_value(n_intervals, select_trees, select_random
         rearrange_columns = ['Date Time', 'Date', 'Time', 'Hour', 'Voltage', 'Current', 'Power (W)', 'Power (KW)']
         df = df[rearrange_columns]
         unique_date = df['Date'].unique()
-        filter_daily_values = df[(df['Date'] >= training_dataset_date) & (df['Date'] <= unique_date[-2])][
+        filter_daily_values = df[(df['Date'] >= '2022-08-28') & (df['Date'] <= unique_date[-2])][
             ['Date', 'Hour', 'Power (KW)']]
         daily_hourly_values = filter_daily_values.groupby(['Date', 'Hour'])['Power (KW)'].sum().reset_index()
 
@@ -98,7 +98,7 @@ def random_forest_regression_card_value(n_intervals, select_trees, select_random
         unique_weather_date = weather_data['Date'].unique()
         hourly_weather = \
             weather_data[
-                (weather_data['Date'] >= training_dataset_date) & (weather_data['Date'] <= unique_weather_date[-2])][
+                (weather_data['Date'] >= '2022-08-28') & (weather_data['Date'] <= unique_weather_date[-2])][
                 ['Date', 'Time', 'SolarIrradiance (W/m2)', 'weather status', 'Temp (°C)', 'RealFeelTemp (°C)',
                  'DewPoint (°C)', 'Wind (km/h)',
                  'Direction', 'Hum (%)', 'Visibility (km)', 'UVIndex', 'UVIndexText', 'PreProbability (%)',
