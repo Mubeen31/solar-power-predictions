@@ -15,22 +15,35 @@ from dash import dash_table as dt
 import time
 import csv
 from components.select_date import training_dataset_date
+from google.oauth2 import service_account
+import pandas_gbq as pd1
+import pandas as pd2
 
 now = datetime.now()
 time_name = now.strftime('%H:%M:%S')
-header_list = ['Date Time', 'Voltage', 'Current']
-df = pd.read_csv('https://raw.githubusercontent.com/Mubeen31/solar-power-and-weather-data/main/sensors_data.csv',
-                 names = header_list)
-df['Power (W)'] = df['Voltage'] * df['Current']
+header_list = ['DateTime', 'Voltage', 'ValueCurrent']
+df1 = pd2.read_csv('Solar data 25-06-2022 to 12-09-2022.csv', names = header_list)
+credentials = service_account.Credentials.from_service_account_file('solardata-key.json')
+project_id = 'solardata-360222'
+df_sql = f"""SELECT
+                DateTime,
+                Voltage,
+                ValueCurrent
+                FROM `solardata-360222.SolarSensorsData.SensorsData`
+                ORDER BY DateTime
+                """
+df2 = pd1.read_gbq(df_sql, project_id = project_id, dialect = 'standard', credentials = credentials)
+df = pd2.concat([df1, df2], axis = 0, join = "inner", ignore_index = True)
+df['Power (W)'] = df['Voltage'] * df['ValueCurrent']
 df['Power (KW)'] = df['Power (W)'] / 1000
-df['Date Time'] = pd.to_datetime(df['Date Time'])
-df['Date'] = df['Date Time'].dt.date
+df['DateTime'] = pd.to_datetime(df['DateTime'])
+df['Date'] = df['DateTime'].dt.date
 df['Date'] = pd.to_datetime(df['Date'])
-df['Time'] = pd.to_datetime(df['Date Time']).dt.time
-df['Hour'] = pd.to_datetime(df['Date Time']).dt.hour
+df['Time'] = pd.to_datetime(df['DateTime']).dt.time
+df['Hour'] = pd.to_datetime(df['DateTime']).dt.hour
 df['Time'] = df['Time'].astype(str)
 # df['Hour'] = df['Hour'].astype(str)
-rearrange_columns = ['Date Time', 'Date', 'Time', 'Hour', 'Voltage', 'Current', 'Power (W)', 'Power (KW)']
+rearrange_columns = ['DateTime', 'Date', 'Time', 'Hour', 'Voltage', 'ValueCurrent', 'Power (W)', 'Power (KW)']
 df = df[rearrange_columns]
 unique_date = df['Date'].unique()
 filter_daily_values = df[(df['Date'] >= training_dataset_date) & (df['Date'] <= unique_date[-2])][

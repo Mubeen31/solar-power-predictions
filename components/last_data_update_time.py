@@ -11,6 +11,9 @@ from sklearn import linear_model
 import sqlalchemy
 from dash import dash_table as dt
 import time
+from google.oauth2 import service_account
+import pandas_gbq as pd1
+import pandas as pd2
 
 font_awesome = "https://use.fontawesome.com/releases/v5.10.2/css/all.css"
 meta_tags = [{"name": "viewport", "content": "width=device-width"}]
@@ -20,16 +23,38 @@ app = dash.Dash(__name__, external_stylesheets = external_stylesheets)
 
 html.Div([
     dcc.Interval(id = 'update_date_time_value',
-                 interval = 60000,
+                 interval = 64000,
                  n_intervals = 0),
 ]),
 
 
 def last_data_update_time_value(n_intervals):
-    header_list = ['Date Time', 'Voltage', 'Current']
-    df = pd.read_csv('https://raw.githubusercontent.com/Mubeen31/solar-power-and-weather-data/main/sensors_data.csv', names = header_list)
-    df['Date Time'] = pd.to_datetime(df['Date Time'])
-    get_date_time = str(df['Date Time'].tail(1).iloc[0].strftime("%d-%m-%Y %H:%M:%S"))
+    header_list = ['DateTime', 'Voltage', 'ValueCurrent']
+    df1 = pd2.read_csv('Solar data 25-06-2022 to 12-09-2022.csv', names = header_list)
+    credentials = service_account.Credentials.from_service_account_file('solardata-key.json')
+    project_id = 'solardata-360222'
+    df_sql = f"""SELECT
+                DateTime,
+                Voltage,
+                ValueCurrent
+                FROM `solardata-360222.SolarSensorsData.SensorsData`
+                ORDER BY DateTime
+                """
+    df2 = pd1.read_gbq(df_sql, project_id = project_id, dialect = 'standard', credentials = credentials)
+    df = pd2.concat([df1, df2], axis = 0, join = "inner", ignore_index = True)
+    df['Power (W)'] = df['Voltage'] * df['ValueCurrent']
+    df['Power (KW)'] = df['Power (W)'] / 1000
+    df['DateTime'] = pd.to_datetime(df['DateTime'])
+    df['Date'] = df['DateTime'].dt.date
+    df['Date'] = pd.to_datetime(df['Date'])
+    df['Time'] = pd.to_datetime(df['DateTime']).dt.time
+    df['Hour'] = pd.to_datetime(df['DateTime']).dt.hour
+    df['Time'] = df['Time'].astype(str)
+    # df['Hour'] = df['Hour'].astype(str)
+    rearrange_columns = ['DateTime', 'Date', 'Time', 'Hour', 'Voltage', 'ValueCurrent', 'Power (W)', 'Power (KW)']
+    df = df[rearrange_columns]
+    df['DateTime'] = pd.to_datetime(df['DateTime'])
+    get_date_time = str(df['DateTime'].tail(1).iloc[0].strftime("%d-%m-%Y %H:%M:%S"))
 
     return [
         html.Div('Last Updated Time: ' + get_date_time),

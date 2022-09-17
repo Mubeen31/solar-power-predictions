@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "solardata-360222",
+  "private_key_id": "40d4b95349989c4157b9eb154275f7efc828b8db",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDGMVNmgd/6S66x\nzfuEA6/it5Zhjmup8nFphqmXhX/Aq4bk1w2LixPfoj/dXGNhzAuoAGYN4JhcpG/h\nwGTAZTn4sbiRG5BUCHUEU/ft/2u9FjkrIX86f9HrkU1+gpwCJAPk3zPgTc3StsuL\nvYnlEjP3YvjB+ihZ6LVZwrjto+m53mMqv7bufTk+xoGqnmO3mYm986BNKlX9b64j\nUNcomqePSJNyZHc7qN7xCos9eugOhYAGG/K7au96kZ1gQkFjDqGee7N2ToU9rROm\nSch9/Od7MBnTFwR2FZN5DRhELfVxM7nToKp7NCXCnW/hexLSxz8YT/tFDEtyn04j\nIqQhxRrNAgMBAAECggEAAi/+y3x6pyNHJVSqRNv9EiG/+E5dD9irQyYmo7kHaaAu\ni3ruzBh9VsMDdo+8REsQXr/dG9AaO0g3llmUBjj3BIT5QBD0R7Td8hApVy6GWkMe\nBM43LvVN9cNIYgwHiIlYM7T/8HtIPFrhKqPlkdquxj+epSknpftFuBH6QAKtsf62\nAfMs6BcX561rJ10QMSD3POaqW1deOSaKofuLfgGzcz7Szp+W58A4z5ViKvsmVXgy\nTmaN8adBvTErQP0hS8l4jK/eBo2SHlwVjB8F6+t9jK+PAvr4szfZtp3SPbR6Kv53\nTzbxYZMLKmB6FO4JiEUR6XCf3UvsxmGEgvtz981gHQKBgQDn34moMaFDBSERVrgZ\nggAB+NSU9e+G41TlqyEnYbcOeZZrQpL6FotVcMgHQ/h/u++rj6UP2vuBQUM29BAK\nbojMQ1H+rL/m2SEReQjCzKoubT4/leMTMsuzgijrMBKkTMhjHjmm3tlP9/4J1L53\n04P8WswRTmzJLvmnpWe7Gf8crwKBgQDa0KHNL+O9sFfLA+YaGHZup6AUW9vhn8BP\nUJSBMXXym/Thl1/eSBT05FBc6kp7O2Sp4HaTCxEdxRdgikolOntFAd0jZWeJcz6a\nfm9RY8qM7yr09E+4nxXSdDzXx9AgDJYZE6TVPxCfaFyCwQjwXN7+78D2z1Oz9noP\n5rMONFk3QwKBgEaVh6QJp5ttPkm26kfpiPMQujW2P/oBzeA0Hd2NI1pmrOFt3KwA\nnN2ffWSozkakAStqiMaw1IreQQXDefaS+1Wi0J0EHU66nhRhkccq4ktLuf1FNWCs\nv9GfN7GQarxVG1MA6m/fuqtbRJvdhTWYz77MLP6/ruH3SMw9z7vnB//FAoGABtZ+\nN+tHMqZQGAgHKMma6dpTJk+4j1RurgvWmDLzfKFjBam1VTzraru3xy+LJE621pgt\nHGs8HbILCPlJV+B7+awVPQXuNl1jl3BcCi8UJVNUBFOeKibOh8UaIaQc3OOHzUDP\n5doSquiX+34MyXYdgdn8LbpM41LQfa636bm5EAECgYAC1zPmnsRFs1FUe7nCLGCM\nHVeUK+p4saMa1t4bNpHgOjkzwg8dABPqaiMQ2BHs2ngQOhTEe90OHSgrJzP4nx/i\nYy2tiRsPd/eptqj92iycG6sQP8kl+qjeq6omFJ2Z5ouy5fM24Qj45VjrAZoG8Kxw\nmL+Tu0IMcb0qQrTjBkPGYA==\n-----END PRIVATE KEY-----\n",
+  "client_email": "solar-data-predictions@solardata-360222.iam.gserviceaccount.com",
+  "client_id": "106510689411907397923",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/solar-data-predictions%40solardata-360222.iam.gserviceaccount.com"
+}
