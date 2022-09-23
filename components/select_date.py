@@ -1,1 +1,1 @@
-training_dataset_date = '2022-09-10'
+training_dataset_date = '2022-09-03'
