@@ -106,7 +106,8 @@ def summary_value(n_intervals, select_trees, select_random_state):
                                                                    'CloudCover (%)', 'UV Index Text']] = 0
     unique_weather_date = weather_data['Date'].unique()
     hourly_weather = \
-        weather_data[(weather_data['Date'] >= training_dataset_date) & (weather_data['Date'] <= unique_weather_date[-2])][
+        weather_data[
+            (weather_data['Date'] >= training_dataset_date) & (weather_data['Date'] <= unique_weather_date[-2])][
             ['Date', 'Time', 'SolarIrradiance (W/m2)', 'weather status', 'Temp (°C)', 'RealFeelTemp (°C)',
              'DewPoint (°C)',
              'Wind (km/h)',
@@ -143,9 +144,10 @@ def summary_value(n_intervals, select_trees, select_random_state):
                                                        'UV Index Text']] = 0
     weather_unique_date = weather_data1['Date'].unique()
     filter_weather_yes_values = \
-    weather_data1[(weather_data1['Date'] >= training_dataset_date) & (weather_data1['Date'] <= unique_weather_date[-3])][
-        ['Date', 'SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex',
-         'UV Index Text']].reset_index()
+        weather_data1[
+            (weather_data1['Date'] >= training_dataset_date) & (weather_data1['Date'] <= unique_weather_date[-3])][
+            ['Date', 'SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex',
+             'UV Index Text']].reset_index()
     filter_weather_yes_values.drop(['index'], axis = 1, inplace = True)
 
     yes_df1 = pd.concat([yes_hourly_values, filter_weather_yes_values], axis = 1)
@@ -185,518 +187,519 @@ def summary_value(n_intervals, select_trees, select_random_state):
                                               rfr_yes_predicted_data['Power (KW)'])
     rfr_yes_rs = metrics.r2_score(last_day_hourly_values['Power (KW)'], rfr_yes_predicted_data['Power (KW)'])
 
-    if time_name >= '00:00:00' and time_name <= '11:59:59':
-        count_total_rows = len(df1)
-        independent_columns = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex',
-                                   'UV Index Text']][
-                              0:count_total_rows]
-        dependent_column = df1['Power (KW)'][0:count_total_rows]
+    # if time_name >= '00:00:00' and time_name <= '11:59:59':
+    #     count_total_rows = len(df1)
+    #     independent_columns = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex',
+    #                                'UV Index Text']][
+    #                           0:count_total_rows]
+    #     dependent_column = df1['Power (KW)'][0:count_total_rows]
+    #
+    #     # reg = XGBRegressor(n_estimators=69)
+    #     # reg.fit(independent_columns, dependent_column)
+    #
+    #     forcasted_data = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex',
+    #                           'UV Index Text']].tail(12)
+    #
+    #     # return_array = list(reg.predict(forcasted_data))
+    #
+    #     date = now.strftime('%Y-%m-%d')
+    #     current_date_12 = [date, date, date, date, date, date, date, date, date, date, date, date]
+    #
+    #     hours_12 = list(daily_hourly_values['Hour'][0:12])
+    #
+    #     # data_dict = {'Date': current_date_12, 'Hour': hours_12, 'Power (KW)': return_array}
+    #     #
+    #     # data_dataframe = pd.DataFrame(data_dict)
+    #     df4 = pd.read_csv('xgboost model/today_predicted_chart_data.csv')
+    #     data_12 = df4['Power (KW)'].sum()
+    #
+    #     filter_today_values = df[df['Date'] == unique_date[-1]][['Date', 'Hour', 'Power (KW)']]
+    #     today_hourly_values = filter_today_values.groupby(['Date', 'Hour'])['Power (KW)'].sum().reset_index()
+    #     length_today_hourly_values = len(today_hourly_values)
+    #     today_sum_12 = today_hourly_values['Power (KW)'].sum()
+    #     mean_sq_error_12 = metrics.mean_squared_error(today_hourly_values['Power (KW)'],
+    #                                                   df4['Power (KW)'].head(length_today_hourly_values))
+    #     root_mean_sq_error_12 = np.sqrt(mean_sq_error_12)
+    #     mean_ab_error_12 = metrics.mean_absolute_error(today_hourly_values['Power (KW)'],
+    #                                                    df4['Power (KW)'].head(length_today_hourly_values))
+    #     r_squared_12 = metrics.r2_score(today_hourly_values['Power (KW)'],
+    #                                     df4['Power (KW)'].head(length_today_hourly_values))
+    #
+    #
+    # elif time_name >= '12:00:00' and time_name <= '23:59:59':
+    count_total_rows = len(df1)
+    independent_columns = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex',
+                               'UV Index Text']][
+                          0:count_total_rows]
+    dependent_column = df1['Power (KW)'][0:count_total_rows]
 
-        # reg = XGBRegressor(n_estimators=69)
-        # reg.fit(independent_columns, dependent_column)
+    # reg = XGBRegressor(n_estimators=69)
+    # reg.fit(independent_columns, dependent_column)
 
-        forcasted_data = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex',
-                              'UV Index Text']].tail(12)
+    forcasted_data = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex',
+                          'UV Index Text']].tail(24)
 
-        # return_array = list(reg.predict(forcasted_data))
+    # return_array = list(reg.predict(forcasted_data))
 
-        date = now.strftime('%Y-%m-%d')
-        current_date_12 = [date, date, date, date, date, date, date, date, date, date, date, date]
+    date = now.strftime('%Y-%m-%d')
+    current_date_24 = [date, date, date, date, date, date, date, date, date, date, date, date, date, date, date,
+                       date, date, date, date, date, date, date, date, date]
 
-        hours_12 = list(daily_hourly_values['Hour'][0:12])
+    hours_24 = list(daily_hourly_values['Hour'][0:24])
 
-        # data_dict = {'Date': current_date_12, 'Hour': hours_12, 'Power (KW)': return_array}
-        #
-        # data_dataframe = pd.DataFrame(data_dict)
-        df4 = pd.read_csv('xgboost model/today_predicted_chart_data.csv')
-        data_12 = df4['Power (KW)'].sum()
+    # data_dict = {'Date': current_date_24, 'Hour': hours_24, 'Power (KW)': return_array}
 
-        filter_today_values = df[df['Date'] == unique_date[-1]][['Date', 'Hour', 'Power (KW)']]
-        today_hourly_values = filter_today_values.groupby(['Date', 'Hour'])['Power (KW)'].sum().reset_index()
-        length_today_hourly_values = len(today_hourly_values)
-        today_sum_12 = today_hourly_values['Power (KW)'].sum()
-        mean_sq_error_12 = metrics.mean_squared_error(today_hourly_values['Power (KW)'],
-                                                      df4['Power (KW)'].head(length_today_hourly_values))
-        root_mean_sq_error_12 = np.sqrt(mean_sq_error_12)
-        mean_ab_error_12 = metrics.mean_absolute_error(today_hourly_values['Power (KW)'],
-                                                       df4['Power (KW)'].head(length_today_hourly_values))
-        r_squared_12 = metrics.r2_score(today_hourly_values['Power (KW)'],
-                                        df4['Power (KW)'].head(length_today_hourly_values))
+    # data_dataframe = pd.DataFrame(data_dict)
+    df4 = pd.read_csv('xgboost model/today_predicted_chart_data.csv')
+    data_24 = df4['Power (KW)'].sum()
 
+    filter_today_values = df[df['Date'] == unique_date[-1]][['Date', 'Hour', 'Power (KW)']]
+    today_hourly_values = filter_today_values.groupby(['Date', 'Hour'])['Power (KW)'].sum().reset_index()
+    length_today_hourly_values = len(today_hourly_values)
+    today_sum_24 = today_hourly_values['Power (KW)'].sum()
 
-    elif time_name >= '12:00:00' and time_name <= '23:59:59':
-        count_total_rows = len(df1)
-        independent_columns = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex',
-                                   'UV Index Text']][
-                              0:count_total_rows]
-        dependent_column = df1['Power (KW)'][0:count_total_rows]
+    mean_sq_error_24 = metrics.mean_squared_error(today_hourly_values['Power (KW)'],
+                                                  df4['Power (KW)'].head(length_today_hourly_values))
+    root_mean_sq_error_24 = np.sqrt(mean_sq_error_24)
+    mean_ab_error_24 = metrics.mean_absolute_error(today_hourly_values['Power (KW)'],
+                                                   df4['Power (KW)'].head(length_today_hourly_values))
+    r_squared_24 = metrics.r2_score(today_hourly_values['Power (KW)'],
+                                    df4['Power (KW)'].head(length_today_hourly_values))
+    # if time_name >= '00:00:00' and time_name <= '11:59:59':
+    #     count_total_rows = len(df1)
+    #     independent_columns = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex',
+    #                                'UV Index Text']][
+    #                           0:count_total_rows]
+    #     dependent_column = df1['Power (KW)'][0:count_total_rows]
+    #
+    #     rfr = RandomForestRegressor(n_estimators = select_trees, random_state = select_random_state)
+    #     rfr.fit(independent_columns, dependent_column)
+    #
+    #     forcasted_data = weather_data[['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex',
+    #                           'UV Index Text']].tail(12)
+    #
+    #     return_array = list(rfr.predict(forcasted_data))
+    #
+    #     date = now.strftime('%Y-%m-%d')
+    #     current_date_12 = [date, date, date, date, date, date, date, date, date, date, date, date]
+    #
+    #     hours_12 = list(daily_hourly_values['Hour'][0:12])
+    #
+    #     data_dict = {'Date': current_date_12, 'Hour': hours_12, 'Power (KW)': return_array}
+    #
+    #     data_dataframe = pd.DataFrame(data_dict)
+    #     rn_data_12 = data_dataframe['Power (KW)'].sum()
+    #
+    #     filter_today_values = df[df['Date'] == unique_date[-1]][['Date', 'Hour', 'Power (KW)']]
+    #     today_hourly_values = filter_today_values.groupby(['Date', 'Hour'])['Power (KW)'].sum().reset_index()
+    #     length_today_hourly_values = len(today_hourly_values)
+    #     rn_today_sum_12 = today_hourly_values['Power (KW)'].sum()
+    #
+    #     rn_mean_sq_error_12 = metrics.mean_squared_error(today_hourly_values['Power (KW)'],
+    #                                                      data_dataframe['Power (KW)'].head(length_today_hourly_values))
+    #     rn_root_mean_sq_error_12 = np.sqrt(rn_mean_sq_error_12)
+    #     rn_mean_ab_error_12 = metrics.mean_absolute_error(today_hourly_values['Power (KW)'],
+    #                                                       data_dataframe['Power (KW)'].head(length_today_hourly_values))
+    #     rn_r_squared_12 = metrics.r2_score(today_hourly_values['Power (KW)'],
+    #                                        data_dataframe['Power (KW)'].head(length_today_hourly_values))
+    #
+    # elif time_name >= '12:00:00' and time_name <= '23:59:59':
+    count_total_rows = len(df1)
+    independent_columns = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex',
+                               'UV Index Text']][
+                          0:count_total_rows]
+    dependent_column = df1['Power (KW)'][0:count_total_rows]
 
-        # reg = XGBRegressor(n_estimators=69)
-        # reg.fit(independent_columns, dependent_column)
+    rfr = RandomForestRegressor(n_estimators = select_trees, random_state = select_random_state)
+    rfr.fit(independent_columns, dependent_column)
 
-        forcasted_data = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex',
-                              'UV Index Text']].tail(24)
+    forcasted_data = weather_data[['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex',
+                                   'UV Index Text']].tail(24)
 
-        # return_array = list(reg.predict(forcasted_data))
+    return_array = list(rfr.predict(forcasted_data))
 
-        date = now.strftime('%Y-%m-%d')
-        current_date_24 = [date, date, date, date, date, date, date, date, date, date, date, date, date, date, date,
-                           date, date, date, date, date, date, date, date, date]
+    date = now.strftime('%Y-%m-%d')
+    current_date_24 = [date, date, date, date, date, date, date, date, date, date, date, date, date, date, date,
+                       date, date, date, date, date, date, date, date, date]
 
-        hours_24 = list(daily_hourly_values['Hour'][0:24])
+    hours_24 = list(daily_hourly_values['Hour'][0:24])
 
-        # data_dict = {'Date': current_date_24, 'Hour': hours_24, 'Power (KW)': return_array}
+    data_dict = {'Date': current_date_24, 'Hour': hours_24, 'Power (KW)': return_array}
 
-        # data_dataframe = pd.DataFrame(data_dict)
-        df4 = pd.read_csv('xgboost model/today_predicted_chart_data.csv')
-        data_24 = df4['Power (KW)'].sum()
+    data_dataframe = pd.DataFrame(data_dict)
+    rn_data_24 = data_dataframe['Power (KW)'].sum()
 
-        filter_today_values = df[df['Date'] == unique_date[-1]][['Date', 'Hour', 'Power (KW)']]
-        today_hourly_values = filter_today_values.groupby(['Date', 'Hour'])['Power (KW)'].sum().reset_index()
-        length_today_hourly_values = len(today_hourly_values)
-        today_sum_24 = today_hourly_values['Power (KW)'].sum()
+    filter_today_values = df[df['Date'] == unique_date[-1]][['Date', 'Hour', 'Power (KW)']]
+    today_hourly_values = filter_today_values.groupby(['Date', 'Hour'])['Power (KW)'].sum().reset_index()
+    length_today_hourly_values = len(today_hourly_values)
+    rn_today_sum_24 = today_hourly_values['Power (KW)'].sum()
 
-        mean_sq_error_24 = metrics.mean_squared_error(today_hourly_values['Power (KW)'],
-                                                      df4['Power (KW)'].head(length_today_hourly_values))
-        root_mean_sq_error_24 = np.sqrt(mean_sq_error_24)
-        mean_ab_error_24 = metrics.mean_absolute_error(today_hourly_values['Power (KW)'],
-                                                       df4['Power (KW)'].head(length_today_hourly_values))
-        r_squared_24 = metrics.r2_score(today_hourly_values['Power (KW)'],
-                                        df4['Power (KW)'].head(length_today_hourly_values))
-    if time_name >= '00:00:00' and time_name <= '11:59:59':
-        count_total_rows = len(df1)
-        independent_columns = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex',
-                                   'UV Index Text']][
-                              0:count_total_rows]
-        dependent_column = df1['Power (KW)'][0:count_total_rows]
+    rn_mean_sq_error_24 = metrics.mean_squared_error(today_hourly_values['Power (KW)'],
+                                                     data_dataframe['Power (KW)'].head(length_today_hourly_values))
+    rn_root_mean_sq_error_24 = np.sqrt(rn_mean_sq_error_24)
+    rn_mean_ab_error_24 = metrics.mean_absolute_error(today_hourly_values['Power (KW)'],
+                                                      data_dataframe['Power (KW)'].head(length_today_hourly_values))
+    rn_r_squared_24 = metrics.r2_score(today_hourly_values['Power (KW)'],
+                                       data_dataframe['Power (KW)'].head(length_today_hourly_values))
 
-        rfr = RandomForestRegressor(n_estimators = select_trees, random_state = select_random_state)
-        rfr.fit(independent_columns, dependent_column)
+    # if time_name >= '00:00:00' and time_name <= '11:59:59':
+    #     return [
+    #         html.Div([
+    #             html.Div([
+    #                 html.Div([
+    #                     html.Div([
+    #                         html.P('Today Results', className = 'stat_results'),
+    #                     ]),
+    #                 ], className = 'error_container1'),
+    #                 html.Div([
+    #                     html.Div([
+    #                         html.P('PE', className = 'error_text'),
+    #                     ], className = 'error_bg'),
+    #                     html.Div([
+    #                         html.P('AE', className = 'error_text'),
+    #                     ], className = 'error_bg'),
+    #                     html.Div([
+    #                         html.P('MSE', className = 'error_text'),
+    #                     ], className = 'error_bg'),
+    #                     html.Div([
+    #                         html.P('RMSE', className = 'error_text'),
+    #                     ], className = 'error_bg'),
+    #                     html.Div([
+    #                         html.P('MAE', className = 'error_text'),
+    #                     ], className = 'error_bg'),
+    #                     html.Div([
+    #                         html.P('R²', className = 'error_text')
+    #                     ], className = 'error_bg')
+    #                 ], className = 'error_container2'),
+    #
+    #                 html.Div([
+    #                     html.Div([
+    #                         html.P('XGBoost Regression Model', className = 'error_text'),
+    #                     ], className = 'error_bg1'),
+    #                     html.Div([
+    #                         html.P('{0:,.2f} KWh'.format(data_12),
+    #                                className = 'error_text'),
+    #                     ], className = 'error_bg'),
+    #                     html.Div([
+    #                         html.P('{0:,.2f} KWh'.format(today_sum_12),
+    #                                className = 'error_text'),
+    #                     ], className = 'error_bg'),
+    #                     html.Div([
+    #                         html.P('{0:,.4f}'.format(mean_sq_error_12),
+    #                                className = 'error_text'),
+    #                     ], className = 'error_bg'),
+    #                     html.Div([
+    #                         html.P('{0:,.4f}'.format(root_mean_sq_error_12),
+    #                                className = 'error_text'),
+    #                     ], className = 'error_bg'),
+    #                     html.Div([
+    #                         html.P('{0:,.4f}'.format(mean_ab_error_12),
+    #                                className = 'error_text')
+    #                     ], className = 'error_bg'),
+    #                     html.Div([
+    #                         html.P('{0:,.4f}'.format(r_squared_12),
+    #                                className = 'error_text')
+    #                     ], className = 'error_bg')
+    #                 ], className = 'error_container3'),
+    #
+    #                 html.Div([
+    #                     html.Div([
+    #                         html.P('Random Forest Regression Model', className = 'error_text'),
+    #                     ], className = 'error_bg1'),
+    #                     html.Div([
+    #                         html.P('{0:,.2f} KWh'.format(rn_data_12),
+    #                                className = 'error_text'),
+    #                     ], className = 'error_bg'),
+    #                     html.Div([
+    #                         html.P('{0:,.2f} KWh'.format(rn_today_sum_12),
+    #                                className = 'error_text'),
+    #                     ], className = 'error_bg'),
+    #                     html.Div([
+    #                         html.P('{0:,.4f}'.format(rn_mean_sq_error_12),
+    #                                className = 'error_text'),
+    #                     ], className = 'error_bg'),
+    #                     html.Div([
+    #                         html.P('{0:,.4f}'.format(rn_root_mean_sq_error_12),
+    #                                className = 'error_text'),
+    #                     ], className = 'error_bg'),
+    #                     html.Div([
+    #                         html.P('{0:,.4f}'.format(rn_mean_ab_error_12),
+    #                                className = 'error_text')
+    #                     ], className = 'error_bg'),
+    #                     html.Div([
+    #                         html.P('{0:,.4f}'.format(rn_r_squared_12),
+    #                                className = 'error_text')
+    #                     ], className = 'error_bg')
+    #                 ], className = 'error_container3')
+    #             ], className = 'error_container_column'),
+    #
+    #             html.Div([
+    #                 html.Div([
+    #                     html.Div([
+    #                         html.P('Yesterday Results', className = 'stat_results'),
+    #                     ]),
+    #                 ], className = 'error_container1'),
+    #                 html.Div([
+    #                     html.Div([
+    #                         html.P('PE', className = 'error_text'),
+    #                     ], className = 'error_bg'),
+    #                     html.Div([
+    #                         html.P('AE', className = 'error_text'),
+    #                     ], className = 'error_bg'),
+    #                     html.Div([
+    #                         html.P('MSE', className = 'error_text'),
+    #                     ], className = 'error_bg'),
+    #                     html.Div([
+    #                         html.P('RMSE', className = 'error_text'),
+    #                     ], className = 'error_bg'),
+    #                     html.Div([
+    #                         html.P('MAE', className = 'error_text'),
+    #                     ], className = 'error_bg'),
+    #                     html.Div([
+    #                         html.P('R²', className = 'error_text')
+    #                     ], className = 'error_bg')
+    #                 ], className = 'error_container2'),
+    #
+    #                 html.Div([
+    #                     html.Div([
+    #                         html.P('XGBoost Regression Model', className = 'error_text'),
+    #                     ], className = 'error_bg1'),
+    #                     html.Div([
+    #                         html.P('{0:,.2f} KWh'.format(mv_pe),
+    #                                className = 'error_text'),
+    #                     ], className = 'error_bg'),
+    #                     html.Div([
+    #                         html.P('{0:,.2f} KWh'.format(last_day_hourly_values_sum),
+    #                                className = 'error_text'),
+    #                     ], className = 'error_bg'),
+    #                     html.Div([
+    #                         html.P('{0:,.4f}'.format(mv_mse),
+    #                                className = 'error_text'),
+    #                     ], className = 'error_bg'),
+    #                     html.Div([
+    #                         html.P('{0:,.4f}'.format(mv_rmse),
+    #                                className = 'error_text'),
+    #                     ], className = 'error_bg'),
+    #                     html.Div([
+    #                         html.P('{0:,.4f}'.format(mv_mae),
+    #                                className = 'error_text')
+    #                     ], className = 'error_bg'),
+    #                     html.Div([
+    #                         html.P('{0:,.4f}'.format(mv_rs),
+    #                                className = 'error_text')
+    #                     ], className = 'error_bg')
+    #                 ], className = 'error_container3'),
+    #
+    #                 html.Div([
+    #                     html.Div([
+    #                         html.P('Random Forest Regression Model', className = 'error_text'),
+    #                     ], className = 'error_bg1'),
+    #                     html.Div([
+    #                         html.P('{0:,.2f} KWh'.format(rfr_yes_pe),
+    #                                className = 'error_text'),
+    #                     ], className = 'error_bg'),
+    #                     html.Div([
+    #                         html.P('{0:,.2f} KWh'.format(last_day_hourly_values_sum),
+    #                                className = 'error_text'),
+    #                     ], className = 'error_bg'),
+    #                     html.Div([
+    #                         html.P('{0:,.4f}'.format(rfr_yes_mse),
+    #                                className = 'error_text'),
+    #                     ], className = 'error_bg'),
+    #                     html.Div([
+    #                         html.P('{0:,.4f}'.format(rfr_yes_rmse),
+    #                                className = 'error_text'),
+    #                     ], className = 'error_bg'),
+    #                     html.Div([
+    #                         html.P('{0:,.4f}'.format(rfr_yes_mae),
+    #                                className = 'error_text')
+    #                     ], className = 'error_bg'),
+    #                     html.Div([
+    #                         html.P('{0:,.4f}'.format(rfr_yes_rs),
+    #                                className = 'error_text')
+    #                     ], className = 'error_bg')
+    #                 ], className = 'error_container3')
+    #             ], className = 'error_container_column')
+    #         ], className = 'results_column')
+    #     ]
 
-        forcasted_data = weather_data[['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex',
-                              'UV Index Text']].tail(12)
-
-        return_array = list(rfr.predict(forcasted_data))
-
-        date = now.strftime('%Y-%m-%d')
-        current_date_12 = [date, date, date, date, date, date, date, date, date, date, date, date]
-
-        hours_12 = list(daily_hourly_values['Hour'][0:12])
-
-        data_dict = {'Date': current_date_12, 'Hour': hours_12, 'Power (KW)': return_array}
-
-        data_dataframe = pd.DataFrame(data_dict)
-        rn_data_12 = data_dataframe['Power (KW)'].sum()
-
-        filter_today_values = df[df['Date'] == unique_date[-1]][['Date', 'Hour', 'Power (KW)']]
-        today_hourly_values = filter_today_values.groupby(['Date', 'Hour'])['Power (KW)'].sum().reset_index()
-        length_today_hourly_values = len(today_hourly_values)
-        rn_today_sum_12 = today_hourly_values['Power (KW)'].sum()
-
-        rn_mean_sq_error_12 = metrics.mean_squared_error(today_hourly_values['Power (KW)'],
-                                                         data_dataframe['Power (KW)'].head(length_today_hourly_values))
-        rn_root_mean_sq_error_12 = np.sqrt(rn_mean_sq_error_12)
-        rn_mean_ab_error_12 = metrics.mean_absolute_error(today_hourly_values['Power (KW)'],
-                                                          data_dataframe['Power (KW)'].head(length_today_hourly_values))
-        rn_r_squared_12 = metrics.r2_score(today_hourly_values['Power (KW)'],
-                                           data_dataframe['Power (KW)'].head(length_today_hourly_values))
-
-    elif time_name >= '12:00:00' and time_name <= '23:59:59':
-        count_total_rows = len(df1)
-        independent_columns = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex',
-                                   'UV Index Text']][
-                              0:count_total_rows]
-        dependent_column = df1['Power (KW)'][0:count_total_rows]
-
-        rfr = RandomForestRegressor(n_estimators = select_trees, random_state = select_random_state)
-        rfr.fit(independent_columns, dependent_column)
-
-        forcasted_data = weather_data[['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex',
-                              'UV Index Text']].tail(24)
-
-        return_array = list(rfr.predict(forcasted_data))
-
-        date = now.strftime('%Y-%m-%d')
-        current_date_24 = [date, date, date, date, date, date, date, date, date, date, date, date, date, date, date,
-                           date, date, date, date, date, date, date, date, date]
-
-        hours_24 = list(daily_hourly_values['Hour'][0:24])
-
-        data_dict = {'Date': current_date_24, 'Hour': hours_24, 'Power (KW)': return_array}
-
-        data_dataframe = pd.DataFrame(data_dict)
-        rn_data_24 = data_dataframe['Power (KW)'].sum()
-
-        filter_today_values = df[df['Date'] == unique_date[-1]][['Date', 'Hour', 'Power (KW)']]
-        today_hourly_values = filter_today_values.groupby(['Date', 'Hour'])['Power (KW)'].sum().reset_index()
-        length_today_hourly_values = len(today_hourly_values)
-        rn_today_sum_24 = today_hourly_values['Power (KW)'].sum()
-
-        rn_mean_sq_error_24 = metrics.mean_squared_error(today_hourly_values['Power (KW)'],
-                                                         data_dataframe['Power (KW)'].head(length_today_hourly_values))
-        rn_root_mean_sq_error_24 = np.sqrt(rn_mean_sq_error_24)
-        rn_mean_ab_error_24 = metrics.mean_absolute_error(today_hourly_values['Power (KW)'],
-                                                          data_dataframe['Power (KW)'].head(length_today_hourly_values))
-        rn_r_squared_24 = metrics.r2_score(today_hourly_values['Power (KW)'],
-                                           data_dataframe['Power (KW)'].head(length_today_hourly_values))
-
-    if time_name >= '00:00:00' and time_name <= '11:59:59':
-        return [
+    # elif time_name >= '12:00:00' and time_name <= '23:59:59':
+    return [
+        html.Div([
             html.Div([
                 html.Div([
                     html.Div([
-                        html.Div([
-                            html.P('Today Results', className = 'stat_results'),
-                        ]),
-                    ], className = 'error_container1'),
+                        html.P('Today Results', className = 'stat_results'),
+                    ]),
+                ], className = 'error_container1'),
+                html.Div([
                     html.Div([
-                        html.Div([
-                            html.P('PE', className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('AE', className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('MSE', className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('RMSE', className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('MAE', className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('R²', className = 'error_text')
-                        ], className = 'error_bg')
-                    ], className = 'error_container2'),
-
+                        html.P('PE', className = 'error_text'),
+                    ], className = 'error_bg'),
                     html.Div([
-                        html.Div([
-                            html.P('XGBoost Regression Model', className = 'error_text'),
-                        ], className = 'error_bg1'),
-                        html.Div([
-                            html.P('{0:,.2f} KWh'.format(data_12),
-                                   className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('{0:,.2f} KWh'.format(today_sum_12),
-                                   className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('{0:,.4f}'.format(mean_sq_error_12),
-                                   className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('{0:,.4f}'.format(root_mean_sq_error_12),
-                                   className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('{0:,.4f}'.format(mean_ab_error_12),
-                                   className = 'error_text')
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('{0:,.4f}'.format(r_squared_12),
-                                   className = 'error_text')
-                        ], className = 'error_bg')
-                    ], className = 'error_container3'),
-
+                        html.P('AE', className = 'error_text'),
+                    ], className = 'error_bg'),
                     html.Div([
-                        html.Div([
-                            html.P('Random Forest Regression Model', className = 'error_text'),
-                        ], className = 'error_bg1'),
-                        html.Div([
-                            html.P('{0:,.2f} KWh'.format(rn_data_12),
-                                   className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('{0:,.2f} KWh'.format(rn_today_sum_12),
-                                   className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('{0:,.4f}'.format(rn_mean_sq_error_12),
-                                   className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('{0:,.4f}'.format(rn_root_mean_sq_error_12),
-                                   className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('{0:,.4f}'.format(rn_mean_ab_error_12),
-                                   className = 'error_text')
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('{0:,.4f}'.format(rn_r_squared_12),
-                                   className = 'error_text')
-                        ], className = 'error_bg')
-                    ], className = 'error_container3')
-                ], className = 'error_container_column'),
+                        html.P('MSE', className = 'error_text'),
+                    ], className = 'error_bg'),
+                    html.Div([
+                        html.P('RMSE', className = 'error_text'),
+                    ], className = 'error_bg'),
+                    html.Div([
+                        html.P('MAE', className = 'error_text'),
+                    ], className = 'error_bg'),
+                    html.Div([
+                        html.P('R²', className = 'error_text')
+                    ], className = 'error_bg')
+                ], className = 'error_container2'),
 
                 html.Div([
                     html.Div([
-                        html.Div([
-                            html.P('Yesterday Results', className = 'stat_results'),
-                        ]),
-                    ], className = 'error_container1'),
+                        html.P('XGBoost Regression Model', className = 'error_text'),
+                    ], className = 'error_bg1'),
                     html.Div([
-                        html.Div([
-                            html.P('PE', className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('AE', className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('MSE', className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('RMSE', className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('MAE', className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('R²', className = 'error_text')
-                        ], className = 'error_bg')
-                    ], className = 'error_container2'),
+                        html.P('{0:,.2f} KWh'.format(data_24),
+                               className = 'error_text'),
+                    ], className = 'error_bg'),
+                    html.Div([
+                        html.P('{0:,.2f} KWh'.format(today_sum_24),
+                               className = 'error_text'),
+                    ], className = 'error_bg'),
+                    html.Div([
+                        html.P('{0:,.4f}'.format(mean_sq_error_24),
+                               className = 'error_text'),
+                    ], className = 'error_bg'),
+                    html.Div([
+                        html.P('{0:,.4f}'.format(root_mean_sq_error_24),
+                               className = 'error_text'),
+                    ], className = 'error_bg'),
+                    html.Div([
+                        html.P('{0:,.4f}'.format(mean_ab_error_24),
+                               className = 'error_text')
+                    ], className = 'error_bg'),
+                    html.Div([
+                        html.P('{0:,.4f}'.format(r_squared_24),
+                               className = 'error_text')
+                    ], className = 'error_bg')
+                ], className = 'error_container3'),
 
+                html.Div([
                     html.Div([
-                        html.Div([
-                            html.P('XGBoost Regression Model', className = 'error_text'),
-                        ], className = 'error_bg1'),
-                        html.Div([
-                            html.P('{0:,.2f} KWh'.format(mv_pe),
-                                   className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('{0:,.2f} KWh'.format(last_day_hourly_values_sum),
-                                   className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('{0:,.4f}'.format(mv_mse),
-                                   className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('{0:,.4f}'.format(mv_rmse),
-                                   className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('{0:,.4f}'.format(mv_mae),
-                                   className = 'error_text')
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('{0:,.4f}'.format(mv_rs),
-                                   className = 'error_text')
-                        ], className = 'error_bg')
-                    ], className = 'error_container3'),
+                        html.P('Random Forest Regression Model', className = 'error_text'),
+                    ], className = 'error_bg1'),
+                    html.Div([
+                        html.P('{0:,.2f} KWh'.format(rn_data_24),
+                               className = 'error_text'),
+                    ], className = 'error_bg'),
+                    html.Div([
+                        html.P('{0:,.2f} KWh'.format(rn_today_sum_24),
+                               className = 'error_text'),
+                    ], className = 'error_bg'),
+                    html.Div([
+                        html.P('{0:,.4f}'.format(rn_mean_sq_error_24),
+                               className = 'error_text'),
+                    ], className = 'error_bg'),
+                    html.Div([
+                        html.P('{0:,.4f}'.format(rn_root_mean_sq_error_24),
+                               className = 'error_text'),
+                    ], className = 'error_bg'),
+                    html.Div([
+                        html.P('{0:,.4f}'.format(rn_mean_ab_error_24),
+                               className = 'error_text')
+                    ], className = 'error_bg'),
+                    html.Div([
+                        html.P('{0:,.4f}'.format(rn_r_squared_24),
+                               className = 'error_text')
+                    ], className = 'error_bg')
+                ], className = 'error_container3')
+            ], className = 'error_container_column'),
 
-                    html.Div([
-                        html.Div([
-                            html.P('Random Forest Regression Model', className = 'error_text'),
-                        ], className = 'error_bg1'),
-                        html.Div([
-                            html.P('{0:,.2f} KWh'.format(rfr_yes_pe),
-                                   className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('{0:,.2f} KWh'.format(last_day_hourly_values_sum),
-                                   className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('{0:,.4f}'.format(rfr_yes_mse),
-                                   className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('{0:,.4f}'.format(rfr_yes_rmse),
-                                   className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('{0:,.4f}'.format(rfr_yes_mae),
-                                   className = 'error_text')
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('{0:,.4f}'.format(rfr_yes_rs),
-                                   className = 'error_text')
-                        ], className = 'error_bg')
-                    ], className = 'error_container3')
-                ], className = 'error_container_column')
-            ], className = 'results_column')
-        ]
-    elif time_name >= '12:00:00' and time_name <= '23:59:59':
-        return [
             html.Div([
                 html.Div([
                     html.Div([
-                        html.Div([
-                            html.P('Today Results', className = 'stat_results'),
-                        ]),
-                    ], className = 'error_container1'),
+                        html.P('Yesterday Results', className = 'stat_results'),
+                    ]),
+                ], className = 'error_container1'),
+                html.Div([
                     html.Div([
-                        html.Div([
-                            html.P('PE', className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('AE', className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('MSE', className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('RMSE', className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('MAE', className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('R²', className = 'error_text')
-                        ], className = 'error_bg')
-                    ], className = 'error_container2'),
-
+                        html.P('PE', className = 'error_text'),
+                    ], className = 'error_bg'),
                     html.Div([
-                        html.Div([
-                            html.P('XGBoost Regression Model', className = 'error_text'),
-                        ], className = 'error_bg1'),
-                        html.Div([
-                            html.P('{0:,.2f} KWh'.format(data_24),
-                                   className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('{0:,.2f} KWh'.format(today_sum_24),
-                                   className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('{0:,.4f}'.format(mean_sq_error_24),
-                                   className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('{0:,.4f}'.format(root_mean_sq_error_24),
-                                   className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('{0:,.4f}'.format(mean_ab_error_24),
-                                   className = 'error_text')
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('{0:,.4f}'.format(r_squared_24),
-                                   className = 'error_text')
-                        ], className = 'error_bg')
-                    ], className = 'error_container3'),
-
+                        html.P('AE', className = 'error_text'),
+                    ], className = 'error_bg'),
                     html.Div([
-                        html.Div([
-                            html.P('Random Forest Regression Model', className = 'error_text'),
-                        ], className = 'error_bg1'),
-                        html.Div([
-                            html.P('{0:,.2f} KWh'.format(rn_data_24),
-                                   className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('{0:,.2f} KWh'.format(rn_today_sum_24),
-                                   className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('{0:,.4f}'.format(rn_mean_sq_error_24),
-                                   className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('{0:,.4f}'.format(rn_root_mean_sq_error_24),
-                                   className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('{0:,.4f}'.format(rn_mean_ab_error_24),
-                                   className = 'error_text')
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('{0:,.4f}'.format(rn_r_squared_24),
-                                   className = 'error_text')
-                        ], className = 'error_bg')
-                    ], className = 'error_container3')
-                ], className = 'error_container_column'),
+                        html.P('MSE', className = 'error_text'),
+                    ], className = 'error_bg'),
+                    html.Div([
+                        html.P('RMSE', className = 'error_text'),
+                    ], className = 'error_bg'),
+                    html.Div([
+                        html.P('MAE', className = 'error_text'),
+                    ], className = 'error_bg'),
+                    html.Div([
+                        html.P('R²', className = 'error_text')
+                    ], className = 'error_bg')
+                ], className = 'error_container2'),
 
                 html.Div([
                     html.Div([
-                        html.Div([
-                            html.P('Yesterday Results', className = 'stat_results'),
-                        ]),
-                    ], className = 'error_container1'),
+                        html.P('XGBoost Regression Model', className = 'error_text'),
+                    ], className = 'error_bg1'),
                     html.Div([
-                        html.Div([
-                            html.P('PE', className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('AE', className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('MSE', className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('RMSE', className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('MAE', className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('R²', className = 'error_text')
-                        ], className = 'error_bg')
-                    ], className = 'error_container2'),
+                        html.P('{0:,.2f} KWh'.format(mv_pe),
+                               className = 'error_text'),
+                    ], className = 'error_bg'),
+                    html.Div([
+                        html.P('{0:,.2f} KWh'.format(last_day_hourly_values_sum),
+                               className = 'error_text'),
+                    ], className = 'error_bg'),
+                    html.Div([
+                        html.P('{0:,.4f}'.format(mv_mse),
+                               className = 'error_text'),
+                    ], className = 'error_bg'),
+                    html.Div([
+                        html.P('{0:,.4f}'.format(mv_rmse),
+                               className = 'error_text'),
+                    ], className = 'error_bg'),
+                    html.Div([
+                        html.P('{0:,.4f}'.format(mv_mae),
+                               className = 'error_text')
+                    ], className = 'error_bg'),
+                    html.Div([
+                        html.P('{0:,.4f}'.format(mv_rs),
+                               className = 'error_text')
+                    ], className = 'error_bg')
+                ], className = 'error_container3'),
 
+                html.Div([
                     html.Div([
-                        html.Div([
-                            html.P('XGBoost Regression Model', className = 'error_text'),
-                        ], className = 'error_bg1'),
-                        html.Div([
-                            html.P('{0:,.2f} KWh'.format(mv_pe),
-                                   className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('{0:,.2f} KWh'.format(last_day_hourly_values_sum),
-                                   className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('{0:,.4f}'.format(mv_mse),
-                                   className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('{0:,.4f}'.format(mv_rmse),
-                                   className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('{0:,.4f}'.format(mv_mae),
-                                   className = 'error_text')
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('{0:,.4f}'.format(mv_rs),
-                                   className = 'error_text')
-                        ], className = 'error_bg')
-                    ], className = 'error_container3'),
-
+                        html.P('Random Forest Regression Model', className = 'error_text'),
+                    ], className = 'error_bg1'),
                     html.Div([
-                        html.Div([
-                            html.P('Random Forest Regression Model', className = 'error_text'),
-                        ], className = 'error_bg1'),
-                        html.Div([
-                            html.P('{0:,.2f} KWh'.format(rfr_yes_pe),
-                                   className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('{0:,.2f} KWh'.format(last_day_hourly_values_sum),
-                                   className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('{0:,.4f}'.format(rfr_yes_mse),
-                                   className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('{0:,.4f}'.format(rfr_yes_rmse),
-                                   className = 'error_text'),
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('{0:,.4f}'.format(rfr_yes_mae),
-                                   className = 'error_text')
-                        ], className = 'error_bg'),
-                        html.Div([
-                            html.P('{0:,.4f}'.format(rfr_yes_rs),
-                                   className = 'error_text')
-                        ], className = 'error_bg')
-                    ], className = 'error_container3')
-                ], className = 'error_container_column')
-            ], className = 'results_column')
-        ]
+                        html.P('{0:,.2f} KWh'.format(rfr_yes_pe),
+                               className = 'error_text'),
+                    ], className = 'error_bg'),
+                    html.Div([
+                        html.P('{0:,.2f} KWh'.format(last_day_hourly_values_sum),
+                               className = 'error_text'),
+                    ], className = 'error_bg'),
+                    html.Div([
+                        html.P('{0:,.4f}'.format(rfr_yes_mse),
+                               className = 'error_text'),
+                    ], className = 'error_bg'),
+                    html.Div([
+                        html.P('{0:,.4f}'.format(rfr_yes_rmse),
+                               className = 'error_text'),
+                    ], className = 'error_bg'),
+                    html.Div([
+                        html.P('{0:,.4f}'.format(rfr_yes_mae),
+                               className = 'error_text')
+                    ], className = 'error_bg'),
+                    html.Div([
+                        html.P('{0:,.4f}'.format(rfr_yes_rs),
+                               className = 'error_text')
+                    ], className = 'error_bg')
+                ], className = 'error_container3')
+            ], className = 'error_container_column')
+        ], className = 'results_column')
+    ]

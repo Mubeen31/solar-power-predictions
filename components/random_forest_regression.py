@@ -124,32 +124,32 @@ def random_forest_regression_chart_value(n_intervals, select_trees, select_rando
         df1.drop(['Date', 'Hour'], axis = 1, inplace = True)
         df1.loc[df1['SolarIrradiance (W/m2)'] == 0, ['Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex',
                                                      'UV Index Text']] = 0
-    if time_name >= '00:00:00' and time_name <= '11:59:59':
-        count_total_rows = len(df1)
-        independent_columns = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex',
-                                   'UV Index Text']][
-                              0:count_total_rows]
-        dependent_column = df1['Power (KW)'][0:count_total_rows]
-
-        rfr = RandomForestRegressor(n_estimators = select_trees, random_state = select_random_state)
-        rfr.fit(independent_columns, dependent_column)
-
-        forcasted_data = weather_data[
-            ['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex',
-             'UV Index Text']].tail(12)
-
-        return_array = list(rfr.predict(forcasted_data))
-
-        date = now.strftime('%Y-%m-%d')
-        current_date_12 = [date, date, date, date, date, date, date, date, date, date, date, date]
-
-        hours_12 = list(daily_hourly_values['Hour'][0:12])
-
-        data_dict = {'Date': current_date_12, 'Hour': hours_12, 'Power (KW)': return_array}
-
-        data_dataframe = pd.DataFrame(data_dict)
-
-    elif time_name >= '12:00:00' and time_name <= '23:59:59':
+    # if time_name >= '00:00:00' and time_name <= '11:59:59':
+    #     count_total_rows = len(df1)
+    #     independent_columns = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex',
+    #                                'UV Index Text']][
+    #                           0:count_total_rows]
+    #     dependent_column = df1['Power (KW)'][0:count_total_rows]
+    #
+    #     rfr = RandomForestRegressor(n_estimators = select_trees, random_state = select_random_state)
+    #     rfr.fit(independent_columns, dependent_column)
+    #
+    #     forcasted_data = weather_data[
+    #         ['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex',
+    #          'UV Index Text']].tail(12)
+    #
+    #     return_array = list(rfr.predict(forcasted_data))
+    #
+    #     date = now.strftime('%Y-%m-%d')
+    #     current_date_12 = [date, date, date, date, date, date, date, date, date, date, date, date]
+    #
+    #     hours_12 = list(daily_hourly_values['Hour'][0:12])
+    #
+    #     data_dict = {'Date': current_date_12, 'Hour': hours_12, 'Power (KW)': return_array}
+    #
+    #     data_dataframe = pd.DataFrame(data_dict)
+    #
+    # elif time_name >= '12:00:00' and time_name <= '23:59:59':
         count_total_rows = len(df1)
         independent_columns = df1[['SolarIrradiance (W/m2)', 'Temp (°C)', 'RealFeelTemp (°C)', 'Wind (km/h)', 'UVIndex',
                                    'UV Index Text']][
@@ -200,7 +200,7 @@ def random_forest_regression_chart_value(n_intervals, select_trees, select_rando
                 line = dict(color = 'firebrick', dash = 'dot'),
                 hoverinfo = 'text',
                 hovertext =
-                '<b>Date</b>: ' + data_dataframe['Date'].astype(str) + '<br>' +
+                '<b>Date</b>: ' + today_hourly_values['Date'].astype(str) + '<br>' +
                 '<b>Hour</b>: ' + data_dataframe['Hour'].astype(str) + '<br>' +
                 '<b>Predicted Solar Energy</b>: ' + [f'{x:,.5f} KWh' for x in data_dataframe['Power (KW)']] + '<br>'
             )],

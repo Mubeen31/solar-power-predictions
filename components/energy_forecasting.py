@@ -148,7 +148,7 @@ def energy_forecasting_chart_value(n_intervals):
                 line = dict(color = 'firebrick', dash = 'dot'),
                 hoverinfo = 'text',
                 hovertext =
-                '<b>Date</b>: ' + df3['Date'].astype(str) + '<br>' +
+                '<b>Date</b>: ' + today_hourly_values['Date'].astype(str) + '<br>' +
                 '<b>Hour</b>: ' + df3['Hour'].astype(str) + '<br>' +
                 '<b>Predicted Solar Energy</b>: ' + [f'{x:,.5f} KWh' for x in df3['Power (KW)']] + '<br>'
             )],
