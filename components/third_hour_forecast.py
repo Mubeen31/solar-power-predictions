@@ -38,7 +38,7 @@ def third_hour_forecast_weather_value(n_intervals):
     # temp = df['Temperature'].tail(-1).iloc[-1]
     # real_feel_temp = df['Real Feel Temperature'].tail(-1).iloc[-1]
     # pr = df['Precipitation'].tail(-1).iloc[-1]
-    complete_api_link = 'http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/331595?apikey=vnwz1buClrE9YhGJFG3mhNVq23tnIACH&details=true&metric=true'
+    complete_api_link = 'http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/331595?apikey=FlRNmjFV97jClzFSmmpUgk2HxAmausxJ&details=true&metric=true'
     api_link = requests.get(complete_api_link)
     api_data = api_link.json()
     date_time_0 = api_data[2]['DateTime']
