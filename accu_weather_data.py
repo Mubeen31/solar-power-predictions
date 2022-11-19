@@ -5,7 +5,7 @@ from datetime import datetime
 
 i = 1
 while i == 1:
-    complete_api_link = 'http://dataservice.accuweather.com/currentconditions/v1/331595?apikey=vnwz1buClrE9YhGJFG3mhNVq23tnIACH&details=true'
+    complete_api_link = 'http://dataservice.accuweather.com/currentconditions/v1/331595?apikey=FlRNmjFV97jClzFSmmpUgk2HxAmausxJ&details=true'
     api_link = requests.get(complete_api_link)
     api_data = api_link.json()
     weather_status = api_data[0]['WeatherText']
